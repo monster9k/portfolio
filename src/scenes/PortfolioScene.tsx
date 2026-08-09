@@ -42,7 +42,7 @@ export function PortfolioScene() {
       />
       {!isLowPower && (
         <EffectComposer>
-          <Bloom luminanceThreshold={0.15} luminanceSmoothing={0.4} intensity={0.6} mipmapBlur />
+          <Bloom luminanceThreshold={0.25} luminanceSmoothing={0.25} intensity={0.4} radius={0.35} />
           <Vignette offset={0.25} darkness={0.9} />
         </EffectComposer>
       )}

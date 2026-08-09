@@ -20,8 +20,8 @@ function buildCirclePoints(radius: number): [number, number, number][] {
 export function OrbitRings() {
   const groupRef = useRef<Group>(null)
   const prefersReducedMotion = usePrefersReducedMotion()
-  const ringA = useMemo(() => buildCirclePoints(2.7), [])
-  const ringB = useMemo(() => buildCirclePoints(3.35), [])
+  const ringA = useMemo(() => buildCirclePoints(4.6), [])
+  const ringB = useMemo(() => buildCirclePoints(5.8), [])
 
   useFrame((_, delta) => {
     if (prefersReducedMotion) return
@@ -30,11 +30,11 @@ export function OrbitRings() {
 
   return (
     <group ref={groupRef}>
-      <group rotation={[Math.PI / 2.6, 0, 0.4]}>
-        <Line points={ringA} color={ACCENT_CYAN} lineWidth={1} transparent opacity={0.2} />
+      <group rotation={[0.4, 0, 0.5]}>
+        <Line points={ringA} color={ACCENT_CYAN} lineWidth={1} transparent opacity={0.14} />
       </group>
-      <group rotation={[Math.PI / 2.15, 0.6, -0.3]}>
-        <Line points={ringB} color={ACCENT_CYAN} lineWidth={1} transparent opacity={0.12} />
+      <group rotation={[0.65, 0.4, -0.3]}>
+        <Line points={ringB} color={ACCENT_CYAN} lineWidth={1} transparent opacity={0.09} />
       </group>
     </group>
   )
