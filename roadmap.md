@@ -16,7 +16,7 @@ This is a separate checklist from `README.md`'s Phase 0–5 roadmap (uses letter
 - [x] New `src/scenes/Nebula.tsx` (additive sprite-plane clouds), gated by `isLowPower` + reduced motion
 - [x] New `src/scenes/SpaceDust.tsx` (`Sparkles` wrapper), gated by `isLowPower` + reduced motion
 - [x] Mount `<Nebula/>` / `<SpaceDust/>` in `PortfolioScene.tsx`'s `<Suspense>` block
-- [ ] Manual visual QA against the reference image
+- [x] Manual visual QA against the reference image — verified live in Chrome: cyberpunk hull windows (cyan/magenta) + wireframe shell render correctly, no console errors, `npm run build`/`lint`/`tsc` all clean. Nebula/dust are correctly out of view at today's `maxDistance=9` (by design — Phase B's zoom-tuning pass makes them visible)
 
 ## Phase A2 — Asteroid tech-satellite redesign
 
