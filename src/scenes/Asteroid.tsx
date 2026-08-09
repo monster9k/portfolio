@@ -1,33 +1,25 @@
 import { useMemo, useRef } from 'react'
 import { useFrame, type ThreeEvent } from '@react-three/fiber'
 import { Billboard, Text } from '@react-three/drei'
-import { IcosahedronGeometry, Vector3 } from 'three'
+import { IcosahedronGeometry } from 'three'
 import type { Group, Mesh } from 'three'
 import { useSceneStore } from '@/store/useSceneStore'
 import type { SectionContent } from '@/content/sections'
 import { useTranslation } from '@/i18n/useTranslation'
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion'
 import { hashId, pseudoRandom } from '@/utils/random'
+import { ACCENT_CYAN, ACCENT_MAGENTA } from '@/styles/colors'
 
 const ASTEROID_RADIUS = 0.22
 const TUMBLE_SPEED_X = 0.4
 const TUMBLE_SPEED_Z = 0.25
+const BASE_HULL_COLOR = '#161c2c'
+const SCALE_VARIANCE = 0.14
 
-function useAsteroidGeometry(seed: number) {
-  return useMemo(() => {
-    const geometry = new IcosahedronGeometry(ASTEROID_RADIUS, 1)
-    const position = geometry.attributes.position
-    const vertex = new Vector3()
-    for (let i = 0; i < position.count; i++) {
-      vertex.fromBufferAttribute(position, i)
-      const noise = 0.82 + pseudoRandom(seed + i) * 0.32
-      vertex.multiplyScalar(noise)
-      position.setXYZ(i, vertex.x, vertex.y, vertex.z)
-    }
-    geometry.computeVertexNormals()
-    return geometry
-  }, [seed])
-}
+// Shared low-poly "tech probe" gem — identical faceted geometry for every
+// asteroid; per-id character comes from scale/accent variation below, not
+// organic noise (that's what made the old rocks look out of place).
+const asteroidGeometry = new IcosahedronGeometry(ASTEROID_RADIUS, 0)
 
 interface AsteroidProps {
   section: SectionContent
@@ -42,7 +34,19 @@ export function Asteroid({ section }: AsteroidProps) {
   const setSelected = useSceneStore((s) => s.setSelected)
   const prefersReducedMotion = usePrefersReducedMotion()
 
-  const geometry = useAsteroidGeometry(useMemo(() => hashId(section.id), [section.id]))
+  const seed = useMemo(() => hashId(section.id), [section.id])
+  // Idle trim alternates cyan/magenta per section (decorative, matches the
+  // planet's dual-accent windows); hover always converges on cyan so the
+  // interactive affordance stays unambiguous regardless of idle tint.
+  const idleAccent = seed % 2 === 0 ? ACCENT_CYAN : ACCENT_MAGENTA
+  const meshScale = useMemo<[number, number, number]>(
+    () => [
+      1 + (pseudoRandom(seed) - 0.5) * SCALE_VARIANCE,
+      1 + (pseudoRandom(seed + 1) - 0.5) * SCALE_VARIANCE,
+      1 + (pseudoRandom(seed + 2) - 0.5) * SCALE_VARIANCE,
+    ],
+    [seed],
+  )
 
   useFrame((_, delta) => {
     if (prefersReducedMotion) return
@@ -85,23 +89,24 @@ export function Asteroid({ section }: AsteroidProps) {
       <group position={[section.orbit.radius, 0, 0]}>
         <mesh
           ref={meshRef}
-          geometry={geometry}
+          geometry={asteroidGeometry}
+          scale={meshScale}
           onPointerOver={handlePointerOver}
           onPointerOut={handlePointerOut}
           onClick={handleClick}
         >
           <meshStandardMaterial
-            color={isHovered ? '#5fe3ff' : '#8b8f9c'}
-            emissive={isHovered ? '#0f5866' : '#000000'}
-            emissiveIntensity={isHovered ? 0.7 : 0}
-            roughness={0.9}
-            metalness={0.05}
+            color={BASE_HULL_COLOR}
+            emissive={isHovered ? ACCENT_CYAN : idleAccent}
+            emissiveIntensity={isHovered ? 1.15 : 0.35}
+            roughness={0.25}
+            metalness={0.8}
           />
         </mesh>
         <Billboard position={[0, 0.42, 0]}>
           <Text
             fontSize={0.16}
-            color={isHovered ? '#5fe3ff' : '#eef1f8'}
+            color={isHovered ? ACCENT_CYAN : '#eef1f8'}
             anchorX="center"
             anchorY="bottom"
             outlineWidth={0.008}
