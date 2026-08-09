@@ -76,11 +76,17 @@ The user rejected the Phase A/A2 result against a second reference image: a mood
 ## Phase E — Bloom + final QA
 
 - [x] `npm install @react-three/postprocessing postprocessing` — done early in Phase A3
-- [x] `PortfolioScene.tsx`: `{!isLowPower && <EffectComposer><Bloom .../></EffectComposer>}`, tuned against new emissive planet/nebula/accents — done early in Phase A3 (may need a final revisit once Phase D's tech icons add more emissive content)
-- [ ] Run full `.claude/skills/ui-ux-consistency/SKILL.md` checklist across Phases A–D
-- [ ] `npm run build` clean
-- [ ] `npm run lint` clean
-- [ ] Delegate a pass to the `ui-ux-reviewer` subagent before calling the overhaul complete
+- [x] `PortfolioScene.tsx`: `{!isLowPower && <EffectComposer><Bloom .../></EffectComposer>}`, tuned against new emissive planet/nebula/accents — done early in Phase A3; re-checked live after Phase D's tech icons landed, no bloom retune needed (icons are flat DOM `Html`, not emissive WebGL materials, so they don't feed the bloom pass)
+- [x] Ran the full `.claude/skills/ui-ux-consistency/SKILL.md` checklist across Phases A3(follow-up)–D by delegating to the `ui-ux-reviewer` subagent (see below) plus a manual `en.json`/`ja.json` key-parity check (programmatic diff — exact match)
+- [x] `npm run build` clean
+- [x] `npm run lint` clean
+- [x] Delegated a pass to the `ui-ux-reviewer` subagent. It found 4 real issues, all fixed in this same phase before calling the overhaul complete:
+  1. **Real bug** (not just "unverified" as Phase C's own notes said): the mobile `.info-panel` media-query override used `!important` unscoped to the open/closed state, so on any viewport ≤640px the panel was *always* a fixed full-screen translucent block — even closed — silently eating all touch/orbit input. Fixed by adding a state-driven `info-panel--open` class and scoping the media query to `.info-panel.info-panel--open`; also made `background`/`pointerEvents` conditional on `section` (they weren't before, `background` in particular was unconditionally opaque). Re-verified live: closed panel is `width:0`, `background:transparent`, `pointerEvents:none`, and the media-query rule (inspected via `document.styleSheets`) only matches the `--open` class.
+  2. `PlanetPanels`/`PlanetDashboards`-adjacent `src/scenes/PlanetDashboards.tsx` was doing real content-selection/shaping logic (picking sections/first project, slicing `stack`) inline in `scenes/`, beyond the established "resolve a single i18n key" precedent in `Asteroid.tsx`/`AsteroidField.tsx`. Extracted the selection logic to a new `src/hooks/useDashboardCardContent.ts` (outside `scenes/`); `PlanetDashboards.tsx` now only maps the already-resolved content onto 3D surface positions.
+  3. Missing `aria-hidden="true"` on the decorative `Html` wrapper `<div>`s in `PlanetDashboards.tsx`/`TechIcon.tsx` (their text duplicates `AccessibleContent.tsx`'s sr-only block but wasn't marked hidden from screen readers) — added.
+  4. `TechIconField`/`TechIcon` weren't gated by `isLowPower`, inconsistent with `PlanetPanels`/`PlanetDashboards` in the same diff — added an `isLowPower` prop that drops from 6 icons to 3 on low-power devices, threaded from `PortfolioScene.tsx`.
+
+  Everything else the reviewer checked came back clean: `OrbitControls` `enablePan`/`enableDamping` intact after the `maxDistance` bump, all 3 `InfoPanel` close paths present, the `role="dialog"` (no `aria-modal`) + focus-on-open pattern is sound given the canvas stays interactive beside it, the CSS-transition width-animation workaround (documented in Phase C) is reasonable, i18n key parity holds, `prefers-reduced-motion` gating covers every new animated piece, and `AccessibleContent.tsx`/`NoWebGLFallback.tsx` are untouched. Re-ran `npm run build`/`npm run lint` clean after applying all 4 fixes.
 
 ## Special-care reminders
 

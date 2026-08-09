@@ -29,7 +29,7 @@ export function InfoPanel() {
 
   return (
     <aside
-      className="info-panel"
+      className={section ? 'info-panel info-panel--open' : 'info-panel'}
       role="dialog"
       aria-labelledby="info-panel-title"
       aria-hidden={!section}
@@ -38,7 +38,8 @@ export function InfoPanel() {
         height: '100%',
         overflow: 'hidden',
         flexShrink: 0,
-        background: 'var(--color-surface)',
+        pointerEvents: section ? 'auto' : 'none',
+        background: section ? 'var(--color-surface)' : 'transparent',
         borderRight: section ? '1px solid var(--color-surface-border)' : 'none',
         backdropFilter: section ? 'blur(12px)' : 'none',
         transition: `width var(--motion-duration) var(--motion-ease)`,

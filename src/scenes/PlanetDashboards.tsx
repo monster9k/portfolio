@@ -2,15 +2,15 @@ import { useMemo } from 'react'
 import { Html } from '@react-three/drei'
 import { pointOnSphere } from './proceduralTextures'
 import { PLANET_RADIUS } from './planetConstants'
-import { useTranslation } from '@/i18n/useTranslation'
-import { sections } from '@/content/sections'
-import { projects } from '@/content/projects'
+import { useDashboardCardContent, type DashboardCardContent } from '@/hooks/useDashboardCardContent'
 
 /**
  * Small glass "dashboard peek" cards embedded on the planet surface, showing
  * a sliver of real (placeholder) portfolio data — skills/project/experience —
  * reusing the same glass-panel chrome as Tooltip.tsx/ProjectList.tsx. Rendered
  * as children of Planet.tsx's rotating group so they stay anchored to the hull.
+ * Content itself is resolved by useDashboardCardContent (outside scenes/) —
+ * this file only decides where each resolved card sits in 3D space.
  */
 
 const CARD_COUNT_NORMAL = 3
@@ -18,58 +18,39 @@ const CARD_COUNT_LOW = 1
 const CARD_SEED_OFFSET = 4001
 const SURFACE_OFFSET = 0.03
 
-interface DashboardCard {
+interface PositionedCard extends DashboardCardContent {
   key: number
   position: [number, number, number]
-  title: string
-  body: string
-  chips?: string[]
 }
 
-function useDashboardCards(): DashboardCard[] {
-  const { t, language } = useTranslation()
+function usePositionedCards(): PositionedCard[] {
+  const content = useDashboardCardContent()
 
-  return useMemo(() => {
-    const skillsSection = sections.find((s) => s.id === 'skills')
-    const projectsSection = sections.find((s) => s.id === 'projects')
-    const experienceSection = sections.find((s) => s.id === 'experience')
-    const firstProject = projects[0]
-
-    const cardContent: Array<Omit<DashboardCard, 'key' | 'position'>> = [
-      {
-        title: t('nav.skills'),
-        body: skillsSection ? skillsSection.shortPreview[language] : '',
-        chips: (firstProject?.stack ?? []).slice(0, 4),
-      },
-      {
-        title: firstProject?.name ?? t('nav.projects'),
-        body: firstProject
-          ? firstProject.description[language]
-          : (projectsSection?.shortPreview[language] ?? ''),
-      },
-      {
-        title: t('nav.experience'),
-        body: experienceSection ? experienceSection.shortPreview[language] : '',
-      },
-    ]
-
-    return cardContent.map((card, i) => {
-      const seed = CARD_SEED_OFFSET + i * 131
-      const { normal } = pointOnSphere(seed)
-      const offset = PLANET_RADIUS + SURFACE_OFFSET
-      return {
-        ...card,
-        key: seed,
-        position: [normal[0] * offset, normal[1] * offset, normal[2] * offset],
-      }
-    })
-  }, [t, language])
+  return useMemo(
+    () =>
+      content.map((card, i) => {
+        const seed = CARD_SEED_OFFSET + i * 131
+        const { normal } = pointOnSphere(seed)
+        const offset = PLANET_RADIUS + SURFACE_OFFSET
+        return {
+          ...card,
+          key: seed,
+          position: [normal[0] * offset, normal[1] * offset, normal[2] * offset] as [
+            number,
+            number,
+            number,
+          ],
+        }
+      }),
+    [content],
+  )
 }
 
-function DashboardCardView({ card }: { card: DashboardCard }) {
+function DashboardCardView({ card }: { card: PositionedCard }) {
   return (
     <Html position={card.position} center zIndexRange={[1, 0]} distanceFactor={6}>
       <div
+        aria-hidden="true"
         style={{
           width: 150,
           padding: 'var(--space-2) var(--space-3)',
@@ -140,7 +121,7 @@ interface PlanetDashboardsProps {
 }
 
 export function PlanetDashboards({ isLowPower }: PlanetDashboardsProps) {
-  const cards = useDashboardCards()
+  const cards = usePositionedCards()
   const visibleCount = isLowPower ? CARD_COUNT_LOW : CARD_COUNT_NORMAL
   const visibleCards = cards.slice(0, visibleCount)
 

@@ -37,7 +37,7 @@ export function PortfolioScene() {
         <SpaceDust />
         <OrbitRings />
         <AsteroidField />
-        <TechIconField />
+        <TechIconField isLowPower={isLowPower} />
       </Suspense>
       <OrbitControls
         enablePan={false}

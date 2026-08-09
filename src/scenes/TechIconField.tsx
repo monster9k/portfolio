@@ -13,12 +13,19 @@ const ICON_MAP: Record<TechIconSlug, IconType> = {
   tailwind: SiTailwindcss,
 }
 
-export function TechIconField() {
+const ICON_COUNT_LOW = 3
+
+interface TechIconFieldProps {
+  isLowPower: boolean
+}
+
+export function TechIconField({ isLowPower }: TechIconFieldProps) {
   const { t } = useTranslation()
+  const visibleIcons = isLowPower ? techIcons.slice(0, ICON_COUNT_LOW) : techIcons
 
   return (
     <>
-      {techIcons.map((tech) => (
+      {visibleIcons.map((tech) => (
         <TechIcon key={tech.id} orbit={tech.orbit} label={t(tech.labelKey)} Icon={ICON_MAP[tech.id]} />
       ))}
     </>

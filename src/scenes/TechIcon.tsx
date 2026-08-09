@@ -35,6 +35,7 @@ export function TechIcon({ orbit, label, Icon }: TechIconProps) {
       <group position={[orbit.radius, 0, 0]}>
         <Html center zIndexRange={[1, 0]}>
           <div
+            aria-hidden="true"
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
             style={{
