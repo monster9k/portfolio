@@ -13,7 +13,7 @@ This is a separate checklist from `README.md`'s Phase 0–5 roadmap (uses letter
 - [x] New `src/scenes/proceduralTextures.ts` — hex-grid + emissive-window canvas texture generator(s), resolution gated by `isLowPower`
 - [x] Rewrite `src/scenes/Planet.tsx` — generated `map`/`emissiveMap`, keep shell structure + rotation + `usePrefersReducedMotion` gating, add gated `emissiveIntensity` pulse
 - [x] Remove `daymap.jpg`/`clouds.jpg` after repo-wide grep confirms no other references
-- [ ] New `src/scenes/Nebula.tsx` (additive sprite-plane clouds), gated by `isLowPower` + reduced motion
+- [x] New `src/scenes/Nebula.tsx` (additive sprite-plane clouds), gated by `isLowPower` + reduced motion
 - [ ] New `src/scenes/SpaceDust.tsx` (`Sparkles` wrapper), gated by `isLowPower` + reduced motion
 - [ ] Mount `<Nebula/>` / `<SpaceDust/>` in `PortfolioScene.tsx`'s `<Suspense>` block
 - [ ] Manual visual QA against the reference image
