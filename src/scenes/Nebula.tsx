@@ -5,7 +5,7 @@ import { AdditiveBlending, CanvasTexture } from 'three'
 import type { Group } from 'three'
 import { useResponsiveQuality } from '@/hooks/useResponsiveQuality'
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion'
-import { ACCENT_CYAN, ACCENT_MAGENTA } from '@/styles/colors'
+import { ACCENT_CYAN, ACCENT_MAGENTA, TEXT_PRIMARY } from '@/styles/colors'
 import { pseudoRandom } from '@/utils/random'
 
 /**
@@ -42,6 +42,13 @@ function buildCloudTexture(): CanvasTexture {
   return new CanvasTexture(canvas)
 }
 
+function pickCloudColor(i: number): string {
+  const roll = pseudoRandom(i * 6.6)
+  if (roll > 0.88) return ACCENT_MAGENTA
+  if (roll > 0.55) return ACCENT_CYAN
+  return TEXT_PRIMARY
+}
+
 function buildPlacements(count: number): CloudPlacement[] {
   return Array.from({ length: count }, (_, i) => {
     const angle = pseudoRandom(i * 11.1) * Math.PI * 2
@@ -50,8 +57,8 @@ function buildPlacements(count: number): CloudPlacement[] {
     return {
       position: [Math.cos(angle) * radius, height, Math.sin(angle) * radius],
       scale: 22 + pseudoRandom(i * 2.2) * 14,
-      color: pseudoRandom(i * 6.6) > 0.5 ? ACCENT_CYAN : ACCENT_MAGENTA,
-      opacity: 0.12 + pseudoRandom(i * 9.9) * 0.1,
+      color: pickCloudColor(i),
+      opacity: 0.05 + pseudoRandom(i * 9.9) * 0.07,
     }
   })
 }
@@ -61,7 +68,7 @@ export function Nebula() {
   const { isLowPower } = useResponsiveQuality()
   const prefersReducedMotion = usePrefersReducedMotion()
   const texture = useMemo(() => buildCloudTexture(), [])
-  const placements = useMemo(() => buildPlacements(isLowPower ? 2 : 4), [isLowPower])
+  const placements = useMemo(() => buildPlacements(isLowPower ? 3 : 6), [isLowPower])
 
   useFrame((_, delta) => {
     if (prefersReducedMotion) return

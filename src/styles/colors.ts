@@ -8,3 +8,5 @@ export const ACCENT_CYAN = '#5fe3ff'
 export const ACCENT_CYAN_DIM = '#0f5866'
 export const ACCENT_MAGENTA = '#c65fff'
 export const ACCENT_MAGENTA_DIM = '#4a1f66'
+/** Mirrors tokens.css --color-text — used for neutral (non-accent) scene particles like dust. */
+export const TEXT_PRIMARY = '#eef1f8'
