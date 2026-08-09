@@ -29,6 +29,20 @@ Follow-up the user flagged after the initial plan: the current asteroids (noise-
 - [x] Hover contrast QA: idle cyan/magenta gems and the brighter cyan hover state are both clearly legible against the dark background at default zoom (verified live); nebula/dust aren't in view until Phase B's zoom increase, so that specific pairing will be re-checked then
 - [x] Manual QA: all 5 asteroids now render as distinct faceted cyan/magenta gems consistent with the planet's dual-accent look — confirmed hover (freeze + cyan glow + tooltip), click (panel opens), and Escape (panel closes) all still work; no console errors, `tsc`/`lint` clean
 
+## Phase A3 — Visual direction correction (match reference mood, redo of A/A2)
+
+The user rejected the Phase A/A2 result against a second reference image: a moody, deep-monochrome navy sphere with pale "screenshot-like" panels (not solid neon blocks), faint elliptical orbit rings, dense atmospheric dust, soft bloom/vignette, and darker, simpler rock-like moons — not the bright flat-shaded cyan/magenta candy look that shipped. This phase redoes the Phase A/A2 visuals to close that gap; it does not touch Phase B–E scope (zoom, split-screen panel, tech icons, which are unaffected). Honesty check: an exact match to a painted/photobashed concept-art image isn't achievable in real-time WebGL — this targets the same mood/material language, not a pixel copy.
+
+- [ ] Rewrite `src/scenes/proceduralTextures.ts`: pale/off-white "screenshot" panels with thin fake-UI micro-lines instead of solid neon fill; dim near-invisible structural seams (was too bright/gridlike); directional light-bias gradient instead of flat top-bottom; panels clustered in a few patches instead of scattered evenly; accent color mostly cyan with magenta now rare (~1 in 10 lit panels), consistent with "deep monochrome, blue accent"
+- [ ] `Planet.tsx`: drop the busy full-sphere wireframe shell; replace with a soft `BackSide`/additive "atmosphere glow" shell (no grid) for a rim-light halo instead
+- [ ] New `src/scenes/OrbitRings.tsx`: 2 thin tilted elliptical wireframe rings around the planet (faint white/cyan `line`, low opacity), slow gated rotation; mount in `PortfolioScene.tsx`
+- [ ] Rewrite `Asteroid.tsx` material/geometry again: reintroduce mild organic noise (subtler than the original rock — not the flat gem), monochrome navy-grey base, cyan-only emissive accent (drop magenta from asteroids to keep them quieter/darker than the planet, matching the reference's simpler moons); hover/click/orbit/label logic untouched
+- [ ] `npm install postprocessing @react-three/postprocessing`; mount `EffectComposer` with `Bloom` + `Vignette` in `PortfolioScene.tsx`, gated off when `isLowPower` (pulled forward from Phase E)
+- [ ] Tune `SpaceDust.tsx` (denser, more size variance) and `Nebula.tsx` (lower opacity, reads as haze not colored blobs)
+- [ ] Add a CSS radial-gradient vignette overlay (reuses `--color-bg-bottom`, no new token) on the scene container in `App.tsx`/`index.css` for extra edge-darkening moodiness
+- [ ] Update root `CLAUDE.md`'s palette note if magenta usage actually changes (asteroids drop it, planet uses it rarely) — keep the doc honest per its own "never let this drift" rule
+- [ ] Manual visual QA against the second reference image — self-review with a live screenshot comparison before calling this done (the failure mode last time was not catching the mismatch before reporting complete)
+
 ## Phase B — Zoom range
 
 - [ ] `PortfolioScene.tsx`: `maxDistance` `9 → 22`
