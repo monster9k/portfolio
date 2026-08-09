@@ -40,7 +40,7 @@ The user rejected the Phase A/A2 result against a second reference image: a mood
 - [x] `npm install postprocessing @react-three/postprocessing`; mounted `EffectComposer` with `Bloom` + `Vignette` in `PortfolioScene.tsx`, gated off when `isLowPower` (pulled forward from Phase E)
 - [x] Tuned `SpaceDust.tsx` (split into a dense pale debris layer + a subtler cyan near-planet accent layer) and `Nebula.tsx` (opacity down to 0.05–0.12, most clouds now near-white with cyan/rare-magenta tint, reads as haze not colored blobs)
 - [x] Added a CSS radial-gradient vignette overlay (reuses `--color-bg-bottom`, no new token) on the scene container in `App.tsx`/`index.css` for extra edge-darkening moodiness
-- [ ] Update root `CLAUDE.md`'s palette note if magenta usage actually changes (asteroids drop it, planet uses it rarely) — keep the doc honest per its own "never let this drift" rule
+- [x] Updated root `CLAUDE.md`'s palette note: magenta is now documented as a rare accent (~1 in 10) on the planet/nebula, dropped entirely from asteroids; also documents the new `TEXT_PRIMARY` mirror in `colors.ts`
 - [ ] Manual visual QA against the second reference image — self-review with a live screenshot comparison before calling this done (the failure mode last time was not catching the mismatch before reporting complete)
 
 ## Phase B — Zoom range
