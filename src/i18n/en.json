@@ -14,19 +14,19 @@
   },
   "sections": {
     "about": {
-      "body": "TODO: write your bio here (who you are, what you're studying/doing, what you're looking for)."
+      "body": "Computer Science student building interactive web experiences with React, TypeScript, and WebGL. Looking for a software engineering internship where I can contribute to real products and keep learning."
     },
     "skills": {
-      "body": "TODO: list your languages, frameworks, and tools here."
+      "body": "Frontend: React, TypeScript, Three.js / React Three Fiber. Backend: Node.js, REST APIs. Also comfortable with Git, Docker, and basic CI/CD."
     },
     "projects": {
-      "body": "TODO: a one-line intro to your project list. Add the projects themselves in src/content/projects.ts."
+      "body": "A few things I've built recently — see the highlights below."
     },
     "experience": {
-      "body": "TODO: write your experience/education timeline here (internships, coursework, certifications)."
+      "body": "Currently pursuing a Computer Science degree, with coursework in data structures, algorithms, and web development. Self-taught in 3D web graphics through personal projects like this one."
     },
     "contact": {
-      "body": "TODO: add how people can reach you (email, LinkedIn, GitHub)."
+      "body": "Reach me by email or check out my GitHub — happy to chat about opportunities."
     }
   }
 }

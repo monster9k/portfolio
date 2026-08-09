@@ -1,18 +1,23 @@
 import { useEffect, useMemo, useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
-import type { Mesh, MeshStandardMaterial } from 'three'
+import type { Group, MeshStandardMaterial } from 'three'
 import { generatePlanetTextures } from './proceduralTextures'
+import { PlanetPanels } from './PlanetPanels'
+import { PlanetDashboards } from './PlanetDashboards'
+import { PLANET_RADIUS } from './planetConstants'
 import { useResponsiveQuality } from '@/hooks/useResponsiveQuality'
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion'
+import { ACCENT_CYAN } from '@/styles/colors'
 
-export const PLANET_RADIUS = 2
+export { PLANET_RADIUS }
 const HULL_ROTATION_SPEED = 0.03
 const PULSE_SPEED = 0.6
 const PULSE_MIN = 0.85
 const PULSE_MAX = 1.35
+const WIREFRAME_OPACITY = 0.16
 
 export function Planet() {
-  const surfaceRef = useRef<Mesh>(null)
+  const surfaceRef = useRef<Group>(null)
   const hullMaterialRef = useRef<MeshStandardMaterial>(null)
   const { planetSegments, isLowPower } = useResponsiveQuality()
   const prefersReducedMotion = usePrefersReducedMotion()
@@ -38,17 +43,31 @@ export function Planet() {
   })
 
   return (
-    <mesh ref={surfaceRef}>
-      <sphereGeometry args={[PLANET_RADIUS, planetSegments, planetSegments]} />
-      <meshStandardMaterial
-        ref={hullMaterialRef}
-        map={textures.map}
-        emissiveMap={textures.emissiveMap}
-        emissive="#ffffff"
-        emissiveIntensity={1}
-        roughness={0.45}
-        metalness={0.7}
-      />
-    </mesh>
+    <group ref={surfaceRef}>
+      <mesh>
+        <sphereGeometry args={[PLANET_RADIUS, planetSegments, planetSegments]} />
+        <meshStandardMaterial
+          ref={hullMaterialRef}
+          map={textures.map}
+          emissiveMap={textures.emissiveMap}
+          emissive="#ffffff"
+          emissiveIntensity={1}
+          roughness={0.45}
+          metalness={0.7}
+        />
+      </mesh>
+      {/* Blueprint-style wireframe shell, slightly proud of the hull so it doesn't z-fight. */}
+      <mesh>
+        <sphereGeometry args={[PLANET_RADIUS * 1.01, planetSegments, planetSegments]} />
+        <meshBasicMaterial
+          color={ACCENT_CYAN}
+          wireframe
+          transparent
+          opacity={WIREFRAME_OPACITY}
+        />
+      </mesh>
+      <PlanetPanels isLowPower={isLowPower} />
+      <PlanetDashboards isLowPower={isLowPower} />
+    </group>
   )
 }

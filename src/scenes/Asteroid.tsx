@@ -1,8 +1,7 @@
 import { useMemo, useRef } from 'react'
 import { useFrame, type ThreeEvent } from '@react-three/fiber'
 import { Billboard, Text } from '@react-three/drei'
-import { IcosahedronGeometry, Vector3 } from 'three'
-import type { Group, Mesh } from 'three'
+import type { Group, Mesh, Texture } from 'three'
 import { useSceneStore } from '@/store/useSceneStore'
 import type { SectionContent } from '@/content/sections'
 import { useTranslation } from '@/i18n/useTranslation'
@@ -11,35 +10,17 @@ import { hashId, pseudoRandom } from '@/utils/random'
 import { ACCENT_CYAN } from '@/styles/colors'
 
 const ASTEROID_RADIUS = 0.22
+const ASTEROID_SEGMENTS = 24
 const TUMBLE_SPEED_X = 0.4
 const TUMBLE_SPEED_Z = 0.25
-const NOISE_AMPLITUDE = 0.1
-const BASE_HULL_COLOR = '#232b3d'
-
-// Mild organic noise — enough to read as a rocky/mechanical moon, far short
-// of the old lumpy-rock look this replaces. Per-id seed keeps each section's
-// asteroid a stable, distinct silhouette across renders/reloads.
-function useAsteroidGeometry(seed: number) {
-  return useMemo(() => {
-    const geometry = new IcosahedronGeometry(ASTEROID_RADIUS, 1)
-    const position = geometry.attributes.position
-    const vertex = new Vector3()
-    for (let i = 0; i < position.count; i++) {
-      vertex.fromBufferAttribute(position, i)
-      const noise = 1 - NOISE_AMPLITUDE / 2 + pseudoRandom(seed + i) * NOISE_AMPLITUDE
-      vertex.multiplyScalar(noise)
-      position.setXYZ(i, vertex.x, vertex.y, vertex.z)
-    }
-    geometry.computeVertexNormals()
-    return geometry
-  }, [seed])
-}
 
 interface AsteroidProps {
   section: SectionContent
+  /** Shared moon texture, loaded once by AsteroidField and reused across all asteroids. */
+  moonMap: Texture
 }
 
-export function Asteroid({ section }: AsteroidProps) {
+export function Asteroid({ section, moonMap }: AsteroidProps) {
   const { t } = useTranslation()
   const groupRef = useRef<Group>(null)
   const meshRef = useRef<Mesh>(null)
@@ -49,7 +30,11 @@ export function Asteroid({ section }: AsteroidProps) {
   const prefersReducedMotion = usePrefersReducedMotion()
 
   const seed = useMemo(() => hashId(section.id), [section.id])
-  const geometry = useAsteroidGeometry(seed)
+  // Give each of the 5 moons a different starting face so they don't look identical.
+  const initialRotation = useMemo<[number, number, number]>(
+    () => [pseudoRandom(seed) * Math.PI * 2, pseudoRandom(seed + 1) * Math.PI * 2, 0],
+    [seed],
+  )
 
   useFrame((_, delta) => {
     if (prefersReducedMotion) return
@@ -92,17 +77,18 @@ export function Asteroid({ section }: AsteroidProps) {
       <group position={[section.orbit.radius, 0, 0]}>
         <mesh
           ref={meshRef}
-          geometry={geometry}
+          rotation={initialRotation}
           onPointerOver={handlePointerOver}
           onPointerOut={handlePointerOut}
           onClick={handleClick}
         >
+          <sphereGeometry args={[ASTEROID_RADIUS, ASTEROID_SEGMENTS, ASTEROID_SEGMENTS]} />
           <meshStandardMaterial
-            color={BASE_HULL_COLOR}
+            map={moonMap}
             emissive={ACCENT_CYAN}
             emissiveIntensity={isHovered ? 1.1 : 0.22}
-            roughness={0.55}
-            metalness={0.4}
+            roughness={0.92}
+            metalness={0.05}
           />
         </mesh>
         <Billboard position={[0, 0.42, 0]}>

@@ -144,7 +144,7 @@ Deployed on [Vercel](https://vercel.com/), connected directly to this GitHub rep
 
 ## Assets & Credits
 
-Planet textures (day map, cloud layer) from [Solar System Scope](https://www.solarsystemscope.com/textures/) — CC BY 4.0.
+The planet's hull/panel textures are generated procedurally at runtime (no image asset). The asteroid/moon texture (`src/assets/textures/moon/moon_2k.jpg`) is from [Solar System Scope](https://www.solarsystemscope.com/textures/) — CC BY 4.0.
 
 ## License
 
