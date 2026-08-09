@@ -6,6 +6,7 @@ import type { Group, Mesh } from 'three'
 import { useSceneStore } from '@/store/useSceneStore'
 import type { SectionContent } from '@/content/sections'
 import { useTranslation } from '@/i18n/useTranslation'
+import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion'
 
 const ASTEROID_RADIUS = 0.22
 const TUMBLE_SPEED_X = 0.4
@@ -52,10 +53,12 @@ export function Asteroid({ section }: AsteroidProps) {
   const isHovered = useSceneStore((s) => s.hoveredId === section.id)
   const setHovered = useSceneStore((s) => s.setHovered)
   const setSelected = useSceneStore((s) => s.setSelected)
+  const prefersReducedMotion = usePrefersReducedMotion()
 
   const geometry = useAsteroidGeometry(useMemo(() => hashId(section.id), [section.id]))
 
   useFrame((_, delta) => {
+    if (prefersReducedMotion) return
     // Freeze the asteroid in place while hovered/selected so its tooltip/label
     // stays put long enough to read and the target doesn't drift out from under the cursor.
     const { hoveredId, selectedId } = useSceneStore.getState()
@@ -91,7 +94,7 @@ export function Asteroid({ section }: AsteroidProps) {
   }
 
   return (
-    <group rotation={[0, section.orbit.phaseOffset, section.orbit.inclination]} ref={groupRef}>
+    <group ref={groupRef} rotation={[0, section.orbit.phaseOffset, section.orbit.inclination]}>
       <group position={[section.orbit.radius, 0, 0]}>
         <mesh
           ref={meshRef}
