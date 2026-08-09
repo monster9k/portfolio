@@ -75,8 +75,8 @@ The user rejected the Phase A/A2 result against a second reference image: a mood
 
 ## Phase E — Bloom + final QA
 
-- [ ] `npm install @react-three/postprocessing postprocessing`
-- [ ] `PortfolioScene.tsx`: `{!isLowPower && <EffectComposer><Bloom .../></EffectComposer>}`, tuned against new emissive planet/nebula/accents
+- [x] `npm install @react-three/postprocessing postprocessing` — done early in Phase A3
+- [x] `PortfolioScene.tsx`: `{!isLowPower && <EffectComposer><Bloom .../></EffectComposer>}`, tuned against new emissive planet/nebula/accents — done early in Phase A3 (may need a final revisit once Phase D's tech icons add more emissive content)
 - [ ] Run full `.claude/skills/ui-ux-consistency/SKILL.md` checklist across Phases A–D
 - [ ] `npm run build` clean
 - [ ] `npm run lint` clean
