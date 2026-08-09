@@ -1,0 +1,74 @@
+# CLAUDE.md
+
+Guidance for Claude Code (and any contributor) working in this repository.
+
+## Project
+
+**Orbit** — a personal portfolio built as an explorable 3D planet. The user drags to orbit a rotatable planet; five small asteroids float around it, each representing a portfolio section (About, Skills, Projects, Experience/Education, Contact). Hovering an asteroid shows a short preview; clicking opens a full detail panel. Purpose: a standout, interactive demo piece for internship interviews and interviews with Japanese companies — it needs to look and feel polished enough to show live on a call.
+
+Full concept, tech stack rationale, and phased roadmap: see [README.md](./README.md) and the plan at implementation time. Current build status is tracked by the checkboxes in README's Roadmap section — check that before assuming a piece of the stack already exists.
+
+## Stack
+
+Vite + React + TypeScript + React Three Fiber + drei for the 3D scene; plain React/CSS + Framer Motion for the 2D overlay UI (tooltip, modal, navbar); Zustand for shared state between the 3D scene and overlay; a custom lightweight i18n context for the EN/日本語 toggle (not react-i18next — see README Tech Stack table for why). Deploy target: Vercel, git-connected auto-deploy.
+
+## Commands
+
+```bash
+npm run dev       # dev server
+npm run build      # type-check + production build
+npm run preview    # serve the production build locally
+npm run lint        # eslint
+```
+
+Run `npm run build` and `npm run lint` clean before considering any phase of work done.
+
+## Folder conventions
+
+```
+src/scenes/          3D scene code (R3F components, useFrame animation, raycasting)
+src/components/ui/   2D DOM overlay (tooltip, modal, navbar, language switcher)
+src/content/         Typed content data (sections.ts, projects.ts)
+src/i18n/            I18nProvider, useTranslation, en.json, ja.json
+src/store/           Zustand store(s)
+src/hooks/           Device/capability detection hooks
+```
+
+**Hard rule: `scenes/` never contains user-facing strings.** Every label/title an asteroid or scene component displays must be passed in as a prop already resolved from `content/` + `i18n/`. This keeps the 3D layer swappable/testable independent of content and language.
+
+## UI/UX design tokens
+
+These are the baseline visual tokens for the project. Treat them as the source of truth — don't introduce a new one-off color, spacing value, or animation duration inline in a component; add it here first if a genuinely new value is needed, then use it everywhere.
+
+- **Palette**: dark space background (near-black, e.g. `#05060a`–`#0b0e17`), planet/asteroid materials lit warm-white, a single accent color used consistently for hover/focus/selected states (e.g. a cyan or amber — pick one early and reuse it everywhere: asteroid hover glow, tooltip border, active nav link, focus rings). Don't add a second accent color without updating this file.
+- **Spacing**: use a consistent 4px-based scale (4/8/12/16/24/32/48px) for all 2D overlay UI padding/margins/gaps. No arbitrary pixel values in `components/ui/`.
+- **Typography**: one primary sans-serif for UI (headings + body, weight variation instead of a second family). Keep a clear 3-level type scale (e.g. section title / body / caption) reused across tooltip, modal, and navbar — don't invent a new font size per component.
+- **Motion**: overlay transitions (tooltip fade-in, modal open/close) should share one duration/easing pair (e.g. 200–250ms, `ease-out`) via Framer Motion — don't hand-tune timing per component. Camera/orbit damping (`enableDamping`, `dampingFactor`) and orbit speeds live in `scenes/` constants, not scattered magic numbers inside JSX.
+
+If the actual palette/texture colors chosen in Phase 1–2 differ from the placeholders above, **update this section to match** — it should always reflect the real, current values, not just the plan.
+
+## Mandatory interaction rules
+
+- Every asteroid must respond to hover (visual feedback + tooltip) while the pointer is stationary over it — never a silent no-op.
+- Clicking an asteroid always opens the detail modal/panel, and it must be closable three ways: close button, Escape key, and backdrop click. Don't remove any of the three when touching modal code.
+- `OrbitControls` must keep `enablePan={false}` and `enableDamping` on — panning breaks the "orbit a planet" metaphor, and disabling damping makes the camera feel broken. Don't add pan or remove damping as a "quick fix" for a control issue; find the actual cause.
+- All user-facing text goes through the i18n `t()` function. No hardcoded English or Japanese strings in components.
+
+## Accessibility (non-negotiable)
+
+- Respect `prefers-reduced-motion`: disable/slow planet auto-rotation, asteroid orbit motion, and camera auto-rotate/intro fly-ins when set.
+- Keep a visually-hidden (sr-only) semantic HTML block with the full bilingual content, and a keyboard-reachable nav that can open every section's detail panel without needing to click a moving 3D object.
+- Provide a non-WebGL fallback (`NoWebGLFallback`) — never let the site render blank on a browser/device without WebGL support.
+
+Don't remove any of the above during refactors, even if it looks like unused code — it's the accessibility/SEO safety net for a canvas-only site.
+
+## How UI/UX consistency is enforced in `.claude/`
+
+Guidance alone is easy to forget mid-task, so this is backed by several mechanisms instead of just this file:
+
+- `.claude/rules/ui-ux.md` — path-scoped, auto-loads into context whenever a file under `src/scenes/**`, `src/components/ui/**`, or `src/styles/**` is opened, so the rules above are re-surfaced automatically without relying on memory of this file.
+- `.claude/skills/ui-ux-consistency/SKILL.md` — the full pre-completion checklist (tokens, bilingual layout, interaction pattern, responsiveness, accessibility). Invoke it explicitly (`/ui-ux-consistency`) or let Claude auto-invoke it when its description matches the task.
+- `.claude/agents/ui-ux-reviewer.md` — a read-only subagent that audits a diff against this file + the skill checklist. Use it as a final pass before considering UI work done (`@ui-ux-reviewer` or ask Claude to delegate to it).
+- `.claude/settings.json` — the only *enforced* (not just suggested) layer: a `PostToolUse` hook auto-formats edited `.ts/.tsx/.css` files with Prettier once it's installed (Phase 0+), and `permissions` allow the routine `npm`/`git` commands this project needs without prompting each time, while denying destructive ones.
+
+Rules/skills/CLAUDE.md are guidance Claude follows by judgment; only `permissions` and `hooks` in `settings.json` are actually enforced by Claude Code regardless of what Claude decides. Keep that distinction in mind before assuming something is "guaranteed" — if a rule truly must never be violated (e.g. never running `git push --force`), it belongs in `settings.json`, not just prose here.

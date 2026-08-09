@@ -1,0 +1,43 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install)",
+      "Bash(npm ci)",
+      "Bash(npm run *)",
+      "Bash(npm test *)",
+      "Bash(git status)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(git add *)",
+      "PowerShell(npm install)",
+      "PowerShell(npm ci)",
+      "PowerShell(npm run *)",
+      "PowerShell(git status)",
+      "PowerShell(git diff *)",
+      "PowerShell(git log *)",
+      "PowerShell(git add *)"
+    ],
+    "deny": [
+      "Bash(rm -rf *)",
+      "Bash(git push --force*)",
+      "Bash(git reset --hard*)",
+      "Bash(git clean *)",
+      "PowerShell(Remove-Item -Recurse -Force *)",
+      "PowerShell(git push --force*)",
+      "PowerShell(git reset --hard*)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh -c 'F=$(cat | jq -r \".tool_input.file_path // empty\"); if [ -n \"$F\" ] && [ -x node_modules/.bin/prettier ]; then case \"$F\" in *.ts|*.tsx|*.js|*.jsx|*.css|*.json) node_modules/.bin/prettier --write \"$F\" ;; esac; fi'"
+          }
+        ]
+      }
+    ]
+  }
+}
