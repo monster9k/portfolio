@@ -123,11 +123,11 @@ All portfolio content lives as typed data, not hardcoded JSX:
 
 ## Roadmap
 
-- [ ] **Phase 0** — Scaffold (Vite + React + TS + R3F, folder structure, lint/format)
-- [ ] **Phase 1** — Static rotatable planet + camera controls
-- [ ] **Phase 2** — Asteroids + hover/click interactions
-- [ ] **Phase 3** — Real bilingual content (EN/JA)
-- [ ] **Phase 4** — Polish: loading screen, accessibility fallback, responsive/perf tiering
+- [x] **Phase 0** — Scaffold (Vite + React + TS + R3F, folder structure, lint/format)
+- [x] **Phase 1** — Static rotatable planet + camera controls
+- [x] **Phase 2** — Asteroids + hover/click interactions
+- [x] **Phase 3** — i18n + content architecture wired end-to-end (EN/JA toggle, Navbar, typed content). Real bio/skills/projects/experience/contact copy is still TODO — see `src/content/sections.ts`, `src/content/projects.ts`, and the `sections.*.body` keys in `src/i18n/en.json`/`ja.json`
+- [x] **Phase 4** — Polish: loading screen, no-WebGL + screen-reader fallback, `prefers-reduced-motion`, responsive/perf tiering
 - [ ] **Phase 5** — Deploy to Vercel + final QA
 
 ---
@@ -142,9 +142,13 @@ Deployed on [Vercel](https://vercel.com/), connected directly to this GitHub rep
 
 ---
 
+## Assets & Credits
+
+Planet textures (day map, cloud layer) from [Solar System Scope](https://www.solarsystemscope.com/textures/) — CC BY 4.0.
+
 ## License
 
-MIT — feel free to fork this as a starting point for your own 3D portfolio.
+MIT — feel free to fork this as a starting point for your own 3D portfolio. Planet textures are CC BY 4.0 (see Assets & Credits) and not covered by the MIT license; swap them out if you need a fully MIT-licensed asset set.
 
 ---
 
