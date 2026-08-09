@@ -35,7 +35,7 @@ The user rejected the Phase A/A2 result against a second reference image: a mood
 
 - [x] Rewrite `src/scenes/proceduralTextures.ts`: pale/off-white "screenshot" panels (background + fake text lines + one accent block) instead of solid neon fill; dim near-invisible structural seams; directional radial-gradient light bias instead of flat top-bottom; panels clustered around 3 patches instead of scattered evenly; accent color mostly cyan, magenta now rare (~1 in 10 lit panels)
 - [x] `Planet.tsx`: dropped the busy full-sphere wireframe shell; replaced with a soft `BackSide`/additive cyan "atmosphere glow" shell (no grid) for a rim-light halo instead
-- [ ] New `src/scenes/OrbitRings.tsx`: 2 thin tilted elliptical wireframe rings around the planet (faint white/cyan `line`, low opacity), slow gated rotation; mount in `PortfolioScene.tsx`
+- [x] New `src/scenes/OrbitRings.tsx`: 2 thin tilted elliptical wireframe rings around the planet (faint cyan `Line` via drei, low opacity), slow gated rotation; mounted in `PortfolioScene.tsx`
 - [ ] Rewrite `Asteroid.tsx` material/geometry again: reintroduce mild organic noise (subtler than the original rock — not the flat gem), monochrome navy-grey base, cyan-only emissive accent (drop magenta from asteroids to keep them quieter/darker than the planet, matching the reference's simpler moons); hover/click/orbit/label logic untouched
 - [ ] `npm install postprocessing @react-three/postprocessing`; mount `EffectComposer` with `Bloom` + `Vignette` in `PortfolioScene.tsx`, gated off when `isLowPower` (pulled forward from Phase E)
 - [ ] Tune `SpaceDust.tsx` (denser, more size variance) and `Nebula.tsx` (lower opacity, reads as haze not colored blobs)

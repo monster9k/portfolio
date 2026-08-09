@@ -5,6 +5,7 @@ import { Planet } from './Planet'
 import { Starfield } from './Starfield'
 import { Nebula } from './Nebula'
 import { SpaceDust } from './SpaceDust'
+import { OrbitRings } from './OrbitRings'
 import { AsteroidField } from './AsteroidField'
 import { useResponsiveQuality } from '@/hooks/useResponsiveQuality'
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion'
@@ -25,6 +26,7 @@ export function PortfolioScene() {
         <Starfield />
         <Nebula />
         <SpaceDust />
+        <OrbitRings />
         <AsteroidField />
       </Suspense>
       <OrbitControls
