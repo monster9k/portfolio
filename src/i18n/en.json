@@ -12,6 +12,14 @@
     "close": "Close",
     "loading": "Loading planet..."
   },
+  "tech": {
+    "react": "React",
+    "typescript": "TypeScript",
+    "vite": "Vite",
+    "node": "Node.js",
+    "docker": "Docker",
+    "tailwind": "Tailwind CSS"
+  },
   "sections": {
     "about": {
       "body": "Computer Science student building interactive web experiences with React, TypeScript, and WebGL. Looking for a software engineering internship where I can contribute to real products and keep learning."

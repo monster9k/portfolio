@@ -8,6 +8,7 @@ import { Nebula } from './Nebula'
 import { SpaceDust } from './SpaceDust'
 import { OrbitRings } from './OrbitRings'
 import { AsteroidField } from './AsteroidField'
+import { TechIconField } from './TechIconField'
 import { useResponsiveQuality } from '@/hooks/useResponsiveQuality'
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion'
 import { useSceneStore } from '@/store/useSceneStore'
@@ -36,6 +37,7 @@ export function PortfolioScene() {
         <SpaceDust />
         <OrbitRings />
         <AsteroidField />
+        <TechIconField />
       </Suspense>
       <OrbitControls
         enablePan={false}

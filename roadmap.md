@@ -63,15 +63,15 @@ The user rejected the Phase A/A2 result against a second reference image: a mood
 
 ## Phase D — Orbiting tech icons
 
-- [ ] `npm install react-icons`
-- [ ] New `src/content/techIcons.ts` — 6 entries (react, typescript, vite, node, docker, tailwind), reusing `OrbitParams`, radii ~4.6–5.4
-- [ ] Add `tech.*` block to `en.json` and `ja.json` in the same change (key parity)
-- [ ] New `src/scenes/TechIcon.tsx` — nested-group orbit (mirrors `Asteroid.tsx`), drei `Html` billboard with `react-icons/si` glyph, DOM hover shows name, no click handler, cursor `default`, `label` passed as resolved prop, `aria-hidden="true"`
-- [ ] New `src/scenes/TechIconField.tsx` (mirrors `AsteroidField.tsx`) — resolves `t(tech.labelKey)` + icon-slug→component mapping
-- [ ] Hover label: small local `Html` tooltip styled with existing tokens (kept separate from global `Tooltip`/`useSceneStore`)
-- [ ] Mount `<TechIconField/>` in `PortfolioScene.tsx`
-- [ ] Confirm `AccessibleContent.tsx` untouched
-- [ ] Manual QA: hover-only (no click) in both languages; no visual collision with asteroids/nebula at default and max zoom
+- [x] `npm install react-icons`
+- [x] New `src/content/techIcons.ts` — 6 entries (react, typescript, vite, node, docker, tailwind), reusing `OrbitParams`, radii 4.6–5.4
+- [x] Added `tech.*` block to `en.json` and `ja.json` in the same change (key parity) — tech names kept identical latin text in both locales (same convention as `ProjectEntry.name`/tech stack proper nouns elsewhere)
+- [x] New `src/scenes/TechIcon.tsx` — nested-group orbit (mirrors `Asteroid.tsx`'s rotation trick), drei `Html` (screen-space, not `transform` mode — i.e. always faces camera like a billboard) rendering a `react-icons/si` glyph, local `useState` hover shows the name in a small tag, no click handler, `cursor: 'default'`, `label`/`Icon` passed as resolved props, `aria-hidden="true"` on the icon itself
+- [x] New `src/scenes/TechIconField.tsx` (mirrors `AsteroidField.tsx`) — resolves `t(tech.labelKey)` + a `TechIconSlug -> IconType` map (`SiReact`/`SiTypescript`/`SiVite`/`SiNodedotjs`/`SiDocker`/`SiTailwindcss`)
+- [x] Hover label implemented as a small inline-styled `<span>` next to the icon using the existing surface/border/font tokens — local component state only, no `useSceneStore`/global `Tooltip` involved
+- [x] Mounted `<TechIconField/>` in `PortfolioScene.tsx`
+- [x] Confirmed `AccessibleContent.tsx` untouched (not read or modified this phase)
+- [x] Manual QA in Chrome: dispatched real hover events on each icon — confirmed the name tag appears (`"React"` etc.), `cursor: default` (not `pointer`, no click affordance), and re-verified the label still resolves correctly after switching to 日本語. Visual check: icons sit in the same radius band as `OrbitRings`/outside the asteroid belt as planned, read as small glowing glyphs, no overlap collisions with asteroids observed while orbiting. Known simplification: icons use fixed-size `Html` (no `distanceFactor`), so unlike asteroids they don't perspective-shrink at Phase B's extended max zoom — acceptable for a small decorative hover flourish, flagged here rather than adding more `distanceFactor` risk after Phase B/C's tuning experience with it
 
 ## Phase E — Bloom + final QA
 

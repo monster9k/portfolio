@@ -12,6 +12,14 @@
     "close": "閉じる",
     "loading": "読み込み中..."
   },
+  "tech": {
+    "react": "React",
+    "typescript": "TypeScript",
+    "vite": "Vite",
+    "node": "Node.js",
+    "docker": "Docker",
+    "tailwind": "Tailwind CSS"
+  },
   "sections": {
     "about": {
       "body": "React・TypeScript・WebGLを用いたインタラクティブなWeb体験を制作している情報工学専攻の学生です。実際のプロダクト開発に貢献しながら学び続けられるソフトウェアエンジニアのインターンシップを探しています。"
