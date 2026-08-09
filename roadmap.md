@@ -6,8 +6,8 @@ This is a separate checklist from `README.md`'s Phase 0–5 roadmap (uses letter
 
 ## Phase A — Tokens, planet, and background visual overhaul
 
-- [ ] Add `--color-accent-secondary` / `-soft` / `-glow` to `src/styles/tokens.css`
-- [ ] Update root `CLAUDE.md` palette section in the same change (dual-accent split: cyan = primary interactive, magenta = decorative/highlight) + note the `colors.ts` JS mirror
+- [x] Add `--color-accent-secondary` / `-soft` / `-glow` to `src/styles/tokens.css`
+- [x] Update root `CLAUDE.md` palette section in the same change (dual-accent split: cyan = primary interactive, magenta = decorative/highlight) + note the `colors.ts` JS mirror
 - [ ] New `src/styles/colors.ts` (`ACCENT_CYAN` / `ACCENT_MAGENTA`)
 - [ ] New `src/utils/random.ts` — extract `hashId`/`pseudoRandom` out of `Asteroid.tsx`; update `Asteroid.tsx` to import it
 - [ ] New `src/scenes/proceduralTextures.ts` — hex-grid + emissive-window canvas texture generator(s), resolution gated by `isLowPower`
