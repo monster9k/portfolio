@@ -16,6 +16,7 @@ function App() {
       {webGLSupported ? (
         <main style={{ width: '100vw', height: '100vh' }}>
           <PortfolioScene />
+          <div className="scene-vignette" aria-hidden="true" />
           <Navbar />
           <Tooltip />
           <DetailModal />

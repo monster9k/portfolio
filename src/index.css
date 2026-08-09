@@ -38,6 +38,16 @@ button {
   font-family: inherit;
 }
 
+/* Darkens the scene edges for the moody reference look; sits above the
+   canvas but below the interactive overlay (Navbar z-index: 10). */
+.scene-vignette {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 45%, var(--color-bg-bottom) 115%);
+}
+
 /* Visually hidden but still reachable by screen readers / keyboard nav */
 .sr-only {
   position: absolute;
