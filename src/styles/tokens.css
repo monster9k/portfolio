@@ -13,6 +13,9 @@
   --color-accent: #5fe3ff;
   --color-accent-soft: rgba(95, 227, 255, 0.16);
   --color-accent-glow: rgba(95, 227, 255, 0.55);
+  --color-accent-secondary: #c65fff;
+  --color-accent-secondary-soft: rgba(198, 95, 255, 0.16);
+  --color-accent-secondary-glow: rgba(198, 95, 255, 0.55);
 
   /* Spacing (4px scale) */
   --space-1: 4px;

@@ -12,21 +12,29 @@
     "close": "閉じる",
     "loading": "読み込み中..."
   },
+  "tech": {
+    "react": "React",
+    "typescript": "TypeScript",
+    "vite": "Vite",
+    "node": "Node.js",
+    "docker": "Docker",
+    "tailwind": "Tailwind CSS"
+  },
   "sections": {
     "about": {
-      "body": "TODO: 自己紹介を書いてください（あなたが誰か、何を学んでいるか、何を求めているか）。"
+      "body": "React・TypeScript・WebGLを用いたインタラクティブなWeb体験を制作している情報工学専攻の学生です。実際のプロダクト開発に貢献しながら学び続けられるソフトウェアエンジニアのインターンシップを探しています。"
     },
     "skills": {
-      "body": "TODO: 使用できる言語・フレームワーク・ツールを記載してください。"
+      "body": "フロントエンド: React, TypeScript, Three.js / React Three Fiber。バックエンド: Node.js, REST API。Git, Docker, 簡単なCI/CDにも対応可能です。"
     },
     "projects": {
-      "body": "TODO: プロジェクト一覧の紹介文。プロジェクト自体は src/content/projects.ts に追加してください。"
+      "body": "最近作ったプロジェクトの一部です。詳細は以下をご覧ください。"
     },
     "experience": {
-      "body": "TODO: 経歴・学歴（インターン、履修科目、資格など）を書いてください。"
+      "body": "現在情報工学を専攻中で、データ構造・アルゴリズム・Web開発を履修しています。このポートフォリオのような個人プロジェクトを通して3D Webグラフィックスを独学しています。"
     },
     "contact": {
-      "body": "TODO: 連絡方法（メール、LinkedIn、GitHubなど）を記載してください。"
+      "body": "メールでご連絡いただくか、GitHubをご覧ください。お仕事のご相談、お気軽にどうぞ。"
     }
   }
 }
