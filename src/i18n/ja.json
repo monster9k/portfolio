@@ -1,0 +1,32 @@
+{
+  "nav": {
+    "about": "自己紹介",
+    "skills": "スキル",
+    "projects": "プロジェクト",
+    "experience": "経歴",
+    "contact": "連絡先"
+  },
+  "ui": {
+    "dragToRotate": "ドラッグして惑星を探索",
+    "hoverHint": "小惑星にカーソルを合わせてプレビュー、クリックで詳細を表示",
+    "close": "閉じる",
+    "loading": "読み込み中..."
+  },
+  "sections": {
+    "about": {
+      "body": "TODO: 自己紹介を書いてください（あなたが誰か、何を学んでいるか、何を求めているか）。"
+    },
+    "skills": {
+      "body": "TODO: 使用できる言語・フレームワーク・ツールを記載してください。"
+    },
+    "projects": {
+      "body": "TODO: プロジェクト一覧の紹介文。プロジェクト自体は src/content/projects.ts に追加してください。"
+    },
+    "experience": {
+      "body": "TODO: 経歴・学歴（インターン、履修科目、資格など）を書いてください。"
+    },
+    "contact": {
+      "body": "TODO: 連絡方法（メール、LinkedIn、GitHubなど）を記載してください。"
+    }
+  }
+}

@@ -40,12 +40,14 @@ src/hooks/           Device/capability detection hooks
 
 These are the baseline visual tokens for the project. Treat them as the source of truth — don't introduce a new one-off color, spacing value, or animation duration inline in a component; add it here first if a genuinely new value is needed, then use it everywhere.
 
-- **Palette**: dark space background (near-black, e.g. `#05060a`–`#0b0e17`), planet/asteroid materials lit warm-white, a single accent color used consistently for hover/focus/selected states (e.g. a cyan or amber — pick one early and reuse it everywhere: asteroid hover glow, tooltip border, active nav link, focus rings). Don't add a second accent color without updating this file.
-- **Spacing**: use a consistent 4px-based scale (4/8/12/16/24/32/48px) for all 2D overlay UI padding/margins/gaps. No arbitrary pixel values in `components/ui/`.
-- **Typography**: one primary sans-serif for UI (headings + body, weight variation instead of a second family). Keep a clear 3-level type scale (e.g. section title / body / caption) reused across tooltip, modal, and navbar — don't invent a new font size per component.
-- **Motion**: overlay transitions (tooltip fade-in, modal open/close) should share one duration/easing pair (e.g. 200–250ms, `ease-out`) via Framer Motion — don't hand-tune timing per component. Camera/orbit damping (`enableDamping`, `dampingFactor`) and orbit speeds live in `scenes/` constants, not scattered magic numbers inside JSX.
+All tokens below are defined as CSS custom properties in `src/styles/tokens.css` — reference them by name (`var(--color-accent)` etc.), never re-declare the raw value in a component.
 
-If the actual palette/texture colors chosen in Phase 1–2 differ from the placeholders above, **update this section to match** — it should always reflect the real, current values, not just the plan.
+- **Palette**: dark space background gradient `--color-bg-top` (`#0b0e17`) → `--color-bg-bottom` (`#05060a`); overlay surfaces (tooltip/modal/navbar) use `--color-surface` (translucent dark, `rgba(18,20,31,0.82)`) with `--color-surface-border`; text is `--color-text` (primary) / `--color-text-secondary`. Single accent color `--color-accent` (`#5fe3ff`, cyan) with `--color-accent-soft`/`--color-accent-glow` variants — used consistently for asteroid hover glow, tooltip/modal border, active nav link, focus rings. Don't add a second accent color without updating `tokens.css` and this file together.
+- **Spacing**: 4px-based scale — `--space-1` (4px) through `--space-12` (48px). No arbitrary pixel values in `components/ui/`.
+- **Typography**: `--font-family` (system sans stack). 3-level type scale: `--font-size-title` (1.75rem), `--font-size-body` (1rem), `--font-size-caption` (0.8125rem) — reused across tooltip, modal, and navbar. Don't invent a new font size per component.
+- **Motion**: `--motion-duration` (220ms) + `--motion-ease` (`cubic-bezier(0.16, 1, 0.3, 1)`) — the one duration/easing pair for overlay transitions (tooltip fade-in, modal open/close) via Framer Motion. Camera/orbit damping (`enableDamping`, `dampingFactor` — see `--orbit-damping-factor: 0.08`) and orbit speeds live in `scenes/` constants, not scattered magic numbers inside JSX.
+
+These are finalized as of Phase 1 scaffolding. If the palette changes later (e.g. after real planet textures are chosen), **update `tokens.css` and this section together** — they must never drift apart.
 
 ## Mandatory interaction rules
 

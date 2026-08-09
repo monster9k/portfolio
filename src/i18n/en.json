@@ -1,0 +1,32 @@
+{
+  "nav": {
+    "about": "About",
+    "skills": "Skills",
+    "projects": "Projects",
+    "experience": "Experience",
+    "contact": "Contact"
+  },
+  "ui": {
+    "dragToRotate": "Drag to explore the planet",
+    "hoverHint": "Hover an asteroid to preview, click to open",
+    "close": "Close",
+    "loading": "Loading planet..."
+  },
+  "sections": {
+    "about": {
+      "body": "TODO: write your bio here (who you are, what you're studying/doing, what you're looking for)."
+    },
+    "skills": {
+      "body": "TODO: list your languages, frameworks, and tools here."
+    },
+    "projects": {
+      "body": "TODO: a one-line intro to your project list. Add the projects themselves in src/content/projects.ts."
+    },
+    "experience": {
+      "body": "TODO: write your experience/education timeline here (internships, coursework, certifications)."
+    },
+    "contact": {
+      "body": "TODO: add how people can reach you (email, LinkedIn, GitHub)."
+    }
+  }
+}
