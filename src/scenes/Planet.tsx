@@ -15,6 +15,9 @@ const PULSE_SPEED = 0.6
 const PULSE_MIN = 0.85
 const PULSE_MAX = 1.35
 const WIREFRAME_OPACITY = 0.16
+/** A slight, permanent axial tilt (not animated) so the hull reads as a spinning globe rather than a perfectly upright ball. */
+const AXIAL_TILT_X = 0.18
+const AXIAL_TILT_Z = 0.09
 
 export function Planet() {
   const surfaceRef = useRef<Group>(null)
@@ -43,7 +46,7 @@ export function Planet() {
   })
 
   return (
-    <group ref={surfaceRef}>
+    <group ref={surfaceRef} rotation={[AXIAL_TILT_X, 0, AXIAL_TILT_Z]}>
       <mesh>
         <sphereGeometry args={[PLANET_RADIUS, planetSegments, planetSegments]} />
         <meshStandardMaterial
