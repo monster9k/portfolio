@@ -7,24 +7,11 @@ import { useSceneStore } from '@/store/useSceneStore'
 import type { SectionContent } from '@/content/sections'
 import { useTranslation } from '@/i18n/useTranslation'
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion'
+import { hashId, pseudoRandom } from '@/utils/random'
 
 const ASTEROID_RADIUS = 0.22
 const TUMBLE_SPEED_X = 0.4
 const TUMBLE_SPEED_Z = 0.25
-
-function hashId(id: string): number {
-  let hash = 0
-  for (let i = 0; i < id.length; i++) {
-    hash = (hash << 5) - hash + id.charCodeAt(i)
-    hash |= 0
-  }
-  return hash
-}
-
-function pseudoRandom(seed: number): number {
-  const x = Math.sin(seed * 12.9898) * 43758.5453
-  return x - Math.floor(x)
-}
 
 function useAsteroidGeometry(seed: number) {
   return useMemo(() => {
