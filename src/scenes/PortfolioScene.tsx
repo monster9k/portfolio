@@ -3,6 +3,7 @@ import { OrbitControls } from '@react-three/drei'
 import { Suspense } from 'react'
 import { Planet } from './Planet'
 import { Starfield } from './Starfield'
+import { AsteroidField } from './AsteroidField'
 
 const CAMERA_POSITION: [number, number, number] = [0, 0.5, 6]
 
@@ -15,6 +16,7 @@ export function PortfolioScene() {
       <Suspense fallback={null}>
         <Planet />
         <Starfield />
+        <AsteroidField />
       </Suspense>
       <OrbitControls
         enablePan={false}
