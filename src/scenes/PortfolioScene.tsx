@@ -3,6 +3,8 @@ import { OrbitControls } from '@react-three/drei'
 import { Suspense } from 'react'
 import { Planet } from './Planet'
 import { Starfield } from './Starfield'
+import { Nebula } from './Nebula'
+import { SpaceDust } from './SpaceDust'
 import { AsteroidField } from './AsteroidField'
 import { useResponsiveQuality } from '@/hooks/useResponsiveQuality'
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion'
@@ -21,6 +23,8 @@ export function PortfolioScene() {
       <Suspense fallback={null}>
         <Planet />
         <Starfield />
+        <Nebula />
+        <SpaceDust />
         <AsteroidField />
       </Suspense>
       <OrbitControls

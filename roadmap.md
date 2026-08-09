@@ -15,7 +15,7 @@ This is a separate checklist from `README.md`'s Phase 0–5 roadmap (uses letter
 - [x] Remove `daymap.jpg`/`clouds.jpg` after repo-wide grep confirms no other references
 - [x] New `src/scenes/Nebula.tsx` (additive sprite-plane clouds), gated by `isLowPower` + reduced motion
 - [x] New `src/scenes/SpaceDust.tsx` (`Sparkles` wrapper), gated by `isLowPower` + reduced motion
-- [ ] Mount `<Nebula/>` / `<SpaceDust/>` in `PortfolioScene.tsx`'s `<Suspense>` block
+- [x] Mount `<Nebula/>` / `<SpaceDust/>` in `PortfolioScene.tsx`'s `<Suspense>` block
 - [ ] Manual visual QA against the reference image
 
 ## Phase A2 — Asteroid tech-satellite redesign
