@@ -1,7 +1,7 @@
 import { PortfolioScene } from '@/scenes/PortfolioScene'
 import { Navbar } from '@/components/ui/Navbar'
 import { Tooltip } from '@/components/ui/Tooltip'
-import { DetailModal } from '@/components/ui/DetailModal'
+import { InfoPanel } from '@/components/ui/InfoPanel'
 import { LoadingScreen } from '@/components/ui/LoadingScreen'
 import { AccessibleContent } from '@/components/ui/AccessibleContent'
 import { NoWebGLFallback } from '@/components/ui/NoWebGLFallback'
@@ -14,12 +14,14 @@ function App() {
   return (
     <I18nProvider>
       {webGLSupported ? (
-        <main style={{ width: '100vw', height: '100vh' }}>
-          <PortfolioScene />
-          <div className="scene-vignette" aria-hidden="true" />
+        <main style={{ width: '100vw', height: '100vh', display: 'flex' }}>
+          <InfoPanel />
+          <div style={{ position: 'relative', flex: 1, height: '100%', minWidth: 0 }}>
+            <PortfolioScene />
+            <div className="scene-vignette" aria-hidden="true" />
+          </div>
           <Navbar />
           <Tooltip />
-          <DetailModal />
           <LoadingScreen />
           <AccessibleContent className="sr-only" />
         </main>

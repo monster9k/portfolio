@@ -3,8 +3,8 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useSceneStore } from '@/store/useSceneStore'
 import { sections } from '@/content/sections'
 import { useTranslation } from '@/i18n/useTranslation'
+import { OVERLAY_TRANSITION } from '@/styles/motion'
 
-const MOTION_TRANSITION = { duration: 0.22, ease: [0.16, 1, 0.3, 1] as const }
 const CURSOR_OFFSET = 18
 
 export function Tooltip() {
@@ -31,7 +31,7 @@ export function Tooltip() {
           initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 6 }}
-          transition={MOTION_TRANSITION}
+          transition={OVERLAY_TRANSITION}
           style={{
             position: 'fixed',
             left: pos.x + CURSOR_OFFSET,

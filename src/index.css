@@ -39,13 +39,28 @@ button {
 }
 
 /* Darkens the scene edges for the moody reference look; sits above the
-   canvas but below the interactive overlay (Navbar z-index: 10). */
+   canvas but below the interactive overlay (Navbar z-index: 10). Positioned
+   relative to the canvas-container (not the viewport) so it stays centered
+   on the 3D scene when the InfoPanel is docked beside it. */
 .scene-vignette {
-  position: fixed;
+  position: absolute;
   inset: 0;
   z-index: 5;
   pointer-events: none;
   background: radial-gradient(ellipse at center, transparent 45%, var(--color-bg-bottom) 115%);
+}
+
+/* Below ~640px the docked split-screen panel has no room to share the
+   viewport with the canvas, so it becomes a full-screen overlay instead —
+   closable the same three ways (button, Escape, and now also just backing
+   out since the canvas isn't visible behind it to click). */
+@media (max-width: 640px) {
+  .info-panel {
+    position: fixed;
+    inset: 0;
+    z-index: 30;
+    width: 100% !important;
+  }
 }
 
 /* Visually hidden but still reachable by screen readers / keyboard nav */
