@@ -11,7 +11,7 @@ This is a separate checklist from `README.md`'s Phase 0–5 roadmap (uses letter
 - [x] New `src/styles/colors.ts` (`ACCENT_CYAN` / `ACCENT_MAGENTA`)
 - [x] New `src/utils/random.ts` — extract `hashId`/`pseudoRandom` out of `Asteroid.tsx`; update `Asteroid.tsx` to import it
 - [x] New `src/scenes/proceduralTextures.ts` — hex-grid + emissive-window canvas texture generator(s), resolution gated by `isLowPower`
-- [ ] Rewrite `src/scenes/Planet.tsx` — generated `map`/`emissiveMap`, keep shell structure + rotation + `usePrefersReducedMotion` gating, add gated `emissiveIntensity` pulse
+- [x] Rewrite `src/scenes/Planet.tsx` — generated `map`/`emissiveMap`, keep shell structure + rotation + `usePrefersReducedMotion` gating, add gated `emissiveIntensity` pulse
 - [ ] Remove `daymap.jpg`/`clouds.jpg` after repo-wide grep confirms no other references
 - [ ] New `src/scenes/Nebula.tsx` (additive sprite-plane clouds), gated by `isLowPower` + reduced motion
 - [ ] New `src/scenes/SpaceDust.tsx` (`Sparkles` wrapper), gated by `isLowPower` + reduced motion
