@@ -1,5 +1,6 @@
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
+import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing'
 import { Suspense } from 'react'
 import { Planet } from './Planet'
 import { Starfield } from './Starfield'
@@ -13,7 +14,7 @@ import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion'
 const CAMERA_POSITION: [number, number, number] = [0, 0.5, 6]
 
 export function PortfolioScene() {
-  const { dpr } = useResponsiveQuality()
+  const { dpr, isLowPower } = useResponsiveQuality()
   const prefersReducedMotion = usePrefersReducedMotion()
 
   return (
@@ -39,6 +40,12 @@ export function PortfolioScene() {
         autoRotate={!prefersReducedMotion}
         autoRotateSpeed={0.15}
       />
+      {!isLowPower && (
+        <EffectComposer>
+          <Bloom luminanceThreshold={0.15} luminanceSmoothing={0.4} intensity={0.6} mipmapBlur />
+          <Vignette offset={0.25} darkness={0.9} />
+        </EffectComposer>
+      )}
     </Canvas>
   )
 }

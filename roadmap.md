@@ -37,7 +37,7 @@ The user rejected the Phase A/A2 result against a second reference image: a mood
 - [x] `Planet.tsx`: dropped the busy full-sphere wireframe shell; replaced with a soft `BackSide`/additive cyan "atmosphere glow" shell (no grid) for a rim-light halo instead
 - [x] New `src/scenes/OrbitRings.tsx`: 2 thin tilted elliptical wireframe rings around the planet (faint cyan `Line` via drei, low opacity), slow gated rotation; mounted in `PortfolioScene.tsx`
 - [x] Rewrite `Asteroid.tsx` material/geometry again: reintroduced mild organic noise (amplitude 0.1, subtler than the original rock's 0.32 — not the flat gem either), monochrome navy-grey base (`#232b3d`), cyan-only emissive accent (dropped magenta from asteroids to keep them quieter/darker than the planet); hover/click/orbit/label logic untouched — to be confirmed in the final Phase A3 QA pass below
-- [ ] `npm install postprocessing @react-three/postprocessing`; mount `EffectComposer` with `Bloom` + `Vignette` in `PortfolioScene.tsx`, gated off when `isLowPower` (pulled forward from Phase E)
+- [x] `npm install postprocessing @react-three/postprocessing`; mounted `EffectComposer` with `Bloom` + `Vignette` in `PortfolioScene.tsx`, gated off when `isLowPower` (pulled forward from Phase E)
 - [ ] Tune `SpaceDust.tsx` (denser, more size variance) and `Nebula.tsx` (lower opacity, reads as haze not colored blobs)
 - [ ] Add a CSS radial-gradient vignette overlay (reuses `--color-bg-bottom`, no new token) on the scene container in `App.tsx`/`index.css` for extra edge-darkening moodiness
 - [ ] Update root `CLAUDE.md`'s palette note if magenta usage actually changes (asteroids drop it, planet uses it rarely) — keep the doc honest per its own "never let this drift" rule
