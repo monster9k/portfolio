@@ -36,7 +36,7 @@ export function PortfolioScene() {
         dampingFactor={0.08}
         rotateSpeed={0.5}
         minDistance={3.5}
-        maxDistance={9}
+        maxDistance={22}
         autoRotate={!prefersReducedMotion}
         autoRotateSpeed={0.15}
       />

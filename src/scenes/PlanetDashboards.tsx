@@ -68,7 +68,7 @@ function useDashboardCards(): DashboardCard[] {
 
 function DashboardCardView({ card }: { card: DashboardCard }) {
   return (
-    <Html position={card.position} center zIndexRange={[1, 0]}>
+    <Html position={card.position} center zIndexRange={[1, 0]} distanceFactor={6}>
       <div
         style={{
           width: 150,

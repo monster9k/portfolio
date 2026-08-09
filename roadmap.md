@@ -45,10 +45,10 @@ The user rejected the Phase A/A2 result against a second reference image: a mood
 
 ## Phase B — Zoom range
 
-- [ ] `PortfolioScene.tsx`: `maxDistance` `9 → 22`
-- [ ] Confirm `enablePan={false}` / `enableDamping` untouched
-- [ ] Tune `Nebula.tsx` placement constants for coherence at the new max distance
-- [ ] Manual QA at full zoom-out (no skybox wall/pop-in)
+- [x] `PortfolioScene.tsx`: `maxDistance` `9 → 22`
+- [x] Confirm `enablePan={false}` / `enableDamping` untouched — unchanged, verified by inspection
+- [x] Tune `Nebula.tsx` placement constants for coherence at the new max distance — no change needed: `MIN_RADIUS=28`/`RADIUS_SPREAD=16` was already pre-tuned for this in Phase A3 (see the file's own comment), confirmed coherent live at full zoom-out
+- [x] Manual QA at full zoom-out (no skybox wall/pop-in) — verified live via synthetic wheel-zoom in Chrome: no walls/pop-in at maxDistance, nebula halo and starfield stay coherent. Found and fixed a real regression while testing: the Phase-A3-follow-up `PlanetDashboards.tsx` cards (fixed-CSS-pixel-size `Html`, no `distanceFactor`) dominated the frame at full zoom-out — added `distanceFactor={6}` so they scale with camera distance like a real in-scene object; re-verified readable up close and proportionate at max zoom
 
 ## Phase C — Split-screen interaction redesign
 
