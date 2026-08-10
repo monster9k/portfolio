@@ -171,6 +171,14 @@ User shared a reference illustration (deep red-orange core, radial band of vivid
 - [x] `npm run build` / `npm run lint` clean
 - [x] Manual QA live in Chrome, compared against the reference image: sun shows a clear dark-red core/body with a brighter warm-gold rim concentrated at the silhouette edge, no flat blown-out fill; noticeably less glaring than the Phase I flat-color version; zoomed in to confirm no seams/banding artifacts; only console message is the pre-existing unrelated `THREE.Clock` deprecation warning, no errors
 
+## Phase K — Fix genuine coordinate-space bug in the sun's Fresnel shader
+
+User reported the Phase J shader still showed a hard bright/dark hemisphere-style split (screenshot) even after a clean dev-server restart + hard refresh — ruling out the stale-build theory from Phase J's QA. Re-inspecting `sunMaterial.ts` found a real bug: the vertex shader computes `vNormal = normalMatrix * normal`, and three.js's built-in `normalMatrix` transforms into **view space** (camera-relative) — but the fragment shader's `viewDirection = normalize(cameraPosition - vWorldPosition)` is computed in **world space**. Dotting a view-space vector against a world-space vector is a coordinate-space mismatch: the result isn't the true grazing-angle cosine, it's an arbitrary value shaped by the camera's current rotation matrix — which explains why it looked like a directional-light-style hemisphere split that shifts with the camera's `autoRotate`, and why Phase J's own QA screenshot (taken at a different camera angle, by chance closer to radially-symmetric-looking) didn't catch it.
+
+- [x] `sunMaterial.ts`: rewrote both shaders to work consistently in **view space** — vertex shader computes `vViewDir = normalize(-mvPosition.xyz)` from `modelViewMatrix * vec4(position, 1.0)` (camera sits at the view-space origin, so this is exact, no `cameraPosition`/world-position uniform needed) alongside the existing view-space `vNormal`; fragment shader dots `vViewDir` against `vNormal` (now both consistently in view space) instead of mixing world/view spaces
+- [x] `npm run build` / `npm run lint` clean
+- [x] Manual QA live in Chrome across multiple camera angles: initial load, after ~8s of `autoRotate`, and after manually orbit-dragging to a steep angle — core→rim gradient stayed radially symmetric around the visible disk at every angle tested, no hemisphere-style split anywhere; only console message is the pre-existing unrelated `THREE.Clock` deprecation warning, no errors
+
 ## Special-care reminders
 
 - Dual-accent tokens: `tokens.css` + root `CLAUDE.md` edited together (Phase A)

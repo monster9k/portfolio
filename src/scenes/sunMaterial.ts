@@ -16,14 +16,18 @@ const MID_COLOR = '#c94a10'
 const RIM_COLOR = '#ffcf7a'
 const RIM_POWER = 2.6
 
+// Both varyings are kept in view space (camera at the origin, looking down
+// -Z) so the fragment shader never mixes coordinate spaces — mixing a
+// view-space normal against a world-space view direction was the bug that
+// produced a hemisphere-style split instead of a true radial rim glow.
 const vertexShader = /* glsl */ `
   varying vec3 vNormal;
-  varying vec3 vWorldPosition;
+  varying vec3 vViewDir;
   void main() {
+    vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
     vNormal = normalize(normalMatrix * normal);
-    vec4 worldPosition = modelMatrix * vec4(position, 1.0);
-    vWorldPosition = worldPosition.xyz;
-    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    vViewDir = normalize(-mvPosition.xyz);
+    gl_Position = projectionMatrix * mvPosition;
   }
 `
 
@@ -34,11 +38,10 @@ const fragmentShader = /* glsl */ `
   uniform float uRimPower;
   uniform float uIntensity;
   varying vec3 vNormal;
-  varying vec3 vWorldPosition;
+  varying vec3 vViewDir;
 
   void main() {
-    vec3 viewDirection = normalize(cameraPosition - vWorldPosition);
-    float rim = pow(1.0 - clamp(dot(viewDirection, normalize(vNormal)), 0.0, 1.0), uRimPower);
+    float rim = pow(1.0 - clamp(dot(vViewDir, normalize(vNormal)), 0.0, 1.0), uRimPower);
     vec3 color = mix(uCoreColor, uMidColor, smoothstep(0.0, 0.6, rim));
     color = mix(color, uRimColor, smoothstep(0.6, 1.0, rim));
     gl_FragColor = vec4(color * uIntensity, 1.0);
