@@ -22,14 +22,35 @@ export interface SkillsContent {
 // NOTE(user): categories mirror common resume conventions (programming
 // languages / frameworks & libraries / tools & platforms / soft skills).
 // Add/remove/rename categories as needed — just keep a matching label in
-// en.json/ja.json under "skillCategories.<id>". Every `items`/`languages`
-// array below is intentionally empty for you to fill in.
+// en.json/ja.json under "skillCategories.<id>". Items/languages below are
+// realistic sample copy so you can preview the layout — swap them for your
+// own (same convention as projects.ts).
 export const skills: SkillsContent = {
   categories: [
-    { id: 'languages', labelKey: 'skillCategories.languages', items: [] },
-    { id: 'frameworks', labelKey: 'skillCategories.frameworks', items: [] },
-    { id: 'tools', labelKey: 'skillCategories.tools', items: [] },
-    { id: 'soft', labelKey: 'skillCategories.soft', items: [] },
+    {
+      id: 'languages',
+      labelKey: 'skillCategories.languages',
+      items: ['JavaScript', 'TypeScript', 'Python', 'Java'],
+    },
+    {
+      id: 'frameworks',
+      labelKey: 'skillCategories.frameworks',
+      items: ['React', 'Three.js / React Three Fiber', 'Node.js', 'Next.js'],
+    },
+    {
+      id: 'tools',
+      labelKey: 'skillCategories.tools',
+      items: ['Git', 'Docker', 'Figma', 'VS Code'],
+    },
+    {
+      id: 'soft',
+      labelKey: 'skillCategories.soft',
+      items: ['Communication', 'Teamwork', 'Problem Solving'],
+    },
   ],
-  languages: [],
+  languages: [
+    { language: 'Vietnamese', level: 'Native' },
+    { language: 'English', level: 'Business level' },
+    { language: 'Japanese', level: 'JLPT N3' },
+  ],
 }

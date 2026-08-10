@@ -17,14 +17,19 @@ export interface AboutContent {
   resumeUrl: string
 }
 
-// NOTE(user): every field below is intentionally blank — fill in your own
-// details. Nothing here is sample/placeholder copy (unlike projects.ts).
+// NOTE(user): the values below are realistic sample copy so you can preview
+// the layout — swap them for your own details (same convention as
+// projects.ts). photoUrl/resumeUrl are left blank since there's no real
+// asset to point to yet.
 export const about: AboutContent = {
-  name: '',
-  title: { en: '', ja: '' },
-  tagline: { en: '', ja: '' },
-  location: '',
-  availability: { en: '', ja: '' },
+  name: 'Alex Tran',
+  title: { en: 'Software Engineering Intern Candidate', ja: 'ソフトウェアエンジニアリング インターン候補' },
+  tagline: {
+    en: 'Building playful, polished 3D web experiences.',
+    ja: '遊び心があり洗練された3D Web体験を作っています。',
+  },
+  location: 'Ho Chi Minh City, Vietnam',
+  availability: { en: 'Open to Summer 2027 internships', ja: '2027年夏季インターンシップ募集中' },
   photoUrl: '',
   resumeUrl: '',
 }

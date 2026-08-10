@@ -103,6 +103,17 @@ The user flagged that About/Skills/Experience/Contact currently only have one fr
 - [x] `npm run build` clean, `npm run lint` clean
 - [x] Manual QA live in Chrome (dev server): opened About/Skills/Experience/Contact via the keyboard-reachable navbar buttons — each renders its body paragraph + "Content coming soon." empty-state cleanly (no broken/blank layout); `Escape` closes the open panel; toggled to 日本語 and confirmed "近日公開予定です。" renders correctly with translated nav labels; no console errors. Not re-verified: hover-tooltip/backdrop-click close and mobile breakpoint (unaffected by this change, already covered by Phase C/E QA)
 
+### Follow-up — swap in sample/demo data so the user can preview the layout
+
+The user saw the blank state ("Content coming soon.") and asked to preview the real layout first — fill `about.ts`/`skills.ts`/`experience.ts`/`contact.ts` with realistic sample data (same convention `projects.ts` already uses), which the user will replace with their real info afterward.
+
+- [x] `about.ts`: sample name/title/tagline/location/availability (photo/resume left blank — no real asset to point to)
+- [x] `skills.ts`: sample items per category + sample spoken languages (EN/JA/VN with proficiency)
+- [x] `experience.ts`: one sample work entry + one sample education entry with real-looking org/role/period/bullets
+- [x] `contact.ts`: sample email/location/GitHub (GitHub uses the actual `monster9k` handle already public in this repo — not fabricated) + a fake LinkedIn handle; phone/resume left blank
+- [x] `npm run build` clean, `npm run lint` clean
+- [x] Manual QA live in Chrome (dev server): all 4 panels (About/Skills/Experience/Contact) now show fully populated sample content instead of the empty-state message — verified layout for name/title/tagline/meta row, grouped skill pills + spoken languages, work/education timeline cards with badges + bullets, and email/location/GitHub/LinkedIn links; re-checked in 日本語 (labels + sample JA copy render correctly); no console errors
+
 ## Special-care reminders
 
 - Dual-accent tokens: `tokens.css` + root `CLAUDE.md` edited together (Phase A)

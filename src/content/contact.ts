@@ -17,12 +17,18 @@ export interface ContactInfo {
   resumeUrl: string
 }
 
-// NOTE(user): every field below is intentionally blank — fill in your own
-// details.
+// NOTE(user): sample copy so you can preview the layout — swap for your own
+// (same convention as projects.ts). `github` already points at this repo's
+// real handle since that's public info; email/linkedin/phone/resume are
+// placeholders — replace them with your real ones.
 export const contact: ContactInfo = {
-  email: '',
+  email: 'alex.tran@example.com',
   phone: '',
-  location: '',
-  links: { github: '', linkedin: '', website: '' },
+  location: 'Ho Chi Minh City, Vietnam',
+  links: {
+    github: 'https://github.com/monster9k',
+    linkedin: 'https://linkedin.com/in/alex-tran',
+    website: '',
+  },
   resumeUrl: '',
 }
