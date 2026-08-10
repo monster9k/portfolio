@@ -161,6 +161,16 @@ User flagged (with screenshot) that the sun's surface still shows large, irregul
 - [x] `npm run build` / `npm run lint` clean
 - [x] Manual QA live in Chrome: sun reads as a smooth, evenly glowing sphere with no discrete bright/dark patches anywhere on its surface; pulse/breathing glow still visible; Mars/Skills/Jupiter planets still read as distinct colors next to the now-flat sun; only console message is the pre-existing unrelated `THREE.Clock` deprecation warning, no errors
 
+## Phase J — Sun: layered core→rim glow (reference-matched), tone down brightness
+
+User shared a reference illustration (deep red-orange core, radial band of vivid orange, bright warm-white/gold glow concentrated at the limb/edge, against a starfield) and said the current flat-color sun is "too bright/glaring" and still doesn't match. A flat lit/unlit color (Phase I) can't produce that layered core→rim look — it needs a **view-dependent (Fresnel/rim) gradient**, brighter at grazing angles (the silhouette edge) than head-on, which is a genuinely different technique from a UV-mapped canvas texture (the thing that caused Phase H/I's bugs) and doesn't reintroduce any of those failure modes since it's calculated per-pixel from view angle, not baked into a wrapped 2D image.
+
+- [x] New `src/scenes/sunMaterial.ts`: a small custom `THREE.ShaderMaterial` factory (`createSunMaterial`) — deep red-orange core (`#6e1404`) cross-fades through a vivid orange mid-band (`#c94a10`) to a warm gold rim (`#ffcf7a`) as the Fresnel term (`1 - dot(viewDir, normal)`, power `2.6`) approaches 1 at grazing angles; `uIntensity` uniform for the existing pulse animation; deliberately unlit (ignores scene `directionalLight`/`ambientLight` entirely)
+- [x] `Planet.tsx`: swapped the flat `meshStandardMaterial` for `<primitive object={sunMaterial} attach="material" />`; pulse animation now writes `sunMaterial.uniforms.uIntensity.value` instead of `emissiveIntensity`; tightened `PULSE_MIN`/`PULSE_MAX` from `0.85–1.35` to `0.85–1.1` (less swing) per the "too bright/glaring" complaint; dropped the now-unused `ACCENT_GOLD` import and `HULL_COLOR` constant
+- [x] Bloom left untouched — the darker core/mid colors alone brought overall brightness down enough in live QA that no Bloom retune was needed
+- [x] `npm run build` / `npm run lint` clean
+- [x] Manual QA live in Chrome, compared against the reference image: sun shows a clear dark-red core/body with a brighter warm-gold rim concentrated at the silhouette edge, no flat blown-out fill; noticeably less glaring than the Phase I flat-color version; zoomed in to confirm no seams/banding artifacts; only console message is the pre-existing unrelated `THREE.Clock` deprecation warning, no errors
+
 ## Special-care reminders
 
 - Dual-accent tokens: `tokens.css` + root `CLAUDE.md` edited together (Phase A)
