@@ -13,7 +13,7 @@ import { useResponsiveQuality } from '@/hooks/useResponsiveQuality'
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion'
 import { useSceneStore } from '@/store/useSceneStore'
 
-const CAMERA_POSITION: [number, number, number] = [0, 0.5, 6]
+const CAMERA_POSITION: [number, number, number] = [0, 0.5, 11]
 
 export function PortfolioScene() {
   const { dpr, isLowPower } = useResponsiveQuality()
@@ -51,7 +51,7 @@ export function PortfolioScene() {
       />
       {!isLowPower && (
         <EffectComposer>
-          <Bloom luminanceThreshold={0.25} luminanceSmoothing={0.25} intensity={0.4} radius={0.35} />
+          <Bloom luminanceThreshold={0.3} luminanceSmoothing={0.2} intensity={0.35} radius={0.22} />
           <Vignette offset={0.25} darkness={0.9} />
         </EffectComposer>
       )}

@@ -3,8 +3,12 @@ import { useSceneStore } from '@/store/useSceneStore'
 import { sections } from '@/content/sections'
 import { useTranslation } from '@/i18n/useTranslation'
 import { ProjectList } from './ProjectList'
+import { AboutCard } from './AboutCard'
+import { SkillsPanel } from './SkillsPanel'
+import { ExperienceTimeline } from './ExperienceTimeline'
+import { ContactCard } from './ContactCard'
 
-const PANEL_WIDTH = 400
+const PANEL_WIDTH = 560
 
 export function InfoPanel() {
   const selectedId = useSceneStore((s) => s.selectedId)
@@ -97,18 +101,24 @@ export function InfoPanel() {
             </button>
           </div>
 
+          {section.id === 'about' && <AboutCard />}
+
           <p
             style={{
               color: 'var(--color-text-secondary)',
               fontSize: 'var(--font-size-body)',
-              marginBottom: section.id === 'projects' ? 'var(--space-6)' : 0,
+              marginBottom:
+                section.id === 'contact' || section.id === 'about' ? 0 : 'var(--space-6)',
               whiteSpace: 'pre-line',
             }}
           >
             {t(section.bodyKey)}
           </p>
 
+          {section.id === 'skills' && <SkillsPanel />}
           {section.id === 'projects' && <ProjectList />}
+          {section.id === 'experience' && <ExperienceTimeline />}
+          {section.id === 'contact' && <ContactCard />}
         </div>
       )}
     </aside>

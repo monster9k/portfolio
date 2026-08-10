@@ -7,12 +7,31 @@ import type { SectionContent } from '@/content/sections'
 import { useTranslation } from '@/i18n/useTranslation'
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion'
 import { hashId, pseudoRandom } from '@/utils/random'
-import { ACCENT_CYAN } from '@/styles/colors'
+import { ACCENT_GOLD } from '@/styles/colors'
 
 const ASTEROID_RADIUS = 0.22
 const ASTEROID_SEGMENTS = 24
 const TUMBLE_SPEED_X = 0.4
 const TUMBLE_SPEED_Z = 0.25
+
+/**
+ * Distinct, planet-inspired base color per section, modeled on real
+ * solar-system planets and kept saturated enough to survive the sun's warm
+ * directional light + bloom halo without washing toward a uniform tan.
+ * Idle emissive uses this same color (dim) so each planet keeps its own
+ * identity at rest; hover always converges on the shared ACCENT_GOLD so
+ * hover affordance stays one consistent signal across all 5.
+ */
+const PLANET_COLOR_BY_SECTION: Record<SectionContent['id'], string> = {
+  about: '#3d7dd8', // Earth — ocean blue
+  skills: '#a3a3a3', // Mercury — neutral grey
+  projects: '#b8441f', // Mars — rust red
+  experience: '#c9834a', // Jupiter — banded tan/orange
+  contact: '#e6d9ad', // Venus — pale cream-yellow
+}
+
+const IDLE_EMISSIVE_INTENSITY = 0.15
+const HOVER_EMISSIVE_INTENSITY = 1.1
 
 interface AsteroidProps {
   section: SectionContent
@@ -85,8 +104,9 @@ export function Asteroid({ section, moonMap }: AsteroidProps) {
           <sphereGeometry args={[ASTEROID_RADIUS, ASTEROID_SEGMENTS, ASTEROID_SEGMENTS]} />
           <meshStandardMaterial
             map={moonMap}
-            emissive={ACCENT_CYAN}
-            emissiveIntensity={isHovered ? 1.1 : 0.22}
+            color={PLANET_COLOR_BY_SECTION[section.id]}
+            emissive={isHovered ? ACCENT_GOLD : PLANET_COLOR_BY_SECTION[section.id]}
+            emissiveIntensity={isHovered ? HOVER_EMISSIVE_INTENSITY : IDLE_EMISSIVE_INTENSITY}
             roughness={0.92}
             metalness={0.05}
           />
@@ -94,7 +114,7 @@ export function Asteroid({ section, moonMap }: AsteroidProps) {
         <Billboard position={[0, 0.42, 0]}>
           <Text
             fontSize={0.16}
-            color={isHovered ? ACCENT_CYAN : '#eef1f8'}
+            color={isHovered ? ACCENT_GOLD : '#eef1f8'}
             anchorX="center"
             anchorY="bottom"
             outlineWidth={0.008}

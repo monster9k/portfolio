@@ -3,7 +3,7 @@ import { useFrame } from '@react-three/fiber'
 import { Line } from '@react-three/drei'
 import type { Group } from 'three'
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion'
-import { ACCENT_CYAN } from '@/styles/colors'
+import { ACCENT_GOLD } from '@/styles/colors'
 
 /** Faint tilted elliptical orbit-path lines around the planet, matching the reference art direction. */
 
@@ -31,10 +31,10 @@ export function OrbitRings() {
   return (
     <group ref={groupRef}>
       <group rotation={[0.4, 0, 0.5]}>
-        <Line points={ringA} color={ACCENT_CYAN} lineWidth={1} transparent opacity={0.14} />
+        <Line points={ringA} color={ACCENT_GOLD} lineWidth={1} transparent opacity={0.14} />
       </group>
       <group rotation={[0.65, 0.4, -0.3]}>
-        <Line points={ringB} color={ACCENT_CYAN} lineWidth={1} transparent opacity={0.09} />
+        <Line points={ringB} color={ACCENT_GOLD} lineWidth={1} transparent opacity={0.09} />
       </group>
     </group>
   )

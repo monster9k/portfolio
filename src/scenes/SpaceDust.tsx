@@ -1,7 +1,7 @@
 import { Sparkles } from '@react-three/drei'
 import { useResponsiveQuality } from '@/hooks/useResponsiveQuality'
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion'
-import { ACCENT_CYAN, TEXT_PRIMARY } from '@/styles/colors'
+import { ACCENT_GOLD, TEXT_PRIMARY } from '@/styles/colors'
 
 /**
  * Two dust layers: a wide, dense pale debris field (the "disintegrating"
@@ -33,7 +33,7 @@ export function SpaceDust() {
         size={1.4}
         speed={speed}
         opacity={0.6}
-        color={ACCENT_CYAN}
+        color={ACCENT_GOLD}
       />
     </>
   )

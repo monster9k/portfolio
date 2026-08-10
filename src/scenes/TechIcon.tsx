@@ -5,7 +5,7 @@ import type { Group } from 'three'
 import type { IconType } from 'react-icons'
 import type { OrbitParams } from '@/content/sections'
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion'
-import { ACCENT_CYAN } from '@/styles/colors'
+import { ACCENT_GOLD } from '@/styles/colors'
 
 /**
  * A single orbiting tech-stack glyph — hover-only (no click/select), purely
@@ -48,7 +48,7 @@ export function TechIcon({ orbit, label, Icon }: TechIconProps) {
             <Icon
               aria-hidden="true"
               size={20}
-              color={hovered ? ACCENT_CYAN : 'var(--color-text-secondary)'}
+              color={hovered ? ACCENT_GOLD : 'var(--color-text-secondary)'}
               style={{
                 filter: hovered ? 'drop-shadow(0 0 6px var(--color-accent-glow))' : 'none',
               }}

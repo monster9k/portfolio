@@ -1,5 +1,9 @@
 import { sections } from '@/content/sections'
 import { projects } from '@/content/projects'
+import { about } from '@/content/about'
+import { skills } from '@/content/skills'
+import { experience } from '@/content/experience'
+import { contact } from '@/content/contact'
 import { useTranslation } from '@/i18n/useTranslation'
 
 interface AccessibleContentProps {
@@ -21,6 +25,33 @@ export function AccessibleContent({ className }: AccessibleContentProps) {
         <section key={section.id} id={`section-${section.id}`}>
           <h2>{t(section.titleKey)}</h2>
           <p>{t(section.bodyKey)}</p>
+
+          {section.id === 'about' && (about.name || about.title[language]) && (
+            <p>
+              {[about.name, about.title[language], about.location, about.availability[language]]
+                .filter(Boolean)
+                .join(' — ')}
+            </p>
+          )}
+
+          {section.id === 'skills' && (
+            <ul>
+              {skills.categories
+                .filter((category) => category.items.length > 0)
+                .map((category) => (
+                  <li key={category.id}>
+                    <strong>{t(category.labelKey)}:</strong> {category.items.join(', ')}
+                  </li>
+                ))}
+              {skills.languages.length > 0 && (
+                <li>
+                  <strong>{t('fields.languagesSpoken')}:</strong>{' '}
+                  {skills.languages.map((entry) => `${entry.language} (${entry.level})`).join(', ')}
+                </li>
+              )}
+            </ul>
+          )}
+
           {section.id === 'projects' && projects.length > 0 && (
             <ul>
               {projects.map((project) => (
@@ -30,6 +61,34 @@ export function AccessibleContent({ className }: AccessibleContentProps) {
                 </li>
               ))}
             </ul>
+          )}
+
+          {section.id === 'experience' && (
+            <ul>
+              {experience
+                .filter((entry) => entry.organization || entry.role[language])
+                .map((entry) => (
+                  <li key={entry.id}>
+                    <strong>{entry.organization}</strong> — {entry.role[language]}
+                    {entry.period ? ` (${entry.period})` : ''}
+                  </li>
+                ))}
+            </ul>
+          )}
+
+          {section.id === 'contact' && (
+            <p>
+              {[
+                contact.email && `${t('fields.email')}: ${contact.email}`,
+                contact.phone && `${t('fields.phone')}: ${contact.phone}`,
+                contact.location,
+                contact.links.github,
+                contact.links.linkedin,
+                contact.links.website,
+              ]
+                .filter(Boolean)
+                .join(' · ')}
+            </p>
           )}
         </section>
       ))}
