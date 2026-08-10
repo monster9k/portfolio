@@ -15,19 +15,23 @@ const TUMBLE_SPEED_X = 0.4
 const TUMBLE_SPEED_Z = 0.25
 
 /**
- * Distinct, muted, planet-inspired base color per section — loosely modeled
- * on real solar-system planets, desaturated so each still reads as quieter
- * than the sun's own bright gold/ember glow. Hover always brightens to the
- * shared ACCENT_GOLD regardless of base color, so hover affordance stays one
- * consistent signal across all 5.
+ * Distinct, planet-inspired base color per section, modeled on real
+ * solar-system planets and kept saturated enough to survive the sun's warm
+ * directional light + bloom halo without washing toward a uniform tan.
+ * Idle emissive uses this same color (dim) so each planet keeps its own
+ * identity at rest; hover always converges on the shared ACCENT_GOLD so
+ * hover affordance stays one consistent signal across all 5.
  */
 const PLANET_COLOR_BY_SECTION: Record<SectionContent['id'], string> = {
-  about: '#2f8fc4', // Earth-like sky-blue — kept vivid so it reads through the sun's bloom halo
-  skills: '#9c9186', // Mercury-like grey-taupe
-  projects: '#d1481f', // Mars-like rust red
-  experience: '#c7a06a', // Saturn-like sandy tan
-  contact: '#d9b877', // Venus-like pale gold
+  about: '#3d7dd8', // Earth — ocean blue
+  skills: '#a3a3a3', // Mercury — neutral grey
+  projects: '#b8441f', // Mars — rust red
+  experience: '#c9834a', // Jupiter — banded tan/orange
+  contact: '#e6d9ad', // Venus — pale cream-yellow
 }
+
+const IDLE_EMISSIVE_INTENSITY = 0.15
+const HOVER_EMISSIVE_INTENSITY = 1.1
 
 interface AsteroidProps {
   section: SectionContent
@@ -101,8 +105,8 @@ export function Asteroid({ section, moonMap }: AsteroidProps) {
           <meshStandardMaterial
             map={moonMap}
             color={PLANET_COLOR_BY_SECTION[section.id]}
-            emissive={ACCENT_GOLD}
-            emissiveIntensity={isHovered ? 1.1 : 0.1}
+            emissive={isHovered ? ACCENT_GOLD : PLANET_COLOR_BY_SECTION[section.id]}
+            emissiveIntensity={isHovered ? HOVER_EMISSIVE_INTENSITY : IDLE_EMISSIVE_INTENSITY}
             roughness={0.92}
             metalness={0.05}
           />

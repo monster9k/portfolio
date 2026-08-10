@@ -12,8 +12,7 @@ import { ACCENT_GOLD, ACCENT_EMBER } from '@/styles/colors'
  * for surface-anchored content.
  */
 
-const HULL_LIT = '#ffcf87'
-const HULL_SHADOW = '#170a05'
+const HULL_MUTED = '#e0994a'
 const EMBER_ACCENT_CHANCE = 0.9
 const CLUSTER_COUNT = 3
 const CLUSTER_RADIUS = 0.22
@@ -129,17 +128,11 @@ export function generatePlanetTextures(isLowPower: boolean): PlanetTextureSet {
   const clusters = buildClusters(CLUSTER_COUNT)
 
   const hullCtx = createContext(width, height)
-  const lightBias = hullCtx.createRadialGradient(
-    width * 0.32,
-    height * 0.28,
-    0,
-    width * 0.32,
-    height * 0.28,
-    width * 0.85,
-  )
-  lightBias.addColorStop(0, HULL_LIT)
-  lightBias.addColorStop(1, HULL_SHADOW)
-  hullCtx.fillStyle = lightBias
+  // Sun is self-luminous — a flat base avoids any hard "dark side" (the old
+  // radial gradient fought the real scene lighting and, combined with the
+  // old metallic material, produced a broken-looking chrome-ball terminator)
+  // and avoids a seam where a radial gradient wraps around the sphere's UVs.
+  hullCtx.fillStyle = HULL_MUTED
   hullCtx.fillRect(0, 0, width, height)
 
   const emissiveCtx = createContext(width, height)

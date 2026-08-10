@@ -52,8 +52,8 @@ export function Planet() {
           emissiveMap={textures.emissiveMap}
           emissive="#ffffff"
           emissiveIntensity={1}
-          roughness={0.45}
-          metalness={0.7}
+          roughness={1}
+          metalness={0}
         />
       </mesh>
       <PlanetDashboards isLowPower={isLowPower} />
