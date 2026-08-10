@@ -6,6 +6,12 @@
     "experience": "経歴",
     "contact": "連絡先"
   },
+  "landing": {
+    "eyebrow": "ポートフォリオ",
+    "exploreCta": "3Dの宇宙を探索する",
+    "downloadCta": "履歴書をダウンロード",
+    "backToHome": "ホームに戻る"
+  },
   "ui": {
     "dragToRotate": "ドラッグして惑星を探索",
     "hoverHint": "小惑星にカーソルを合わせてプレビュー、クリックで詳細を表示",

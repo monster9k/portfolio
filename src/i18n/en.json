@@ -6,6 +6,12 @@
     "experience": "Experience",
     "contact": "Contact"
   },
+  "landing": {
+    "eyebrow": "Portfolio",
+    "exploreCta": "Explore the 3D universe",
+    "downloadCta": "Download CV",
+    "backToHome": "Back to home"
+  },
   "ui": {
     "dragToRotate": "Drag to explore the planet",
     "hoverHint": "Hover an asteroid to preview, click to open",

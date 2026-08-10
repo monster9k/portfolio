@@ -3,6 +3,7 @@ paths:
   - "src/scenes/**"
   - "src/components/ui/**"
   - "src/styles/**"
+  - "src/pages/**"
 ---
 
 # UI/UX rules for this file

@@ -4,13 +4,13 @@ Guidance for Claude Code (and any contributor) working in this repository.
 
 ## Project
 
-**Orbit** — a personal portfolio built as an explorable 3D planet. The user drags to orbit a rotatable planet; five small asteroids float around it, each representing a portfolio section (About, Skills, Projects, Experience/Education, Contact). Hovering an asteroid shows a short preview; clicking opens a full detail panel. Purpose: a standout, interactive demo piece for internship interviews and interviews with Japanese companies — it needs to look and feel polished enough to show live on a call.
+**Orbit** — a personal portfolio built as an explorable 3D planet. Visitors land on a traditional resume-style hero page first (`/` — name, title, photo, bio, contact, CTA buttons), then opt into the 3D experience via an explicit "Explore the 3D universe" button, which routes to `/explore`: the user drags to orbit a rotatable planet (a sun); five small asteroids (planets) float around it, each representing a portfolio section (About, Skills, Projects, Experience/Education, Contact). Hovering an asteroid shows a short preview; clicking opens a full detail panel. Purpose: a standout, interactive demo piece for internship interviews and interviews with Japanese companies — it needs to look and feel polished enough to show live on a call, while still making a strong first impression for someone who just wants the resume info quickly.
 
 Full concept, tech stack rationale, and phased roadmap: see [README.md](./README.md) and the plan at implementation time. Current build status is tracked by the checkboxes in README's Roadmap section — check that before assuming a piece of the stack already exists.
 
 ## Stack
 
-Vite + React + TypeScript + React Three Fiber + drei for the 3D scene; plain React/CSS + Framer Motion for the 2D overlay UI (tooltip, modal, navbar); Zustand for shared state between the 3D scene and overlay; a custom lightweight i18n context for the EN/日本語 toggle (not react-i18next — see README Tech Stack table for why). Deploy target: Vercel, git-connected auto-deploy.
+Vite + React + TypeScript + React Three Fiber + drei for the 3D scene; plain React/CSS + Framer Motion for the 2D overlay UI (tooltip, modal, navbar); React Router (`react-router-dom`) for the two-route split (`/` landing, `/explore` 3D scene); Zustand for shared state between the 3D scene and overlay; a custom lightweight i18n context for the EN/日本語 toggle (not react-i18next — see README Tech Stack table for why). Deploy target: Vercel, git-connected auto-deploy.
 
 ## Commands
 
@@ -33,6 +33,7 @@ Run `npm run build` and `npm run lint` clean before considering any phase of wor
 ## Folder conventions
 
 ```
+src/pages/            Route-level page components (LandingPage, ExplorePage) — mounted by App.tsx's <Routes>
 src/scenes/          3D scene code (R3F components, useFrame animation, raycasting)
 src/components/ui/   2D DOM overlay (tooltip, modal, navbar, language switcher)
 src/content/         Typed content data (sections.ts, projects.ts)

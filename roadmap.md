@@ -179,6 +179,22 @@ User reported the Phase J shader still showed a hard bright/dark hemisphere-styl
 - [x] `npm run build` / `npm run lint` clean
 - [x] Manual QA live in Chrome across multiple camera angles: initial load, after ~8s of `autoRotate`, and after manually orbit-dragging to a steep angle — core→rim gradient stayed radially symmetric around the visible disk at every angle tested, no hemisphere-style split anywhere; only console message is the pre-existing unrelated `THREE.Clock` deprecation warning, no errors
 
+## Phase L — Resume-style landing page at `/`, 3D scene moves to `/explore`
+
+User felt the site shouldn't drop visitors straight into the 3D scene — for a first impression (e.g. an interviewer opening the link cold) they want a traditional, information-dense "this is me" landing page first (referenced https://www.thanhngan13.dev/: hero with name/title/photo/bio/contact/social + CTA buttons), while still showcasing the 3D orbit scene prominently rather than dropping it. Chose (via AskUserQuestion): **landing page is the primary experience at `/`, with a prominent CTA button that navigates into the existing 3D scene at a new `/explore` route** — the 3D experience itself is untouched, just relocated behind a route and an explicit entry point. `react-router-dom` is already an installed dependency (unused until now).
+
+- [x] `main.tsx`: wrapped `<App />` in `<BrowserRouter>`
+- [x] New `src/pages/` folder (route-level page components, distinct from the always-mounted overlay components in `components/ui/`) — added to CLAUDE.md folder conventions in the same change
+- [x] New `src/pages/ExplorePage.tsx`: moved the current `App.tsx` body here verbatim (the `webGLSupported` branch, `InfoPanel`/`PortfolioScene`/vignette/`Navbar`/`Tooltip`/`LoadingScreen`/`AccessibleContent`, `NoWebGLFallback` fallback) — no behavior changes, just relocated
+- [x] New `src/pages/LandingPage.tsx`: resume-style hero reusing existing `content/about.ts` + `content/contact.ts` data (no new content files) — avatar (photo or `FiUser` placeholder, same pattern as `AboutCard.tsx`), name/title/tagline, location + availability, email/phone/social links (pill style consistent with `ContactCard.tsx`), an `Orbit` wordmark + `LanguageSwitcher` header row, and two CTAs: "Download CV" (secondary/outline, `about.resumeUrl`/`contact.resumeUrl`, hidden since both are empty in sample data) and a prominent primary-accent "Explore the 3D universe" button that `useNavigate()`s to `/explore`. All labels through `t()`; new `landing.*` keys added to both `en.json`/`ja.json`
+- [x] `App.tsx`: replaced its body with `<I18nProvider><Routes><Route path="/" element={<LandingPage/>}/><Route path="/explore" element={<ExplorePage/>}/></Routes></I18nProvider>`
+- [x] `Navbar.tsx`: turned the plain `Orbit` wordmark `<span>` into a `<Link to="/">` (with `aria-label` from the new `landing.backToHome` key) so there's a way back from `/explore` to the landing page; visual style unchanged
+- [x] `index.css`: removed the global `overflow: hidden` from `body`; added `overflow: hidden` directly on `ExplorePage.tsx`'s root `<main>` instead, so the existing fixed-viewport 3D experience is visually unchanged
+- [x] `.claude/rules/ui-ux.md`: added `"src/pages/**"` to the frontmatter `paths` list
+- [x] `CLAUDE.md`: updated the "Project" intro paragraph to describe the `/` landing → `/explore` entry flow, added `src/pages/` to folder conventions, and noted `react-router-dom` in the Stack section (it was an installed-but-unused dependency until this phase)
+- [x] `npm run build` / `npm run lint` clean
+- [x] Manual QA live in Chrome: `/` loads the bilingual hero with correct sample content, no console errors; CTA navigates to `/explore` and the 3D scene is unchanged (sun renders correctly, nav-click opens/closes a panel via Escape, orbit controls); `Orbit` wordmark navigates back to `/`; switched to 日本語 on the landing page, then navigated into `/explore` — language stayed in sync across both routes (single `I18nProvider` instance, confirmed). **Not verified this pass**: narrow-viewport rendering (the browser-automation tool's window resize didn't visibly affect screenshot capture in this environment) — relying on the same flex-wrap/no-fixed-width patterns already used elsewhere in the codebase; no-WebGL fallback path (unaffected by this change, `NoWebGLFallback` logic moved as-is into `ExplorePage.tsx`)
+
 ## Special-care reminders
 
 - Dual-accent tokens: `tokens.css` + root `CLAUDE.md` edited together (Phase A)
