@@ -88,6 +88,21 @@ The user rejected the Phase A/A2 result against a second reference image: a mood
 
   Everything else the reviewer checked came back clean: `OrbitControls` `enablePan`/`enableDamping` intact after the `maxDistance` bump, all 3 `InfoPanel` close paths present, the `role="dialog"` (no `aria-modal`) + focus-on-open pattern is sound given the canvas stays interactive beside it, the CSS-transition width-animation workaround (documented in Phase C) is reasonable, i18n key parity holds, `prefers-reduced-motion` gating covers every new animated piece, and `AccessibleContent.tsx`/`NoWebGLFallback.tsx` are untouched. Re-ran `npm run build`/`npm run lint` clean after applying all 4 fixes.
 
+## Phase F — Structured content fields for About/Skills/Experience/Contact
+
+The user flagged that About/Skills/Experience/Contact currently only have one free-text `body` string each (see `src/content/sections.ts` + `sections.*.body` in `en.json`/`ja.json`) — there's no structured place for the fields a real portfolio/resume needs (name, title, categorized skills, work/education timeline entries, email, social links, resume download, etc.). This phase adds that structure, modeled on standard resume/portfolio conventions (and, given the Japanese-employer audience CLAUDE.md calls out, includes a "languages spoken" block since JLPT/English level is standard on a 履歴書). Per the user's explicit instruction: add the *structure* and labels only — leave every actual value (name, email, real skills, etc.) blank/empty for them to fill in later, not sample placeholder text like `projects.ts` uses.
+
+- [x] New `src/content/about.ts` (`AboutContent`: name, title, tagline, location, availability, photoUrl, resumeUrl — all blank)
+- [x] New `src/content/skills.ts` (`SkillsContent`: 4 categories — programming languages / frameworks & libraries / tools & platforms / soft skills — plus a `languages` (spoken) list; all empty)
+- [x] New `src/content/experience.ts` (`ExperienceEntry[]`, `type: 'work' | 'education'`, one blank entry of each as scaffolding)
+- [x] New `src/content/contact.ts` (`ContactInfo`: email, phone, location, links.github/linkedin/website, resumeUrl — all blank)
+- [x] Added `skillCategories.*` and `fields.*` i18n keys (labels only) to both `en.json` and `ja.json` in the same change — verified key-parity programmatically (zero keys only-in-en or only-in-ja)
+- [x] New `src/components/ui/AboutCard.tsx`, `SkillsPanel.tsx`, `ExperienceTimeline.tsx`, `ContactCard.tsx` — render the structured fields using existing tokens/patterns (mirrors `ProjectList.tsx`'s pill/card styling), each gracefully falling back to the i18n `fields.comingSoon` message when its content is still blank (deliberately not reusing `ProjectList`'s existing hardcoded-English TODO string, to stay compliant with the "all user text through `t()`" rule for new code)
+- [x] Wired the four new components into `InfoPanel.tsx` (same pattern as `section.id === 'projects' && <ProjectList/>`); also fixed the body-paragraph bottom margin to apply to all sections with extra content below it (was previously `projects`-only)
+- [x] Updated `AccessibleContent.tsx` to mirror the new structured fields for the sr-only/no-WebGL fallback, same as it already does for `projects`
+- [x] `npm run build` clean, `npm run lint` clean
+- [x] Manual QA live in Chrome (dev server): opened About/Skills/Experience/Contact via the keyboard-reachable navbar buttons — each renders its body paragraph + "Content coming soon." empty-state cleanly (no broken/blank layout); `Escape` closes the open panel; toggled to 日本語 and confirmed "近日公開予定です。" renders correctly with translated nav labels; no console errors. Not re-verified: hover-tooltip/backdrop-click close and mobile breakpoint (unaffected by this change, already covered by Phase C/E QA)
+
 ## Special-care reminders
 
 - Dual-accent tokens: `tokens.css` + root `CLAUDE.md` edited together (Phase A)

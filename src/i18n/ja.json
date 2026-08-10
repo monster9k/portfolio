@@ -20,6 +20,28 @@
     "docker": "Docker",
     "tailwind": "Tailwind CSS"
   },
+  "skillCategories": {
+    "languages": "プログラミング言語",
+    "frameworks": "フレームワーク・ライブラリ",
+    "tools": "ツール・プラットフォーム",
+    "soft": "ソフトスキル"
+  },
+  "fields": {
+    "location": "所在地",
+    "availability": "稼働状況",
+    "resume": "履歴書 / CV",
+    "email": "メール",
+    "phone": "電話番号",
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "website": "ウェブサイト",
+    "languagesSpoken": "言語",
+    "experienceType": {
+      "work": "職務経歴",
+      "education": "学歴"
+    },
+    "comingSoon": "近日公開予定です。"
+  },
   "sections": {
     "about": {
       "body": "React・TypeScript・WebGLを用いたインタラクティブなWeb体験を制作している情報工学専攻の学生です。実際のプロダクト開発に貢献しながら学び続けられるソフトウェアエンジニアのインターンシップを探しています。"

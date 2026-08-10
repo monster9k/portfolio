@@ -3,6 +3,10 @@ import { useSceneStore } from '@/store/useSceneStore'
 import { sections } from '@/content/sections'
 import { useTranslation } from '@/i18n/useTranslation'
 import { ProjectList } from './ProjectList'
+import { AboutCard } from './AboutCard'
+import { SkillsPanel } from './SkillsPanel'
+import { ExperienceTimeline } from './ExperienceTimeline'
+import { ContactCard } from './ContactCard'
 
 const PANEL_WIDTH = 400
 
@@ -101,14 +105,18 @@ export function InfoPanel() {
             style={{
               color: 'var(--color-text-secondary)',
               fontSize: 'var(--font-size-body)',
-              marginBottom: section.id === 'projects' ? 'var(--space-6)' : 0,
+              marginBottom: section.id === 'contact' ? 0 : 'var(--space-6)',
               whiteSpace: 'pre-line',
             }}
           >
             {t(section.bodyKey)}
           </p>
 
+          {section.id === 'about' && <AboutCard />}
+          {section.id === 'skills' && <SkillsPanel />}
           {section.id === 'projects' && <ProjectList />}
+          {section.id === 'experience' && <ExperienceTimeline />}
+          {section.id === 'contact' && <ContactCard />}
         </div>
       )}
     </aside>

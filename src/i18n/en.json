@@ -20,6 +20,28 @@
     "docker": "Docker",
     "tailwind": "Tailwind CSS"
   },
+  "skillCategories": {
+    "languages": "Programming Languages",
+    "frameworks": "Frameworks & Libraries",
+    "tools": "Tools & Platforms",
+    "soft": "Soft Skills"
+  },
+  "fields": {
+    "location": "Location",
+    "availability": "Availability",
+    "resume": "Resume / CV",
+    "email": "Email",
+    "phone": "Phone",
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "website": "Website",
+    "languagesSpoken": "Languages",
+    "experienceType": {
+      "work": "Work",
+      "education": "Education"
+    },
+    "comingSoon": "Content coming soon."
+  },
   "sections": {
     "about": {
       "body": "Computer Science student building interactive web experiences with React, TypeScript, and WebGL. Looking for a software engineering internship where I can contribute to real products and keep learning."
