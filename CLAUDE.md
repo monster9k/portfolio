@@ -23,6 +23,13 @@ npm run lint        # eslint
 
 Run `npm run build` and `npm run lint` clean before considering any phase of work done.
 
+## Workflow: plan into roadmap.md, then tick + commit
+
+[`roadmap.md`](./roadmap.md) (repo root, separate from README.md's high-level Phase 0–5 roadmap) is the single source of truth for both what's planned and what's actually shipped for ongoing feature work — it must never drift from reality. Every request follows this two-step flow:
+
+1. **Plan first, into `roadmap.md`.** Before writing any code for a new request, break it down into concrete checklist items and add them to `roadmap.md` as unchecked `- [ ]` items (as new items under the relevant phase, or a new phase section if none fits — follow the existing lettered-phase convention in that file). Do this even for small requests. Don't start implementing until the plan is committed to `roadmap.md` — it's the durable record, not a throwaway plan file.
+2. **Execute, then tick + commit.** When told to carry out a task from `roadmap.md`, implement it, then flip its `- [ ]` to `- [x]` (with a brief note of what actually happened, matching that file's existing style) and commit the code change together with that checkbox update (one commit, unless the user asks otherwise). Never leave a finished task unchecked, and never check a box without a matching commit landing at the same time.
+
 ## Folder conventions
 
 ```
