@@ -5,7 +5,7 @@ import { AdditiveBlending, CanvasTexture } from 'three'
 import type { Group } from 'three'
 import { useResponsiveQuality } from '@/hooks/useResponsiveQuality'
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion'
-import { ACCENT_CYAN, ACCENT_MAGENTA, TEXT_PRIMARY } from '@/styles/colors'
+import { ACCENT_GOLD, ACCENT_EMBER, TEXT_PRIMARY } from '@/styles/colors'
 import { pseudoRandom } from '@/utils/random'
 
 /**
@@ -44,8 +44,8 @@ function buildCloudTexture(): CanvasTexture {
 
 function pickCloudColor(i: number): string {
   const roll = pseudoRandom(i * 6.6)
-  if (roll > 0.88) return ACCENT_MAGENTA
-  if (roll > 0.55) return ACCENT_CYAN
+  if (roll > 0.88) return ACCENT_EMBER
+  if (roll > 0.55) return ACCENT_GOLD
   return TEXT_PRIMARY
 }
 

@@ -7,12 +7,27 @@ import type { SectionContent } from '@/content/sections'
 import { useTranslation } from '@/i18n/useTranslation'
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion'
 import { hashId, pseudoRandom } from '@/utils/random'
-import { ACCENT_CYAN } from '@/styles/colors'
+import { ACCENT_GOLD } from '@/styles/colors'
 
 const ASTEROID_RADIUS = 0.22
 const ASTEROID_SEGMENTS = 24
 const TUMBLE_SPEED_X = 0.4
 const TUMBLE_SPEED_Z = 0.25
+
+/**
+ * Distinct, muted, planet-inspired base color per section — loosely modeled
+ * on real solar-system planets, desaturated so each still reads as quieter
+ * than the sun's own bright gold/ember glow. Hover always brightens to the
+ * shared ACCENT_GOLD regardless of base color, so hover affordance stays one
+ * consistent signal across all 5.
+ */
+const PLANET_COLOR_BY_SECTION: Record<SectionContent['id'], string> = {
+  about: '#2f8fc4', // Earth-like sky-blue — kept vivid so it reads through the sun's bloom halo
+  skills: '#9c9186', // Mercury-like grey-taupe
+  projects: '#d1481f', // Mars-like rust red
+  experience: '#c7a06a', // Saturn-like sandy tan
+  contact: '#d9b877', // Venus-like pale gold
+}
 
 interface AsteroidProps {
   section: SectionContent
@@ -85,8 +100,9 @@ export function Asteroid({ section, moonMap }: AsteroidProps) {
           <sphereGeometry args={[ASTEROID_RADIUS, ASTEROID_SEGMENTS, ASTEROID_SEGMENTS]} />
           <meshStandardMaterial
             map={moonMap}
-            emissive={ACCENT_CYAN}
-            emissiveIntensity={isHovered ? 1.1 : 0.22}
+            color={PLANET_COLOR_BY_SECTION[section.id]}
+            emissive={ACCENT_GOLD}
+            emissiveIntensity={isHovered ? 1.1 : 0.1}
             roughness={0.92}
             metalness={0.05}
           />
@@ -94,7 +110,7 @@ export function Asteroid({ section, moonMap }: AsteroidProps) {
         <Billboard position={[0, 0.42, 0]}>
           <Text
             fontSize={0.16}
-            color={isHovered ? ACCENT_CYAN : '#eef1f8'}
+            color={isHovered ? ACCENT_GOLD : '#eef1f8'}
             anchorX="center"
             anchorY="bottom"
             outlineWidth={0.008}
