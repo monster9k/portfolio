@@ -1,11 +1,11 @@
-import { useEffect, useMemo, useRef } from 'react'
+import { useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 import type { Group, MeshStandardMaterial } from 'three'
-import { generatePlanetTextures } from './proceduralTextures'
 import { PlanetDashboards } from './PlanetDashboards'
 import { PLANET_RADIUS } from './planetConstants'
 import { useResponsiveQuality } from '@/hooks/useResponsiveQuality'
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion'
+import { ACCENT_GOLD } from '@/styles/colors'
 
 export { PLANET_RADIUS }
 const HULL_ROTATION_SPEED = 0.03
@@ -15,6 +15,8 @@ const PULSE_MAX = 1.35
 /** A slight, permanent axial tilt (not animated) so the hull reads as a spinning globe rather than a perfectly upright ball. */
 const AXIAL_TILT_X = 0.18
 const AXIAL_TILT_Z = 0.09
+/** Flat, evenly-lit base color for the sun's hull — deliberately not textured (see Phase I in roadmap.md: a generated blotch texture read as a rendering glitch). */
+const HULL_COLOR = '#e0994a'
 
 export function Planet() {
   const surfaceRef = useRef<Group>(null)
@@ -22,15 +24,6 @@ export function Planet() {
   const { planetSegments, isLowPower } = useResponsiveQuality()
   const prefersReducedMotion = usePrefersReducedMotion()
   const elapsed = useRef(0)
-
-  const textures = useMemo(() => generatePlanetTextures(isLowPower), [isLowPower])
-
-  useEffect(() => {
-    return () => {
-      textures.map.dispose()
-      textures.emissiveMap.dispose()
-    }
-  }, [textures])
 
   useFrame((_, delta) => {
     if (prefersReducedMotion) return
@@ -48,9 +41,8 @@ export function Planet() {
         <sphereGeometry args={[PLANET_RADIUS, planetSegments, planetSegments]} />
         <meshStandardMaterial
           ref={hullMaterialRef}
-          map={textures.map}
-          emissiveMap={textures.emissiveMap}
-          emissive="#ffffff"
+          color={HULL_COLOR}
+          emissive={ACCENT_GOLD}
           emissiveIntensity={1}
           roughness={1}
           metalness={0}

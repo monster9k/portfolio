@@ -152,6 +152,15 @@ Live QA screenshot after Phase G revealed two regressions the earlier QA pass mi
 - [x] `npm run build` / `npm run lint` clean (re-verified after the flat-fill follow-up fix too)
 - [x] Manual QA live in Chrome (dev server, multiple passes): sun now reads as a smooth, uniformly glowing sphere — no hard terminator, no specular streak, no texture seam; all 5 planets visibly distinct and readable as their named real planet (checked via nav-click freeze for Skills/Contact, which were occluded behind the sun at the default auto-rotate angle); hover-to-gold affordance still works; Escape still closes the panel; only console message is a pre-existing unrelated `THREE.Clock` deprecation warning from a library, no errors
 
+## Phase I — Remove the sun's blotchy "flare" texture
+
+User flagged (with screenshot) that the sun's surface still shows large, irregular bright orange/red patches scattered unevenly across it — reads as a rendering glitch, not intentional "flare" texture. Root cause: `proceduralTextures.ts`'s `generatePlanetTextures` paints `paintFlareBlotch` blotches clustered around 3 random centers at up to 55%/100% alpha with a radius up to 60% of each grid cell — large, high-opacity, unevenly clustered blobs that read as glitchy stains rather than surface detail, on both the diffuse `map` and `emissiveMap`.
+
+- [x] `proceduralTextures.ts`: removed the clustered flare-blotch generation entirely (`buildPanelGrid`, `buildClusters`, `nearestClusterDistance`, `paintFlareBlotch`, `withAlpha`, `PanelCell`/`ClusterCenter` types, `CLUSTER_COUNT`/`CLUSTER_RADIUS`/`EMBER_ACCENT_CHANCE`/`HULL_MUTED` constants, the `CanvasTexture`/`generatePlanetTextures`/`PlanetTextureSet` machinery) — file now only exports `pointOnSphere` (still used by `PlanetDashboards.tsx`)
+- [x] `Planet.tsx`: dropped `generatePlanetTextures`/`useMemo`/texture-dispose `useEffect`; `meshStandardMaterial` now uses a plain `color={HULL_COLOR}` (`#e0994a`) + `emissive={ACCENT_GOLD}` directly, no `map`/`emissiveMap` — pulsing `emissiveIntensity` (unchanged `PULSE_MIN`/`PULSE_MAX`) still gives the "breathing" glow
+- [x] `npm run build` / `npm run lint` clean
+- [x] Manual QA live in Chrome: sun reads as a smooth, evenly glowing sphere with no discrete bright/dark patches anywhere on its surface; pulse/breathing glow still visible; Mars/Skills/Jupiter planets still read as distinct colors next to the now-flat sun; only console message is the pre-existing unrelated `THREE.Clock` deprecation warning, no errors
+
 ## Special-care reminders
 
 - Dual-accent tokens: `tokens.css` + root `CLAUDE.md` edited together (Phase A)
