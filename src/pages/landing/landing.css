@@ -1,0 +1,166 @@
+/*
+  Styling the inline-style components in this folder can't express:
+  responsive grid columns, hover states, sticky positioning, anchor scroll
+  offsets, and the hero CTA's pulse. Same precedent as index.css's mobile
+  .info-panel breakpoint — everything here reads tokens via var(--...).
+*/
+
+.landing-page {
+  overflow-x: hidden;
+}
+
+.landing-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-3) var(--space-6);
+  background: var(--color-surface);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-surface-border);
+}
+
+.landing-nav__links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.landing-nav__links::-webkit-scrollbar {
+  display: none;
+}
+
+.landing-nav__link {
+  flex-shrink: 0;
+  white-space: nowrap;
+  background: transparent;
+  border: none;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-caption);
+  cursor: pointer;
+  padding: var(--space-1) var(--space-2);
+  text-decoration: none;
+  transition: color var(--motion-duration) var(--motion-ease);
+}
+
+.landing-nav__link:hover,
+.landing-nav__link:focus-visible {
+  color: var(--color-accent);
+}
+
+.landing-page [id] {
+  scroll-margin-top: 64px;
+}
+
+.landing-section {
+  padding: var(--space-12) var(--space-6);
+}
+
+.landing-section__inner {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.landing-section__header {
+  text-align: center;
+  margin-bottom: var(--space-8);
+}
+
+.landing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-4);
+}
+
+.landing-card {
+  border: 1px solid var(--color-surface-border);
+  background: var(--color-surface);
+  border-radius: 14px;
+  padding: var(--space-4);
+  transition:
+    transform var(--motion-duration) var(--motion-ease),
+    border-color var(--motion-duration) var(--motion-ease);
+}
+
+.landing-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-accent-glow);
+}
+
+.landing-filter-tab {
+  border: 1px solid var(--color-surface-border);
+  background: transparent;
+  color: var(--color-text-secondary);
+  border-radius: 999px;
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--font-size-caption);
+  cursor: pointer;
+  transition:
+    background var(--motion-duration) var(--motion-ease),
+    color var(--motion-duration) var(--motion-ease),
+    border-color var(--motion-duration) var(--motion-ease);
+}
+
+.landing-filter-tab[aria-pressed='true'] {
+  background: var(--color-accent-soft);
+  border-color: var(--color-accent-glow);
+  color: var(--color-accent);
+}
+
+.landing-hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-12);
+  flex-wrap: wrap;
+  min-height: calc(100dvh - 60px);
+  padding: var(--space-8) var(--space-6);
+}
+
+.landing-hero__cta {
+  animation: landing-cta-pulse 2.6s ease-in-out infinite;
+}
+
+.landing-hero__cta:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+@keyframes landing-cta-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 var(--color-accent-glow);
+  }
+  50% {
+    box-shadow: 0 0 0 16px transparent;
+  }
+}
+
+.landing-footer {
+  background: var(--color-bg-bottom);
+  border-top: 1px solid var(--color-surface-border);
+  padding: var(--space-8) var(--space-6) var(--space-6);
+}
+
+.landing-footer__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-8);
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+@media (max-width: 720px) {
+  .landing-hero {
+    flex-direction: column-reverse;
+    text-align: center;
+    min-height: 0;
+    padding-top: var(--space-12);
+    padding-bottom: var(--space-12);
+  }
+}

@@ -1,10 +1,63 @@
 {
   "nav": {
+    "home": "ホーム",
     "about": "自己紹介",
     "skills": "スキル",
+    "education": "学歴",
+    "achievements": "実績",
     "projects": "プロジェクト",
     "experience": "経歴",
     "contact": "連絡先"
+  },
+  "landing": {
+    "eyebrow": "ポートフォリオ",
+    "exploreCta": "3Dの宇宙を探索する",
+    "exploreCtaHint": "作品を軌道上からインタラクティブに探索",
+    "downloadCta": "履歴書をダウンロード",
+    "backToHome": "ホームに戻る",
+    "stats": {
+      "yearsCoding": "コーディング歴",
+      "projectsBuilt": "制作プロジェクト数",
+      "certificates": "取得資格数"
+    },
+    "sectionTitles": {
+      "about": "自己紹介",
+      "aboutSubtitle": "私のこれまでの歩みとスキルをご紹介します",
+      "education": "学歴",
+      "educationSubtitle": "私の学びの歩みと継続的な学習",
+      "experience": "経歴",
+      "experienceSubtitle": "学んだことを実践してきた場所",
+      "achievements": "実績",
+      "achievementsSubtitle": "これまでに獲得した賞・資格・表彰",
+      "projects": "プロジェクト",
+      "projectsSubtitle": "最近作ったプロジェクトの一部",
+      "contact": "連絡先",
+      "contactSubtitle": "お仕事のご相談はこちらから"
+    },
+    "achievements": {
+      "categories": {
+        "all": "すべて",
+        "award": "受賞",
+        "certificate": "資格",
+        "recognition": "表彰",
+        "competition": "競技大会"
+      },
+      "viewCertificate": "証明書を見る",
+      "openExternal": "外部リンクを開く"
+    },
+    "projects": {
+      "viewDemo": "デモを見る",
+      "viewRepo": "リポジトリを見る",
+      "featuresLabel": "主な特徴",
+      "stackLabel": "技術スタック"
+    },
+    "footer": {
+      "aboutHeading": "概要",
+      "quickLinks": "クイックリンク",
+      "contactInfo": "連絡先情報",
+      "madeWith": "使用技術:",
+      "rights": "All rights reserved."
+    }
   },
   "ui": {
     "dragToRotate": "ドラッグして惑星を探索",
@@ -40,6 +93,9 @@
       "work": "職務経歴",
       "education": "学歴"
     },
+    "gpa": "GPA",
+    "keyAchievements": "主な成果",
+    "keyResponsibilities": "主な職務内容",
     "comingSoon": "近日公開予定です。"
   },
   "sections": {

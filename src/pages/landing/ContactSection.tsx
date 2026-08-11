@@ -1,0 +1,82 @@
+import { FiFileText, FiGithub, FiGlobe, FiLinkedin, FiMail, FiMapPin, FiPhone } from 'react-icons/fi'
+import { contact } from '@/content/contact'
+import { useTranslation } from '@/i18n/useTranslation'
+import { RevealSection } from './RevealSection'
+
+const PILL_STYLE = {
+  display: 'inline-flex',
+  alignItems: 'center',
+  gap: 'var(--space-2)',
+  fontSize: 'var(--font-size-body)',
+  borderRadius: 999,
+  padding: 'var(--space-2) var(--space-5)',
+} as const
+
+export function ContactSection() {
+  const { t } = useTranslation()
+  const hasLinks = contact.links.github || contact.links.linkedin || contact.links.website
+  const hasAnyContent = contact.email || contact.phone || contact.location || hasLinks || contact.resumeUrl
+
+  if (!hasAnyContent) return null
+
+  return (
+    <RevealSection id="contact" ariaLabelledBy="contact-heading" className="landing-section">
+      <div className="landing-section__inner" style={{ textAlign: 'center' }}>
+        <h2 id="contact-heading" style={{ fontSize: 'var(--font-size-section-title)', color: 'var(--color-text)' }}>
+          {t('landing.sectionTitles.contact')}
+        </h2>
+        <p style={{ color: 'var(--color-text-secondary)', marginTop: 'var(--space-2)', marginBottom: 'var(--space-6)' }}>
+          {t('landing.sectionTitles.contactSubtitle')}
+        </p>
+
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 'var(--space-3)' }}>
+          {contact.email && (
+            <a href={`mailto:${contact.email}`} style={{ ...PILL_STYLE, color: 'var(--color-accent)', background: 'var(--color-accent-soft)' }}>
+              <FiMail aria-hidden="true" />
+              <span className="sr-only">{t('fields.email')}: </span>
+              {contact.email}
+            </a>
+          )}
+          {contact.phone && (
+            <a href={`tel:${contact.phone}`} style={{ ...PILL_STYLE, color: 'var(--color-text-secondary)', border: '1px solid var(--color-surface-border)' }}>
+              <FiPhone aria-hidden="true" />
+              <span className="sr-only">{t('fields.phone')}: </span>
+              {contact.phone}
+            </a>
+          )}
+          {contact.location && (
+            <span style={{ ...PILL_STYLE, color: 'var(--color-text-secondary)', border: '1px solid var(--color-surface-border)' }}>
+              <FiMapPin aria-hidden="true" />
+              <span className="sr-only">{t('fields.location')}: </span>
+              {contact.location}
+            </span>
+          )}
+          {contact.links.github && (
+            <a href={contact.links.github} target="_blank" rel="noreferrer" style={{ ...PILL_STYLE, color: 'var(--color-text-secondary)', border: '1px solid var(--color-surface-border)' }}>
+              <FiGithub aria-hidden="true" />
+              {t('fields.github')}
+            </a>
+          )}
+          {contact.links.linkedin && (
+            <a href={contact.links.linkedin} target="_blank" rel="noreferrer" style={{ ...PILL_STYLE, color: 'var(--color-text-secondary)', border: '1px solid var(--color-surface-border)' }}>
+              <FiLinkedin aria-hidden="true" />
+              {t('fields.linkedin')}
+            </a>
+          )}
+          {contact.links.website && (
+            <a href={contact.links.website} target="_blank" rel="noreferrer" style={{ ...PILL_STYLE, color: 'var(--color-text-secondary)', border: '1px solid var(--color-surface-border)' }}>
+              <FiGlobe aria-hidden="true" />
+              {t('fields.website')}
+            </a>
+          )}
+          {contact.resumeUrl && (
+            <a href={contact.resumeUrl} target="_blank" rel="noreferrer" style={{ ...PILL_STYLE, color: 'var(--color-accent)', background: 'var(--color-accent-soft)' }}>
+              <FiFileText aria-hidden="true" />
+              {t('fields.resume')}
+            </a>
+          )}
+        </div>
+      </div>
+    </RevealSection>
+  )
+}

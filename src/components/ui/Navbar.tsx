@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { sections } from '@/content/sections'
 import { useSceneStore } from '@/store/useSceneStore'
 import { useTranslation } from '@/i18n/useTranslation'
@@ -24,11 +25,18 @@ export function Navbar() {
         padding: 'var(--space-4) var(--space-6)',
       }}
     >
-      <span
-        style={{ fontSize: 'var(--font-size-body)', fontWeight: 600, color: 'var(--color-text)' }}
+      <Link
+        to="/"
+        aria-label={t('landing.backToHome')}
+        style={{
+          fontSize: 'var(--font-size-body)',
+          fontWeight: 600,
+          color: 'var(--color-text)',
+          textDecoration: 'none',
+        }}
       >
         Orbit
-      </span>
+      </Link>
 
       <div
         style={{

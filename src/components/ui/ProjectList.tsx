@@ -1,5 +1,6 @@
 import { projects } from '@/content/projects'
 import { useTranslation } from '@/i18n/useTranslation'
+import { TechPill } from './TechPill'
 
 export function ProjectList() {
   const { language } = useTranslation()
@@ -60,18 +61,7 @@ export function ProjectList() {
             }}
           >
             {project.stack.map((tech) => (
-              <span
-                key={tech}
-                style={{
-                  fontSize: 'var(--font-size-caption)',
-                  color: 'var(--color-accent)',
-                  background: 'var(--color-accent-soft)',
-                  borderRadius: 999,
-                  padding: '2px 10px',
-                }}
-              >
-                {tech}
-              </span>
+              <TechPill key={tech} label={tech} />
             ))}
           </div>
 

@@ -1,5 +1,12 @@
 import type { LocalizedText } from './sections'
 
+export interface StatEntry {
+  /** TODO(user): the number/figure itself, e.g. "2+", "6+". */
+  value: string
+  /** i18n key resolving to the stat's label (see en.json/ja.json "landing.stats"). */
+  labelKey: string
+}
+
 export interface AboutContent {
   /** TODO(user): your full name, as you want it displayed. */
   name: string
@@ -15,12 +22,15 @@ export interface AboutContent {
   photoUrl: string
   /** TODO(user): link to a hosted PDF resume/CV. Leave empty to hide the download link. */
   resumeUrl: string
+  /** TODO(user): 3 small headline figures shown as stat cards on the landing page About section. */
+  stats: StatEntry[]
 }
 
 // NOTE(user): the values below are realistic sample copy so you can preview
 // the layout — swap them for your own details (same convention as
 // projects.ts). photoUrl/resumeUrl are left blank since there's no real
-// asset to point to yet.
+// asset to point to yet. `stats` are intentionally modest/plausible for a
+// student/intern profile rather than copied from any reference site.
 export const about: AboutContent = {
   name: 'Alex Tran',
   title: { en: 'Software Engineering Intern Candidate', ja: 'ソフトウェアエンジニアリング インターン候補' },
@@ -32,4 +42,9 @@ export const about: AboutContent = {
   availability: { en: 'Open to Summer 2027 internships', ja: '2027年夏季インターンシップ募集中' },
   photoUrl: '',
   resumeUrl: '',
+  stats: [
+    { value: '2+', labelKey: 'landing.stats.yearsCoding' },
+    { value: '6+', labelKey: 'landing.stats.projectsBuilt' },
+    { value: '5+', labelKey: 'landing.stats.certificates' },
+  ],
 }

@@ -1,5 +1,6 @@
 import { skills } from '@/content/skills'
 import { useTranslation } from '@/i18n/useTranslation'
+import { TechPill } from './TechPill'
 
 export function SkillsPanel() {
   const { t } = useTranslation()
@@ -30,18 +31,7 @@ export function SkillsPanel() {
           </h3>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-2)' }}>
             {category.items.map((item) => (
-              <span
-                key={item}
-                style={{
-                  fontSize: 'var(--font-size-caption)',
-                  color: 'var(--color-accent)',
-                  background: 'var(--color-accent-soft)',
-                  borderRadius: 999,
-                  padding: '2px 10px',
-                }}
-              >
-                {item}
-              </span>
+              <TechPill key={item} label={item} />
             ))}
           </div>
         </div>

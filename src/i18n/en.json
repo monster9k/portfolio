@@ -1,10 +1,63 @@
 {
   "nav": {
+    "home": "Home",
     "about": "About",
     "skills": "Skills",
+    "education": "Education",
+    "achievements": "Achievements",
     "projects": "Projects",
     "experience": "Experience",
     "contact": "Contact"
+  },
+  "landing": {
+    "eyebrow": "Portfolio",
+    "exploreCta": "Explore the 3D universe",
+    "exploreCtaHint": "Step into an interactive orbit around my work",
+    "downloadCta": "Download CV",
+    "backToHome": "Back to home",
+    "stats": {
+      "yearsCoding": "Years Coding",
+      "projectsBuilt": "Projects Built",
+      "certificates": "Certificates Earned"
+    },
+    "sectionTitles": {
+      "about": "About Me",
+      "aboutSubtitle": "Discover my journey and skills in software development",
+      "education": "Education",
+      "educationSubtitle": "My academic journey and continuous learning path",
+      "experience": "Experience",
+      "experienceSubtitle": "Where I've applied what I've learned",
+      "achievements": "Achievements",
+      "achievementsSubtitle": "Awards, certifications, and recognitions earned along the way",
+      "projects": "Projects",
+      "projectsSubtitle": "A few things I've built recently",
+      "contact": "Contact",
+      "contactSubtitle": "Let's talk about opportunities"
+    },
+    "achievements": {
+      "categories": {
+        "all": "All",
+        "award": "Awards",
+        "certificate": "Certificates",
+        "recognition": "Recognitions",
+        "competition": "Competitions"
+      },
+      "viewCertificate": "View Certificate",
+      "openExternal": "Open External"
+    },
+    "projects": {
+      "viewDemo": "View Demo",
+      "viewRepo": "View Repo",
+      "featuresLabel": "Highlights",
+      "stackLabel": "Tech Stack"
+    },
+    "footer": {
+      "aboutHeading": "About",
+      "quickLinks": "Quick Links",
+      "contactInfo": "Contact Info",
+      "madeWith": "Made with",
+      "rights": "All rights reserved."
+    }
   },
   "ui": {
     "dragToRotate": "Drag to explore the planet",
@@ -40,6 +93,9 @@
       "work": "Work",
       "education": "Education"
     },
+    "gpa": "GPA",
+    "keyAchievements": "Key Achievements",
+    "keyResponsibilities": "Key Responsibilities",
     "comingSoon": "Content coming soon."
   },
   "sections": {
