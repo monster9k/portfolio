@@ -128,7 +128,7 @@ All portfolio content lives as typed data, not hardcoded JSX:
 - [x] **Phase 2** — Asteroids + hover/click interactions
 - [x] **Phase 3** — i18n + content architecture wired end-to-end (EN/JA toggle, Navbar, typed content). Real bio/skills/projects/experience/contact copy is still TODO — see `src/content/sections.ts`, `src/content/projects.ts`, and the `sections.*.body` keys in `src/i18n/en.json`/`ja.json`
 - [x] **Phase 4** — Polish: loading screen, no-WebGL + screen-reader fallback, `prefers-reduced-motion`, responsive/perf tiering
-- [ ] **Phase 5** — Deploy to Vercel + final QA
+- [x] **Phase 5** — Deploy to Vercel + final QA
 
 ---
 
