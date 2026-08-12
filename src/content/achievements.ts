@@ -15,93 +15,124 @@ export interface AchievementEntry {
   /** TODO(user): short skill/topic tags shown as pills. */
   tags: string[]
   links?: {
-    /** TODO(user): link to view the certificate/proof itself. */
+    /** TODO(user): link to view the certificate/proof itself — opened in the in-page CertificateModal. */
     certificate?: string
     /** TODO(user): link to the issuer's page about it. */
     external?: string
   }
 }
 
-// NOTE(user): realistic sample copy so you can preview the layout — swap
-// for your own (same convention as projects.ts). Spans all 4 categories so
-// the landing page's filter tabs have something to filter.
+// Real certificates. `links.certificate` opens in CertificateModal (see
+// AchievementsSection.tsx) — a local PDF is shown via <iframe>, a HackerRank
+// certificate URL is HackerRank's own iframe-embed endpoint.
 export const achievements: AchievementEntry[] = [
   {
-    id: 'hackathon-2026',
-    category: 'award',
-    title: 'HCMC Student Hackathon — 1st Place',
-    issuer: 'HCMC University Alliance',
-    date: '2026.03',
+    id: 'ms-nlp-intro',
+    category: 'certificate',
+    title: 'Introduction to Natural Language Processing Concepts',
+    issuer: 'Microsoft',
+    date: '2026.08',
     description: {
-      en: 'Led a 4-person team to build an accessibility-focused campus navigation app in 24 hours.',
-      ja: '4人チームを率い、24時間でアクセシビリティ重視のキャンパスナビアプリを開発。',
+      en: 'Microsoft Learn module covering core NLP concepts and techniques.',
+      ja: 'Microsoft Learnモジュール。自然言語処理の基礎概念と手法を学習。',
     },
-    tags: ['Team Lead', 'React Native', 'Accessibility'],
-    links: {},
+    tags: ['NLP', 'AI'],
+    links: { certificate: '/certificates/ms-nlp-intro.pdf' },
   },
   {
-    id: 'hackerrank-problem-solving',
+    id: 'ms-mcp-server',
+    category: 'certificate',
+    title: 'Introduction to MCP Servers',
+    issuer: 'Microsoft',
+    date: '2026.08',
+    description: {
+      en: 'Microsoft Learn module on building and using Model Context Protocol (MCP) servers.',
+      ja: 'Microsoft Learnモジュール。MCP（Model Context Protocol）サーバーの構築と活用を学習。',
+    },
+    tags: ['MCP', 'AI Agent'],
+    links: { certificate: '/certificates/ms-mcp-server.pdf' },
+  },
+  {
+    id: 'ms-ai-foundry-chat',
+    category: 'certificate',
+    title: 'Develop Generative AI Chat Apps with Microsoft Foundry',
+    issuer: 'Microsoft',
+    date: '2026.08',
+    description: {
+      en: 'Microsoft Learn module on building a generative AI chat application with Microsoft Foundry.',
+      ja: 'Microsoft Learnモジュール。Microsoft Foundryを用いた生成AIチャットアプリの開発を学習。',
+    },
+    tags: ['Generative AI', 'Microsoft Foundry'],
+    links: { certificate: '/certificates/ms-ai-foundry-chat.pdf' },
+  },
+  {
+    // TODO(user): confirm this is actually "Problem Solving (Intermediate)" —
+    // guessed from the earlier sample data's category, matched to the first
+    // HackerRank link in the order you sent them.
+    id: 'hackerrank-1',
     category: 'certificate',
     title: 'Problem Solving (Intermediate)',
     issuer: 'HackerRank',
-    date: '2026.02',
+    date: '',
     description: {
       en: 'Assesses data structures, algorithmic thinking, and optimized problem-solving under time constraints.',
       ja: 'データ構造、アルゴリズム思考、制限時間内での最適化された問題解決力を評価。',
     },
     tags: ['Algorithms', 'Data Structures'],
-    links: { certificate: '', external: 'https://www.hackerrank.com/' },
+    links: { certificate: 'https://www.hackerrank.com/certificates/iframe/a6de5b698f31' },
   },
   {
-    id: 'hackerrank-js',
+    // TODO(user): confirm this is actually "JavaScript (Intermediate)".
+    id: 'hackerrank-2',
     category: 'certificate',
     title: 'JavaScript (Intermediate)',
     issuer: 'HackerRank',
-    date: '2025.11',
+    date: '',
     description: {
       en: 'Covers closures, async/await, prototypal inheritance, and DOM manipulation.',
       ja: 'クロージャ、async/await、プロトタイプ継承、DOM操作を網羅。',
     },
     tags: ['JavaScript', 'Async', 'DOM'],
-    links: { certificate: '', external: 'https://www.hackerrank.com/' },
+    links: { certificate: 'https://www.hackerrank.com/certificates/iframe/ffa8775ae942' },
   },
   {
-    id: 'deans-list',
-    category: 'recognition',
-    title: "Dean's List",
-    issuer: 'University of Technology',
-    date: '2025 - 2026',
-    description: {
-      en: 'Recognized for maintaining a top-decile GPA for two consecutive academic years.',
-      ja: '2年連続で上位10%のGPAを維持し表彰。',
-    },
-    tags: ['Academic Excellence'],
-    links: {},
-  },
-  {
-    id: 'icpc-regional',
-    category: 'competition',
-    title: 'ICPC Asia Regional — Honorable Mention',
-    issuer: 'ICPC Foundation',
-    date: '2025.11',
-    description: {
-      en: 'Competed in a 3-person team solving algorithmic problems under a 5-hour contest window.',
-      ja: '3人チームで参加し、5時間の競技時間内でアルゴリズム問題を解く大会に出場。',
-    },
-    tags: ['Competitive Programming', 'C++'],
-    links: { external: 'https://icpc.global/' },
-  },
-  {
-    id: 'hackerrank-sql',
+    // TODO(user): confirm this is actually "SQL (Basic)".
+    id: 'hackerrank-3',
     category: 'certificate',
     title: 'SQL (Basic)',
     issuer: 'HackerRank',
-    date: '2025.09',
+    date: '',
     description: {
       en: 'Tests SQL fundamentals: SELECTs, filtering, sorting, and simple joins.',
       ja: 'SELECT、フィルタリング、ソート、単純な結合などSQLの基礎を評価。',
     },
     tags: ['SQL', 'Joins'],
-    links: { certificate: '', external: 'https://www.hackerrank.com/' },
+    links: { certificate: 'https://www.hackerrank.com/certificates/iframe/d4333fa1f8a5' },
+  },
+  {
+    id: 'ielts',
+    category: 'certificate',
+    title: 'IELTS — 6.0',
+    issuer: 'IELTS',
+    date: '',
+    description: {
+      en: 'International English Language Testing System, overall band score 6.0.',
+      ja: 'IELTS（国際英語能力テスト）総合スコア6.0。',
+    },
+    tags: ['English'],
+    links: {},
+  },
+  {
+    id: 'jlpt-n4',
+    category: 'certificate',
+    title: 'JLPT N4',
+    issuer: 'Japan Foundation',
+    date: '',
+    description: {
+      en: 'Japanese Language Proficiency Test, N4 level.',
+      ja: '日本語能力試験（JLPT）N4レベル合格。',
+    },
+    tags: ['Japanese'],
+    links: {},
   },
 ]

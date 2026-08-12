@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { FiCalendar, FiExternalLink, FiEye } from 'react-icons/fi'
-import { achievements, type AchievementCategory } from '@/content/achievements'
+import { achievements, type AchievementCategory, type AchievementEntry } from '@/content/achievements'
 import { useTranslation } from '@/i18n/useTranslation'
 import { getBrandIcon } from '@/utils/brandIcon'
 import { RevealSection } from './RevealSection'
+import { CertificateModal } from './CertificateModal'
 
 type FilterValue = AchievementCategory | 'all'
 
@@ -12,6 +13,7 @@ const FILTERS: FilterValue[] = ['all', 'award', 'certificate', 'recognition', 'c
 export function AchievementsSection() {
   const { t, language } = useTranslation()
   const [filter, setFilter] = useState<FilterValue>('all')
+  const [activeCertificate, setActiveCertificate] = useState<AchievementEntry | null>(null)
 
   if (achievements.length === 0) return null
 
@@ -151,21 +153,24 @@ export function AchievementsSection() {
                 {(entry.links?.certificate || entry.links?.external) && (
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-2)' }}>
                     {entry.links.certificate && (
-                      <a
-                        href={entry.links.certificate}
-                        target="_blank"
-                        rel="noreferrer"
+                      <button
+                        type="button"
+                        onClick={() => setActiveCertificate(entry)}
                         style={{
                           display: 'inline-flex',
                           alignItems: 'center',
                           gap: 'var(--space-1)',
                           fontSize: 'var(--font-size-caption)',
                           color: 'var(--color-accent)',
+                          background: 'transparent',
+                          border: 'none',
+                          padding: 0,
+                          cursor: 'pointer',
                         }}
                       >
                         <FiEye aria-hidden="true" size={13} />
                         {t('landing.achievements.viewCertificate')}
-                      </a>
+                      </button>
                     )}
                     {entry.links.external && (
                       <a
@@ -191,6 +196,14 @@ export function AchievementsSection() {
           })}
         </div>
       </div>
+
+      {activeCertificate?.links?.certificate && (
+        <CertificateModal
+          title={activeCertificate.title}
+          url={activeCertificate.links.certificate}
+          onClose={() => setActiveCertificate(null)}
+        />
+      )}
     </RevealSection>
   )
 }

@@ -26,9 +26,9 @@ export function AccessibleContent({ className }: AccessibleContentProps) {
           <h2>{t(section.titleKey)}</h2>
           <p>{t(section.bodyKey)}</p>
 
-          {section.id === 'about' && (about.name || about.title[language]) && (
+          {section.id === 'about' && (about.name[language] || about.title[language]) && (
             <p>
-              {[about.name, about.title[language], about.location, about.availability[language]]
+              {[about.name[language], about.title[language], about.location, about.availability[language]]
                 .filter(Boolean)
                 .join(' — ')}
             </p>

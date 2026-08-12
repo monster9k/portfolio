@@ -18,7 +18,7 @@ export function SiteFooter() {
       <div className="landing-footer__grid">
         <div>
           <h2 style={{ fontSize: 'var(--font-size-body)', color: 'var(--color-accent)', marginBottom: 'var(--space-3)' }}>
-            {t('landing.footer.aboutHeading')} {about.name}
+            {t('landing.footer.aboutHeading')} {about.name[language]}
           </h2>
           {about.tagline[language] && (
             <p style={{ fontSize: 'var(--font-size-caption)', color: 'var(--color-text-secondary)', marginBottom: 'var(--space-3)' }}>
@@ -126,7 +126,7 @@ export function SiteFooter() {
           color: 'var(--color-text-secondary)',
         }}
       >
-        © {new Date().getFullYear()} {about.name}. {t('landing.footer.rights')} {t('landing.footer.madeWith')} React
+        © {new Date().getFullYear()} {about.name[language]}. {t('landing.footer.rights')} {t('landing.footer.madeWith')} React
         &amp; TypeScript.
       </div>
     </footer>
