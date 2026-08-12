@@ -5,7 +5,6 @@ const NAV_ITEMS = [
   { id: 'hero', labelKey: 'nav.home' },
   { id: 'about', labelKey: 'nav.about' },
   { id: 'education', labelKey: 'nav.education' },
-  { id: 'experience', labelKey: 'nav.experience' },
   { id: 'achievements', labelKey: 'nav.achievements' },
   { id: 'projects', labelKey: 'nav.projects' },
   { id: 'contact', labelKey: 'nav.contact' },

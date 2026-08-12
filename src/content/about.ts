@@ -38,11 +38,11 @@ export const about: AboutContent = {
     en: 'Open to internships starting around September 2026',
     ja: '2026年9月頃からのインターンシップに応募可能',
   },
-  photoUrl: '',
+  photoUrl: '/photo.jpg',
   resumeUrl: '',
   stats: [
     { value: '2+', labelKey: 'landing.stats.yearsCoding' },
     { value: '3+', labelKey: 'landing.stats.projectsBuilt' },
-    { value: '5+', labelKey: 'landing.stats.certificates' },
+    { value: '8+', labelKey: 'landing.stats.certificates' },
   ],
 }

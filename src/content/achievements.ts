@@ -15,16 +15,16 @@ export interface AchievementEntry {
   /** TODO(user): short skill/topic tags shown as pills. */
   tags: string[]
   links?: {
-    /** TODO(user): link to view the certificate/proof itself. */
+    /** TODO(user): link to view the certificate/proof itself — opened in the in-page CertificateModal. */
     certificate?: string
     /** TODO(user): link to the issuer's page about it. */
     external?: string
   }
 }
 
-// Real certificates. The 3 Microsoft Learn ones link to a local screenshot
-// under public/certificates/ as proof (drop the matching PNGs there — see
-// roadmap.md Phase N). IELTS/JLPT have no certificate image yet.
+// Real certificates. `links.certificate` opens in CertificateModal (see
+// AchievementsSection.tsx) — a local PDF is shown via <iframe>, a HackerRank
+// certificate URL is HackerRank's own iframe-embed endpoint.
 export const achievements: AchievementEntry[] = [
   {
     id: 'ms-nlp-intro',
@@ -37,7 +37,7 @@ export const achievements: AchievementEntry[] = [
       ja: 'Microsoft Learnモジュール。自然言語処理の基礎概念と手法を学習。',
     },
     tags: ['NLP', 'AI'],
-    links: { certificate: '/certificates/ms-nlp-intro.png' },
+    links: { certificate: '/certificates/ms-nlp-intro.pdf' },
   },
   {
     id: 'ms-mcp-server',
@@ -50,7 +50,7 @@ export const achievements: AchievementEntry[] = [
       ja: 'Microsoft Learnモジュール。MCP（Model Context Protocol）サーバーの構築と活用を学習。',
     },
     tags: ['MCP', 'AI Agent'],
-    links: { certificate: '/certificates/ms-mcp-server.png' },
+    links: { certificate: '/certificates/ms-mcp-server.pdf' },
   },
   {
     id: 'ms-ai-foundry-chat',
@@ -63,7 +63,51 @@ export const achievements: AchievementEntry[] = [
       ja: 'Microsoft Learnモジュール。Microsoft Foundryを用いた生成AIチャットアプリの開発を学習。',
     },
     tags: ['Generative AI', 'Microsoft Foundry'],
-    links: { certificate: '/certificates/ms-ai-foundry-chat.png' },
+    links: { certificate: '/certificates/ms-ai-foundry-chat.pdf' },
+  },
+  {
+    // TODO(user): confirm this is actually "Problem Solving (Intermediate)" —
+    // guessed from the earlier sample data's category, matched to the first
+    // HackerRank link in the order you sent them.
+    id: 'hackerrank-1',
+    category: 'certificate',
+    title: 'Problem Solving (Intermediate)',
+    issuer: 'HackerRank',
+    date: '',
+    description: {
+      en: 'Assesses data structures, algorithmic thinking, and optimized problem-solving under time constraints.',
+      ja: 'データ構造、アルゴリズム思考、制限時間内での最適化された問題解決力を評価。',
+    },
+    tags: ['Algorithms', 'Data Structures'],
+    links: { certificate: 'https://www.hackerrank.com/certificates/iframe/a6de5b698f31' },
+  },
+  {
+    // TODO(user): confirm this is actually "JavaScript (Intermediate)".
+    id: 'hackerrank-2',
+    category: 'certificate',
+    title: 'JavaScript (Intermediate)',
+    issuer: 'HackerRank',
+    date: '',
+    description: {
+      en: 'Covers closures, async/await, prototypal inheritance, and DOM manipulation.',
+      ja: 'クロージャ、async/await、プロトタイプ継承、DOM操作を網羅。',
+    },
+    tags: ['JavaScript', 'Async', 'DOM'],
+    links: { certificate: 'https://www.hackerrank.com/certificates/iframe/ffa8775ae942' },
+  },
+  {
+    // TODO(user): confirm this is actually "SQL (Basic)".
+    id: 'hackerrank-3',
+    category: 'certificate',
+    title: 'SQL (Basic)',
+    issuer: 'HackerRank',
+    date: '',
+    description: {
+      en: 'Tests SQL fundamentals: SELECTs, filtering, sorting, and simple joins.',
+      ja: 'SELECT、フィルタリング、ソート、単純な結合などSQLの基礎を評価。',
+    },
+    tags: ['SQL', 'Joins'],
+    links: { certificate: 'https://www.hackerrank.com/certificates/iframe/d4333fa1f8a5' },
   },
   {
     id: 'ielts',
