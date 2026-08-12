@@ -100,16 +100,16 @@
   },
   "sections": {
     "about": {
-      "body": "React・TypeScript・WebGLを用いたインタラクティブなWeb体験を制作している情報工学専攻の学生です。実際のプロダクト開発に貢献しながら学び続けられるソフトウェアエンジニアのインターンシップを探しています。"
+      "body": "ダナン工科大学（Danang University of Science and Technology）情報工学専攻の学生です。React・TypeScript・Node.js/NestJS・C#を用いてフルスタックのWebアプリケーションを開発しています。2026年9月頃から始められるソフトウェアエンジニアのインターンシップを探しており、実際のプロダクト開発に貢献しながら学び続けたいと考えています。"
     },
     "skills": {
-      "body": "フロントエンド: React, TypeScript, Three.js / React Three Fiber。バックエンド: Node.js, REST API。Git, Docker, 簡単なCI/CDにも対応可能です。"
+      "body": "フロントエンド: React, TypeScript。バックエンド: Node.js, NestJS, C#, Java。Git, Docker, REST API設計にも対応可能です。"
     },
     "projects": {
       "body": "最近作ったプロジェクトの一部です。詳細は以下をご覧ください。"
     },
     "experience": {
-      "body": "現在情報工学を専攻中で、データ構造・アルゴリズム・Web開発を履修しています。このポートフォリオのような個人プロジェクトを通して3D Webグラフィックスを独学しています。"
+      "body": "正式な就業経験はまだありませんが、Algominds、TaskNexus、そしてこのポートフォリオなど、個人プロジェクトを企画から開発・公開まで一貫して手がけてきた実践的な経験があります。"
     },
     "contact": {
       "body": "メールでご連絡いただくか、GitHubをご覧ください。お仕事のご相談、お気軽にどうぞ。"

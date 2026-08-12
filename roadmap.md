@@ -235,6 +235,23 @@ User asked to keep improving the UI: swap tech-stack/skill names and social link
 - [x] `npm run build` / `npm run lint` clean; reformatted the touched files with `npx prettier --write` to match the project's formatting
 - [x] Manual QA live in Chrome: confirmed icons render for JavaScript/TypeScript/Python/React/Three.js/Node.js/Next.js/Git/Docker/Figma (About skills), and per-project stacks (Next.js/Node.js/PostgreSQL/MDX/Tailwind CSS/etc. on Projects); confirmed "Java" and "VS Code" correctly stay text-only (no fake icon); confirmed the HackerRank issuer icon renders on the correct line above the date after the layout fix; re-checked the same skills/projects data rendering identically with icons inside the `/explore` `InfoPanel` (Skills and Projects panels); no console errors
 
+## Phase N — Real resume content pass (replace "Alex Tran" sample data with real info)
+
+User (Nguyễn Viết Minh Khoa) provided their real name/contact/skills/education/achievements/projects to replace all remaining sample copy in `src/content/*.ts` + the `sections.*.body` i18n keys, ahead of using `/` for real internship interviews (including Japanese companies — hence the bilingual name field).
+
+- [x] `src/content/about.ts`: `name` changed from `string` to `LocalizedText` (`{ en: 'Nguyen Viet Minh Khoa', ja: 'グエン・ビエット・ミン・コア' }`); updated the 4 consumers (`HeroSection.tsx`, `SiteFooter.tsx`, `AboutCard.tsx`, `AccessibleContent.tsx`) to read `about.name[language]`; `location` → `'Da Nang, Vietnam'`; `availability` → "Open to internships starting around September 2026" (EN/JA); `stats` → `2+` years coding / `3+` projects built / `5+` certificates
+- [x] `src/content/contact.ts`: real `email`, `phone` (`+84 336 874 730`), `location`, and the real LinkedIn profile URL
+- [x] `src/content/skills.ts`: `languages` category dropped Python, added C#; `frameworks` dropped Three.js/React Three Fiber and Next.js, added NestJS (note: `projects.ts`'s `orbit-portfolio` entry keeps Three.js/R3F in its own `stack` — that's this project's real tech, unrelated to the general skills list); `tools` dropped Figma; spoken `languages` updated to IELTS 6.0 (English) / JLPT N4 (Japanese)
+- [x] `src/utils/brandIcon.ts`: added `SiNestjs` import + `nestjs` map entry (verified to exist in the installed `react-icons/si`); confirmed no `SiCsharp`/`SiMicrosoft` exist in this version, so C#/Microsoft intentionally stay icon-less text per this file's existing "no icon is better than a wrong icon" rule
+- [x] `src/content/achievements.ts`: replaced all 6 sample entries with 5 real ones — 3 Microsoft Learn certificates (NLP concepts, MCP servers, generative AI chat apps with Microsoft Foundry) each linking to a local proof screenshot under `public/certificates/`, plus IELTS 6.0 and JLPT N4 (no image yet, link omitted). Achievements filter tabs (Awards/Recognitions/Competitions) intentionally left as-is even though currently empty — user chose not to touch that component code
+- [x] `src/content/sections.ts`: updated `skills`/`experience` `shortPreview` copy to match the new skill set and drop the "self-taught in 3D graphics" framing
+- [x] `en.json`/`ja.json`: rewrote `sections.about.body`, `sections.skills.body`, `sections.experience.body` to reference Đại học Bách Khoa Đà Nẵng, the real stack, the Sept 2026 availability, and a "no formal work experience yet, project-based experience instead" framing for Experience
+- [ ] `public/certificates/`: user to manually save the 3 Microsoft Learn certificate screenshots as `ms-nlp-intro.png`, `ms-mcp-server.png`, `ms-ai-foundry-chat.png` (paths already wired up in `achievements.ts`; pasted-image bytes weren't reachable from the assistant's filesystem tools in this session)
+- [ ] `src/content/experience.ts`: replace sample work/education entries with 2 real education entries (Đại học Bách Khoa Đà Nẵng, THPT Phan Châu Trinh Đà Nẵng) and 3 "project experience" entries (Algominds, TaskNexus, this portfolio) framed as work — blocked on exact program/dates and project details from user
+- [ ] `src/content/projects.ts`: replace the 2 remaining sample projects (TaskFlow-style placeholders) with real Algominds/TaskNexus entries — blocked on the same missing project details
+- [ ] `npm run build` / `npm run lint` clean — passed for everything landed so far; re-run after the two blocked items above land
+- [ ] Manual QA live in Chrome once `experience.ts`/`projects.ts`/certificate images are in place
+
 ## Special-care reminders
 
 - Dual-accent tokens: `tokens.css` + root `CLAUDE.md` edited together (Phase A)

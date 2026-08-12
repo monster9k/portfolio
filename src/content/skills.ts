@@ -30,17 +30,17 @@ export const skills: SkillsContent = {
     {
       id: 'languages',
       labelKey: 'skillCategories.languages',
-      items: ['JavaScript', 'TypeScript', 'Python', 'Java'],
+      items: ['JavaScript', 'TypeScript', 'Java', 'C#'],
     },
     {
       id: 'frameworks',
       labelKey: 'skillCategories.frameworks',
-      items: ['React', 'Three.js / React Three Fiber', 'Node.js', 'Next.js'],
+      items: ['React', 'Node.js', 'NestJS'],
     },
     {
       id: 'tools',
       labelKey: 'skillCategories.tools',
-      items: ['Git', 'Docker', 'Figma', 'VS Code'],
+      items: ['Git', 'Docker', 'VS Code'],
     },
     {
       id: 'soft',
@@ -50,7 +50,7 @@ export const skills: SkillsContent = {
   ],
   languages: [
     { language: 'Vietnamese', level: 'Native' },
-    { language: 'English', level: 'Business level' },
-    { language: 'Japanese', level: 'JLPT N3' },
+    { language: 'English', level: 'IELTS 6.0' },
+    { language: 'Japanese', level: 'JLPT N4' },
   ],
 }

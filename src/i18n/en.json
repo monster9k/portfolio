@@ -100,16 +100,16 @@
   },
   "sections": {
     "about": {
-      "body": "Computer Science student building interactive web experiences with React, TypeScript, and WebGL. Looking for a software engineering internship where I can contribute to real products and keep learning."
+      "body": "Computer Science student at Danang University of Science and Technology, building full-stack web applications with React, TypeScript, Node.js/NestJS, and C#. Looking for a software engineering internship starting around September 2026 where I can contribute to real products and keep learning."
     },
     "skills": {
-      "body": "Frontend: React, TypeScript, Three.js / React Three Fiber. Backend: Node.js, REST APIs. Also comfortable with Git, Docker, and basic CI/CD."
+      "body": "Frontend: React, TypeScript. Backend: Node.js, NestJS, C#, Java. Also comfortable with Git, Docker, and REST API design."
     },
     "projects": {
       "body": "A few things I've built recently — see the highlights below."
     },
     "experience": {
-      "body": "Currently pursuing a Computer Science degree, with coursework in data structures, algorithms, and web development. Self-taught in 3D web graphics through personal projects like this one."
+      "body": "No formal work experience yet — my hands-on experience comes from building and shipping personal full-stack projects, including Algominds, TaskNexus, and this portfolio, end to end from planning to deployment."
     },
     "contact": {
       "body": "Reach me by email or check out my GitHub — happy to chat about opportunities."

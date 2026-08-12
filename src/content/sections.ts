@@ -47,8 +47,8 @@ export const sections: SectionContent[] = [
     id: 'skills',
     titleKey: 'nav.skills',
     shortPreview: {
-      en: 'React, TypeScript, Three.js, Node.js — and always learning.',
-      ja: 'React, TypeScript, Three.js, Node.js — 学び続けています。',
+      en: 'React, TypeScript, Node.js, NestJS — and always learning.',
+      ja: 'React, TypeScript, Node.js, NestJS — 学び続けています。',
     },
     bodyKey: 'sections.skills.body',
     orbit: { radius: 4.0, inclination: -0.22, speed: 0.13, phaseOffset: PHASE_STEP * 1 },
@@ -67,8 +67,8 @@ export const sections: SectionContent[] = [
     id: 'experience',
     titleKey: 'nav.experience',
     shortPreview: {
-      en: 'CS student, self-taught in 3D web graphics.',
-      ja: '情報工学専攻、3D Webグラフィックスは独学。',
+      en: 'CS student building full-stack projects end-to-end.',
+      ja: '情報工学専攻、フルスタックプロジェクトを一貫して開発。',
     },
     bodyKey: 'sections.experience.body',
     orbit: { radius: 4.2, inclination: -0.1, speed: 0.15, phaseOffset: PHASE_STEP * 3 },

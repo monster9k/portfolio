@@ -8,7 +8,7 @@ export function AboutCard() {
   const { t, language } = useTranslation()
 
   const hasAnyContent =
-    about.name ||
+    about.name[language] ||
     about.title[language] ||
     about.tagline[language] ||
     about.location ||
@@ -51,9 +51,9 @@ export function AboutCard() {
           )}
         </div>
         <div>
-          {about.name && (
+          {about.name[language] && (
             <div style={{ color: 'var(--color-text)', fontSize: 'var(--font-size-title)' }}>
-              {about.name}
+              {about.name[language]}
             </div>
           )}
           {about.title[language] && (

@@ -52,9 +52,9 @@ export function HeroSection() {
         </p>
 
         <div>
-          {about.name && (
+          {about.name[language] && (
             <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-hero)', color: 'var(--color-text)' }}>
-              {about.name}
+              {about.name[language]}
             </h1>
           )}
           {about.title[language] && (
