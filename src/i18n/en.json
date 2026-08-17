@@ -42,6 +42,10 @@
         "recognition": "Recognitions",
         "competition": "Competitions"
       },
+      "groups": {
+        "language": "Language Certifications",
+        "tech": "Technical Certifications"
+      },
       "viewCertificate": "View Certificate",
       "openExternal": "Open External"
     },
@@ -52,9 +56,6 @@
       "stackLabel": "Tech Stack"
     },
     "footer": {
-      "aboutHeading": "About",
-      "quickLinks": "Quick Links",
-      "contactInfo": "Contact Info",
       "madeWith": "Made with",
       "rights": "All rights reserved."
     }
@@ -97,6 +98,7 @@
     "keyAchievements": "Key Achievements",
     "keyResponsibilities": "Key Responsibilities",
     "leadershipHighlights": "Leadership Highlights",
+    "featured": "Highlighted",
     "comingSoon": "Content coming soon."
   },
   "sections": {

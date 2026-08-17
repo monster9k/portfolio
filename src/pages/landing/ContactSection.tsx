@@ -1,4 +1,5 @@
 import { FiFileText, FiGithub, FiGlobe, FiLinkedin, FiMail, FiMapPin, FiPhone } from 'react-icons/fi'
+import { about } from '@/content/about'
 import { contact } from '@/content/contact'
 import { useTranslation } from '@/i18n/useTranslation'
 import { RevealSection } from './RevealSection'
@@ -15,7 +16,8 @@ const PILL_STYLE = {
 export function ContactSection() {
   const { t } = useTranslation()
   const hasLinks = contact.links.github || contact.links.linkedin || contact.links.website
-  const hasAnyContent = contact.email || contact.phone || contact.location || hasLinks || contact.resumeUrl
+  const resumeUrl = contact.resumeUrl || about.resumeUrl
+  const hasAnyContent = contact.email || contact.phone || contact.location || hasLinks || resumeUrl
 
   if (!hasAnyContent) return null
 
@@ -29,30 +31,36 @@ export function ContactSection() {
           {t('landing.sectionTitles.contactSubtitle')}
         </p>
 
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 'var(--space-3)' }}>
-          {contact.email && (
-            <a href={`mailto:${contact.email}`} style={{ ...PILL_STYLE, color: 'var(--color-accent)', background: 'var(--color-accent-soft)' }}>
-              <FiMail aria-hidden="true" />
-              <span className="sr-only">{t('fields.email')}: </span>
-              {contact.email}
-            </a>
+        <div className="landing-contact-card">
+          {(contact.email || contact.phone) && (
+            <div className="landing-contact-card__pills">
+              {contact.email && (
+                <a href={`mailto:${contact.email}`} style={{ ...PILL_STYLE, color: 'var(--color-accent)', background: 'var(--color-accent-soft)' }}>
+                  <FiMail aria-hidden="true" />
+                  <span className="sr-only">{t('fields.email')}: </span>
+                  {contact.email}
+                </a>
+              )}
+              {contact.phone && (
+                <a href={`tel:${contact.phone}`} style={{ ...PILL_STYLE, color: 'var(--color-text-secondary)', border: '1px solid var(--color-surface-border)' }}>
+                  <FiPhone aria-hidden="true" />
+                  <span className="sr-only">{t('fields.phone')}: </span>
+                  {contact.phone}
+                </a>
+              )}
+            </div>
           )}
-          {contact.phone && (
-            <a href={`tel:${contact.phone}`} style={{ ...PILL_STYLE, color: 'var(--color-text-secondary)', border: '1px solid var(--color-surface-border)' }}>
-              <FiPhone aria-hidden="true" />
-              <span className="sr-only">{t('fields.phone')}: </span>
-              {contact.phone}
-            </a>
-          )}
+
           {contact.location && (
-            <span style={{ ...PILL_STYLE, color: 'var(--color-text-secondary)', border: '1px solid var(--color-surface-border)' }}>
+            <p className="landing-contact-card__location">
               <FiMapPin aria-hidden="true" />
               <span className="sr-only">{t('fields.location')}: </span>
               {contact.location}
-            </span>
+            </p>
           )}
+
           {hasLinks && (
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 'var(--space-2)' }}>
+            <div className="landing-contact-card__socials">
               {contact.links.github && (
                 <a href={contact.links.github} target="_blank" rel="noreferrer" aria-label={t('fields.github')} className="landing-icon-btn">
                   <FiGithub aria-hidden="true" />
@@ -70,10 +78,11 @@ export function ContactSection() {
               )}
             </div>
           )}
-          {contact.resumeUrl && (
-            <a href={contact.resumeUrl} target="_blank" rel="noreferrer" style={{ ...PILL_STYLE, color: 'var(--color-accent)', background: 'var(--color-accent-soft)' }}>
+
+          {resumeUrl && (
+            <a href={resumeUrl} target="_blank" rel="noreferrer" className="landing-contact-card__cta">
               <FiFileText aria-hidden="true" />
-              {t('fields.resume')}
+              {t('landing.downloadCta')}
             </a>
           )}
         </div>

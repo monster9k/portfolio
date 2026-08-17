@@ -70,13 +70,17 @@
   padding: var(--space-12) var(--space-6);
 }
 
-/* Alternate a subtle surface tint + top border on every other section
-   (About, Achievements, Contact) so the eye can tell one section has
-   ended and the next begun while scrolling — reuses the same translucent
-   surface token as cards/nav/modal rather than a one-off color. Hero
-   isn't `.landing-section` so it's already visually distinct from About;
-   Education/Projects stay on the plain page background in between. */
-.landing-section:nth-of-type(even) {
+/* Alternate a subtle surface tint + top/bottom border on About and
+   Achievements so the eye can tell one section has ended and the next
+   begun while scrolling — reuses the same translucent surface token as
+   cards/nav/modal rather than a one-off color. Hero isn't `.landing-section`
+   so it's already visually distinct from About; Education/Projects stay on
+   the plain page background in between. #contact is deliberately excluded
+   (it's technically "even" too) — its own `.landing-contact-card` carries
+   the visual weight instead, so tinting the whole section behind it would
+   just wash the card's contrast out. */
+#about,
+#achievements {
   background: var(--color-surface);
   border-top: 1px solid var(--color-surface-border);
   border-bottom: 1px solid var(--color-surface-border);
@@ -118,6 +122,14 @@
 .landing-card:hover {
   transform: translateY(-4px);
   border-color: var(--color-accent-glow);
+}
+
+/* Marks the most important achievement cards (per-entry `featured: true`)
+   so they're the first thing the eye lands on — a glow border reusing the
+   existing accent-glow token, no new color introduced. */
+.landing-card--featured {
+  border-color: var(--color-accent-glow);
+  box-shadow: 0 0 0 1px var(--color-accent-glow), 0 0 24px -8px var(--color-accent-glow);
 }
 
 .landing-filter-tab {
@@ -177,35 +189,50 @@
   border-color: var(--color-accent-glow);
 }
 
-/* Compact single-row stat strip (About section) — deliberately smaller/less
-   dominant than a `.landing-grid` of `.landing-card`s so a handful of
-   early-career numbers don't out-weigh the Projects section below. */
+/* Compact stat strip (About section) — 3 equal-width columns (not a flex
+   row sized to content, so "Certificates Earned" and "Years Coding" get the
+   same column width), each with the number stacked above its label so the
+   two never run into each other. Deliberately smaller/less dominant than a
+   `.landing-grid` of `.landing-card`s so a handful of early-career numbers
+   don't out-weigh the Projects section below. */
 .landing-stats-strip {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--space-2) 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   border: 1px solid var(--color-surface-border);
   border-radius: 14px;
   background: var(--color-surface);
-  padding: var(--space-3) var(--space-2);
+  padding: var(--space-4) var(--space-2);
 }
 
 .landing-stats-strip__item {
+  position: relative;
   display: flex;
-  align-items: baseline;
-  gap: var(--space-2);
-  padding: var(--space-1) var(--space-5);
-  border-right: 1px solid var(--color-surface-border);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  padding: var(--space-2) var(--space-3);
+  text-align: center;
 }
 
-.landing-stats-strip__item:last-child {
-  border-right: none;
+/* A short, vertically-centered divider between columns instead of a
+   full-height border — reads as a subtle column separator, not a "|"
+   crammed against the text. */
+.landing-stats-strip__item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 1px;
+  height: 60%;
+  transform: translateY(-50%);
+  background: var(--color-surface-border);
 }
 
 .landing-stats-strip__value {
-  font-size: var(--font-size-title);
+  font-size: var(--font-size-section-title);
   font-weight: 700;
+  line-height: 1;
   color: var(--color-accent);
 }
 
@@ -300,16 +327,91 @@
   }
 }
 
+/* The one visually prominent block in the Contact section — everything
+   (contact pills, socials, the Download CV CTA) lives inside this card
+   instead of a loose row of equal-weight pills spanning the section. */
+.landing-contact-card {
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-8) var(--space-6);
+  border: 1px solid var(--color-accent-glow);
+  border-radius: 18px;
+  background: var(--color-surface);
+}
+
+.landing-contact-card__pills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+}
+
+.landing-contact-card__location {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin: 0;
+  font-size: var(--font-size-caption);
+  color: var(--color-text-secondary);
+}
+
+.landing-contact-card__socials {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.landing-contact-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-body);
+  font-weight: 700;
+  color: var(--color-bg-bottom);
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-secondary) 100%);
+  border: none;
+  border-radius: 999px;
+  padding: var(--space-3) var(--space-6);
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform var(--motion-duration) var(--motion-ease);
+}
+
+.landing-contact-card__cta:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
 .landing-footer {
   background: var(--color-bg-bottom);
   border-top: 1px solid var(--color-surface-border);
   padding: var(--space-8) var(--space-6) var(--space-6);
 }
 
-.landing-footer__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: var(--space-8);
+/* Trimmed footer (Phase T): once Contact above carries the full contact
+   card, the footer below is just a closing bar — social icons + copyright,
+   centered. */
+.landing-footer__minimal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  text-align: center;
+}
+
+.landing-footer__socials {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.landing-footer__copyright {
+  margin: 0;
+  font-size: var(--font-size-caption);
+  color: var(--color-text-secondary);
 }
 
 @media (max-width: 720px) {

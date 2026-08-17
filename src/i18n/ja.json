@@ -42,6 +42,10 @@
         "recognition": "表彰",
         "competition": "競技大会"
       },
+      "groups": {
+        "language": "語学認定",
+        "tech": "技術認定"
+      },
       "viewCertificate": "証明書を見る",
       "openExternal": "外部リンクを開く"
     },
@@ -52,9 +56,6 @@
       "stackLabel": "技術スタック"
     },
     "footer": {
-      "aboutHeading": "概要",
-      "quickLinks": "クイックリンク",
-      "contactInfo": "連絡先情報",
       "madeWith": "使用技術:",
       "rights": "All rights reserved."
     }
@@ -97,6 +98,7 @@
     "keyAchievements": "主な成果",
     "keyResponsibilities": "主な職務内容",
     "leadershipHighlights": "リーダーシップ実績",
+    "featured": "注目",
     "comingSoon": "近日公開予定です。"
   },
   "sections": {

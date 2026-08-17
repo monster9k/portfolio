@@ -20,6 +20,10 @@ export interface AchievementEntry {
     /** TODO(user): link to the issuer's page about it. */
     external?: string
   }
+  /** Visual grouping cluster shown in the Achievements section (language certs vs technical certs). */
+  group: 'language' | 'tech'
+  /** Gives the card a glow border + star badge to draw the eye to the most important entries first. Use sparingly. */
+  featured?: boolean
 }
 
 // Real certificates. `links.certificate` opens in CertificateModal (see
@@ -38,6 +42,7 @@ export const achievements: AchievementEntry[] = [
     },
     tags: ['NLP', 'AI'],
     links: { certificate: '/certificates/ms-nlp-intro.pdf' },
+    group: 'tech',
   },
   {
     id: 'ms-mcp-server',
@@ -51,6 +56,7 @@ export const achievements: AchievementEntry[] = [
     },
     tags: ['MCP', 'AI Agent'],
     links: { certificate: '/certificates/ms-mcp-server.pdf' },
+    group: 'tech',
   },
   {
     id: 'ms-ai-foundry-chat',
@@ -64,6 +70,8 @@ export const achievements: AchievementEntry[] = [
     },
     tags: ['Generative AI', 'Microsoft Foundry'],
     links: { certificate: '/certificates/ms-ai-foundry-chat.pdf' },
+    group: 'tech',
+    featured: true,
   },
   {
     // TODO(user): confirm this is actually "Problem Solving (Intermediate)" —
@@ -80,6 +88,7 @@ export const achievements: AchievementEntry[] = [
     },
     tags: ['Algorithms', 'Data Structures'],
     links: { certificate: 'https://www.hackerrank.com/certificates/iframe/a6de5b698f31' },
+    group: 'tech',
   },
   {
     // TODO(user): confirm this is actually "JavaScript (Intermediate)".
@@ -94,6 +103,7 @@ export const achievements: AchievementEntry[] = [
     },
     tags: ['JavaScript', 'Async', 'DOM'],
     links: { certificate: 'https://www.hackerrank.com/certificates/iframe/ffa8775ae942' },
+    group: 'tech',
   },
   {
     // TODO(user): confirm this is actually "SQL (Basic)".
@@ -108,6 +118,7 @@ export const achievements: AchievementEntry[] = [
     },
     tags: ['SQL', 'Joins'],
     links: { certificate: 'https://www.hackerrank.com/certificates/iframe/d4333fa1f8a5' },
+    group: 'tech',
   },
   {
     id: 'ielts',
@@ -121,6 +132,8 @@ export const achievements: AchievementEntry[] = [
     },
     tags: ['English'],
     links: {},
+    group: 'language',
+    featured: true,
   },
   {
     id: 'jlpt-n4',
@@ -134,5 +147,7 @@ export const achievements: AchievementEntry[] = [
     },
     tags: ['Japanese'],
     links: {},
+    group: 'language',
+    featured: true,
   },
 ]

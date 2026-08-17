@@ -42,31 +42,59 @@ export const projects: ProjectEntry[] = [
     ],
   },
   {
-    // TODO(user): replace with TaskNexus's real description, stack, period, and links.
+    // TODO(user): add a repo/demo link and exact period once you have them;
+    // add the frontend/backend framework to `stack` if you want a fuller list
+    // (only the deploy platforms you gave were confirmed, so that's all
+    // that's listed here).
     id: 'tasknexus',
     name: 'TaskNexus',
     description: {
-      en: 'Personal project — full description and tech stack coming soon.',
-      ja: '個人プロジェクト — 詳細は近日公開予定です。',
+      en: 'A cross-platform task and messaging management platform, built as a team capstone project (PBL3).',
+      ja: 'チームのキャップストーンプロジェクト（PBL3）として開発した、タスクとメッセージ管理のクロスプラットフォームです。',
     },
-    stack: [],
-    role: { en: 'Solo developer', ja: '個人開発' },
+    stack: ['Render', 'Vercel', 'Supabase', 'Upstash Redis'],
+    role: { en: 'Project Leader', ja: 'プロジェクトリーダー' },
     period: '',
     links: {},
-    highlights: [],
+    highlights: [
+      {
+        en: 'Cross-platform task and messaging management built for teams',
+        ja: 'チーム向けのクロスプラットフォームなタスク・メッセージ管理',
+      },
+      {
+        en: 'Led the team as Project Leader for this PBL3 capstone project',
+        ja: 'PBL3キャップストーンプロジェクトでプロジェクトリーダーを担当',
+      },
+      {
+        en: 'Deployed with a modern serverless stack: Render, Vercel, Supabase, and Upstash Redis',
+        ja: 'Render、Vercel、Supabase、Upstash Redisを用いたモダンなサーバーレス構成でデプロイ',
+      },
+    ],
   },
   {
-    // TODO(user): replace with Algominds's real description, stack, period, and links.
+    // TODO(user): add a repo/demo link and exact period once you have them;
+    // add the frontend/backend framework to `stack` if you want a fuller list
+    // (only the Gemini API you mentioned was confirmed, so that's all
+    // that's listed here).
     id: 'algominds',
     name: 'Algominds',
     description: {
-      en: 'Personal project — full description and tech stack coming soon.',
-      ja: '個人プロジェクト — 詳細は近日公開予定です。',
+      en: 'An AI-powered coding interview simulator inspired by LeetCode, giving real-time feedback on your solutions.',
+      ja: 'LeetCodeスタイルのAIコーディング面接シミュレーターで、解答にリアルタイムのフィードバックを提供します。',
     },
-    stack: [],
+    stack: ['Google Gemini API'],
     role: { en: 'Solo developer', ja: '個人開発' },
     period: '',
     links: {},
-    highlights: [],
+    highlights: [
+      {
+        en: 'Simulates LeetCode-style coding interviews with AI-generated feedback',
+        ja: 'LeetCode形式のコーディング面接をAIによるフィードバック付きでシミュレート',
+      },
+      {
+        en: 'Powered by the Google Gemini API for real-time solution evaluation',
+        ja: 'Google Gemini APIによる解答のリアルタイム評価',
+      },
+    ],
   },
 ]
