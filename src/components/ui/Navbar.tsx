@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { FiArrowLeft } from 'react-icons/fi'
 import { sections } from '@/content/sections'
 import { useSceneStore } from '@/store/useSceneStore'
 import { useTranslation } from '@/i18n/useTranslation'
@@ -27,15 +28,22 @@ export function Navbar() {
     >
       <Link
         to="/"
-        aria-label={t('landing.backToHome')}
         style={{
-          fontSize: 'var(--font-size-body)',
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: 'var(--space-2)',
+          fontSize: 'var(--font-size-caption)',
           fontWeight: 600,
           color: 'var(--color-text)',
           textDecoration: 'none',
+          background: 'var(--color-surface)',
+          border: '1px solid var(--color-surface-border)',
+          borderRadius: 999,
+          padding: 'var(--space-2) var(--space-4)',
         }}
       >
-        Orbit
+        <FiArrowLeft aria-hidden="true" />
+        {t('landing.backToHome')}
       </Link>
 
       <div
