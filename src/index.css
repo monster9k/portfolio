@@ -11,6 +11,22 @@ body,
   margin: 0;
 }
 
+/* Nav-link/keyboard (Home/End/PageUp/PageDown) jumps to an anchor are
+   instant by default, which never gives an in-between section's scroll-
+   reveal (framer-motion `whileInView`, `once: true`) a single rendered
+   frame to observe — so a skipped section stays permanently `opacity: 0`
+   even though it still occupies its layout space, reading as a large blank
+   gap. Smooth-scrolling through it fixes that at the source. */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 body {
   font-family: var(--font-family);
   font-size: var(--font-size-body);
