@@ -42,7 +42,7 @@ export const about: AboutContent = {
     ja: '2026年9月頃からのインターンシップに応募可能',
   },
   photoUrl: '/photo.jpg',
-  resumeUrl: '',
+  resumeUrl: '/resume.pdf',
   stats: [
     { value: '2+', labelKey: 'landing.stats.yearsCoding' },
     { value: '3+', labelKey: 'landing.stats.projectsBuilt' },

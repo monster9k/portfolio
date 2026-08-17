@@ -31,5 +31,5 @@ export const contact: ContactInfo = {
       'https://www.linkedin.com/in/nguy%E1%BB%85n-vi%E1%BA%BFt-minh-khoa-undefined-228158384/',
     website: '',
   },
-  resumeUrl: '',
+  resumeUrl: '/resume.pdf',
 }
