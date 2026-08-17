@@ -314,6 +314,15 @@ User sent a screenshot showing what looked like About's content overlapping/mixi
 - [x] `npm run build` / `npm run lint` clean
 - [x] Manual QA: performed live via the same scratch Playwright harness — pixel-level before/after comparison of the reported seam, plus a full page scroll-through re-check that Phase P's container alignment and Phase Q's reveal-on-nav-jump fix both still hold
 
+## Phase S — Hero avatar/text too far apart + no visible boundary between sections
+
+User compared new vs. old screenshots and flagged two real regressions/gaps: (1) in the Hero, the avatar now sits far from the name/title text block (an unintended side effect of Phase P's container fix); (2) after Phase R removed the background-banding bug, the page background is now perfectly uniform everywhere, so there's no way to tell by eye when scrolling from one section into the next — the user wants that boundary cue back, done properly this time (not via an accidental document-height gradient).
+
+- [x] `landing.css`: `.landing-hero__inner`'s `justify-content: space-between → center`. Phase P (container-alignment fix) bounded the hero's flex row inside the shared `.landing-section__inner` container and, while doing so, switched its `justify-content` from the original `center` to `space-between` — a design change that wasn't part of what was asked, and its real effect (text pinned to the container's left edge, avatar pinned to the right, ~300px of dead space between them on a wide screen) is exactly the "too far apart" the user is now pointing at. Reverted to `center`, which keeps text+avatar as a tight `gap`-separated pair while still being bounded by the same shared container as every section below it (Phase P's actual goal), so both fixes now coexist correctly
+- [x] `landing.css`: added `.landing-section:nth-of-type(even) { background: var(--color-surface); border-top/border-bottom: 1px solid var(--color-surface-border); }` — About/Achievements/Contact (the even-indexed `<section>`s among Hero+5 content sections) get the same translucent surface tint already used by cards/nav/modal, Education/Projects stay on the plain page background in between, giving a clean alternating boundary at every section transition. Reuses an existing token per CLAUDE.md's rule, and is a deliberate, controlled per-section rule instead of the accidental full-document gradient Phase R removed — the two don't reintroduce each other's bug
+- [x] `npm run build` / `npm run lint` clean
+- [x] Manual QA: live via the same scratch Playwright harness — confirmed hero text/avatar now sit close together as one visual group; screenshotted the Hero→About and About→Education boundaries directly and confirmed a clean, single-line separator with a subtle tint shift at each, no banding; confirmed computed `background-color` alternates exactly as designed across all 6 sections (`hero`/`education`/`projects` transparent, `about`/`achievements`/`contact` tinted)
+
 ## Special-care reminders
 
 - Dual-accent tokens: `tokens.css` + root `CLAUDE.md` edited together (Phase A)

@@ -70,6 +70,18 @@
   padding: var(--space-12) var(--space-6);
 }
 
+/* Alternate a subtle surface tint + top border on every other section
+   (About, Achievements, Contact) so the eye can tell one section has
+   ended and the next begun while scrolling — reuses the same translucent
+   surface token as cards/nav/modal rather than a one-off color. Hero
+   isn't `.landing-section` so it's already visually distinct from About;
+   Education/Projects stay on the plain page background in between. */
+.landing-section:nth-of-type(even) {
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-surface-border);
+  border-bottom: 1px solid var(--color-surface-border);
+}
+
 /* The one shared content container for the whole landing page — every
    full-width wrapper (nav, hero, each `.landing-section`, footer) applies
    the same `var(--space-6)` horizontal padding and then centers this
@@ -216,7 +228,7 @@
 .landing-hero__inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: var(--space-12);
   flex-wrap: wrap;
 }
