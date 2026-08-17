@@ -28,14 +28,35 @@ html {
 }
 
 body {
+  position: relative;
   font-family: var(--font-family);
   font-size: var(--font-size-body);
   line-height: var(--line-height-body);
   color: var(--color-text);
-  background: linear-gradient(180deg, var(--color-bg-top) 0%, var(--color-bg-bottom) 100%);
+  background: var(--color-bg-bottom);
   color-scheme: dark;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* The bg-top -> bg-bottom gradient used to live directly on `body`'s
+   `background`, stretched across the *document's* full scrollable height.
+   The two colors only differ by a few RGB units, so once a page gets tall
+   (e.g. the landing page after real content was added), that tiny
+   difference spread over thousands of pixels quantizes into visible hard
+   color bands — reading as a seam mid-page, worse the taller the content
+   gets, misleadingly close to unrelated section boundaries. Anchoring it to
+   a `position: fixed` full-viewport layer instead keeps the gradient's span
+   fixed to the viewport height (not the ever-growing document height), so
+   the same subtle transition never has room to band. (Deliberately not
+   `background-attachment: fixed` — same effect, but that property has a
+   long history of janky/broken rendering on iOS Safari.) */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, var(--color-bg-top) 0%, var(--color-bg-bottom) 100%);
 }
 
 h1,
