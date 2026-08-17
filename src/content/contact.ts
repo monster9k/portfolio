@@ -22,12 +22,13 @@ export interface ContactInfo {
 // real handle since that's public info; email/linkedin/phone/resume are
 // placeholders — replace them with your real ones.
 export const contact: ContactInfo = {
-  email: 'monster722006@gmail.com',
+  email: 'nvminhkhoa722006@gmail.com',
   phone: '+84 336 874 730',
   location: 'Da Nang, Vietnam',
   links: {
     github: 'https://github.com/monster9k',
-    linkedin: 'https://www.linkedin.com/in/nguy%E1%BB%85n-vi%E1%BA%BFt-minh-khoa-undefined-228158384/',
+    linkedin:
+      'https://www.linkedin.com/in/nguy%E1%BB%85n-vi%E1%BA%BFt-minh-khoa-undefined-228158384/',
     website: '',
   },
   resumeUrl: '',
