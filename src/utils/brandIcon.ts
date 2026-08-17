@@ -2,6 +2,7 @@ import type { IconType } from 'react-icons'
 import {
   SiAngular,
   SiBootstrap,
+  SiCisco,
   SiCplusplus,
   SiCss,
   SiDart,
@@ -11,6 +12,7 @@ import {
   SiFirebase,
   SiFlutter,
   SiGit,
+  SiGithub,
   SiGitlab,
   SiGooglegemini,
   SiGraphql,
@@ -28,12 +30,14 @@ import {
   SiNodedotjs,
   SiPhp,
   SiPostgresql,
+  SiPostman,
   SiPrisma,
   SiPython,
   SiReact,
   SiRedis,
   SiRedux,
   SiSass,
+  SiSocketdotio,
   SiSwift,
   SiTailwindcss,
   SiThreedotjs,
@@ -95,6 +99,10 @@ const BRAND_ICON_MAP: Record<string, IconType> = {
   hackerrank: SiHackerrank,
   prisma: SiPrisma,
   'google gemini': SiGooglegemini,
+  github: SiGithub,
+  postman: SiPostman,
+  'socket.io': SiSocketdotio,
+  cisco: SiCisco,
 }
 
 /** Below this key length, only exact matches are considered — short keys (e.g. "git", "php") substring-matching inside unrelated words is how you get a Go logo on "Algorithms". */

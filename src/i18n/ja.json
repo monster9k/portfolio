@@ -32,7 +32,8 @@
       "projects": "プロジェクト",
       "projectsSubtitle": "最近作ったプロジェクトの一部",
       "contact": "連絡先",
-      "contactSubtitle": "お仕事のご相談はこちらから"
+      "contactSubtitle": "お仕事のご相談はこちらから",
+      "contactConnectCta": "気軽にご連絡ください"
     },
     "achievements": {
       "categories": {
@@ -103,10 +104,10 @@
   },
   "sections": {
     "about": {
-      "body": "ダナン工科大学（Danang University of Science and Technology）情報技術専攻・日本語プログラムの学生です。React・TypeScript・Node.js/NestJS・C#を用いてフルスタックのWebアプリケーションを開発しています。IELTS 6.0、JLPT N4を取得しており、英語・日本語の両方でのコミュニケーション経験があります。2026年9月頃から始められるソフトウェアエンジニアのインターンシップを探しており、実際のプロダクト開発に貢献しながら学び続けたいと考えています。"
+      "body": "ダナン工科大学（Da Nang University of Technology, DUT）情報技術専攻・日本語プログラムの3年生です。チームのフルスタックプロジェクト（TaskNexus）でリーダーを務め、NestJS・React・Gemini APIを用いてAI統合アプリケーション（Algominds）を開発した実践経験があります。IELTS 6.0、JLPT N4を取得済みです。2026年9月頃から始められるフルスタック／バックエンド開発のインターンシップを探しており、実際のプロダクト開発に貢献しながらシステム設計とAI活用開発のスキルをさらに伸ばしたいと考えています。"
     },
     "skills": {
-      "body": "フロントエンド: React, TypeScript。バックエンド: Node.js, NestJS, C#, Java。データベース: Prisma (ORM), MongoDB, SQL。AI連携: Google Gemini API。Git, Docker, REST API設計にも対応可能です。"
+      "body": "フロントエンド: React, TypeScript。バックエンド: Node.js, NestJS, Express, C#, Java。データベース: Prisma, PostgreSQL, Redis, MongoDB, SQL。リアルタイム・AI: Socket.io, Google Gemini API。Git, Docker, Postman, REST API設計にも対応可能です。"
     },
     "projects": {
       "body": "最近作ったプロジェクトの一部です。詳細は以下をご覧ください。"
@@ -115,7 +116,7 @@
       "body": "正式な就業経験はまだありませんが、Algominds、TaskNexus、そしてこのポートフォリオなど、個人プロジェクトを企画から開発・公開まで一貫して手がけてきた実践的な経験があります。"
     },
     "contact": {
-      "body": "メールでご連絡いただくか、GitHubをご覧ください。お仕事のご相談、お気軽にどうぞ。"
+      "body": "インターンシップの機会、プロジェクト、ソフトウェアエンジニアリングの求人など、いつでもお気軽にご相談ください。"
     }
   }
 }

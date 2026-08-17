@@ -26,22 +26,26 @@ export interface ExperienceEntry {
 // are zero 'work' entries). Only education remains, and only the university
 // entry — the user asked to drop the High School line (not useful for a
 // university-student IT portfolio) and use that space for GPA instead.
+//
+// Organization name/period/GPA sourced from the user's real resume PDF
+// (FullStackBe_NguyenVietMinhKhoa_intern.pdf) — corrects earlier
+// unconfirmed placeholder values.
 export const experience: ExperienceEntry[] = [
   {
     id: 'education-1',
     type: 'education',
-    organization: 'Danang University of Science and Technology',
+    organization: 'Da Nang University of Technology (DUT)',
     role: {
-      en: 'B.S. in Information Technology (Japan-Oriented Program)',
-      ja: '情報技術学士（日本語プログラム）',
+      en: 'Information Technology (Japan-Oriented Program)',
+      ja: '情報技術学（日本語プログラム）',
     },
-    period: '2022.09 - Early 2028 (expected)',
+    period: '2024 - Present',
     location: 'Da Nang, Vietnam',
-    gpa: '3.3/4.0',
+    gpa: '3.37/4.0',
     description: [
       {
-        en: 'Coursework: Data Structures, Algorithms, Web Development, Software Engineering',
-        ja: '履修科目: データ構造、アルゴリズム、Web開発、ソフトウェア工学',
+        en: 'Developed strong foundations in software engineering principles, full-stack web development, and database management.',
+        ja: 'ソフトウェア工学の基礎、フルスタックWeb開発、データベース管理について確かな基盤を築いています。',
       },
     ],
   },

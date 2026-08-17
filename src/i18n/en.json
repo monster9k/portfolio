@@ -32,7 +32,8 @@
       "projects": "Projects",
       "projectsSubtitle": "A few things I've built recently",
       "contact": "Contact",
-      "contactSubtitle": "Let's talk about opportunities"
+      "contactSubtitle": "Let's talk about opportunities",
+      "contactConnectCta": "Let's connect"
     },
     "achievements": {
       "categories": {
@@ -103,10 +104,10 @@
   },
   "sections": {
     "about": {
-      "body": "Computer Science student in the Japan-oriented Information Technology program at Danang University of Science and Technology, building full-stack web applications with React, TypeScript, Node.js/NestJS, and C#. IELTS 6.0 and JLPT N4 certified, with real experience collaborating in both English and Japanese. Looking for a software engineering internship starting around September 2026 where I can contribute to real products and keep learning."
+      "body": "3rd-year Information Technology student (Japan-Oriented Program) at Da Nang University of Technology (DUT), with hands-on experience leading a full-stack team project (TaskNexus) and building an AI-integrated application (Algominds) with NestJS, React, and the Gemini API. IELTS 6.0 and JLPT N4 certified. Looking for a Full-stack / Backend Developer internship starting around September 2026 where I can contribute to real products and keep growing in system design and AI-assisted development."
     },
     "skills": {
-      "body": "Frontend: React, TypeScript. Backend: Node.js, NestJS, C#, Java. Databases: Prisma (ORM), MongoDB, SQL. AI integration: Google Gemini API. Also comfortable with Git, Docker, and REST API design."
+      "body": "Frontend: React, TypeScript. Backend: Node.js, NestJS, Express, C#, Java. Databases: Prisma, PostgreSQL, Redis, MongoDB, SQL. Real-time & AI: Socket.io, Google Gemini API. Also comfortable with Git, Docker, Postman, and REST API design."
     },
     "projects": {
       "body": "A few things I've built recently — see the highlights below."
@@ -115,7 +116,7 @@
       "body": "No formal work experience yet — my hands-on experience comes from building and shipping personal full-stack projects, including Algominds, TaskNexus, and this portfolio, end to end from planning to deployment."
     },
     "contact": {
-      "body": "Reach me by email or check out my GitHub — happy to chat about opportunities."
+      "body": "I'm always open to discussing internship opportunities, projects, or software engineering roles."
     }
   }
 }

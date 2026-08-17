@@ -46,17 +46,29 @@ export const skills: SkillsContent = {
     {
       id: 'frameworks',
       labelKey: 'skillCategories.frameworks',
-      items: ['React', 'Node.js', 'NestJS', 'Prisma', 'MongoDB', 'SQL', 'Google Gemini API'],
+      items: [
+        'React',
+        'Node.js',
+        'NestJS',
+        'Express',
+        'Socket.io',
+        'Prisma',
+        'PostgreSQL',
+        'Redis',
+        'MongoDB',
+        'SQL',
+        'Google Gemini API',
+      ],
     },
     {
       id: 'tools',
       labelKey: 'skillCategories.tools',
-      items: ['Git', 'Docker', 'VS Code'],
+      items: ['Git', 'GitHub', 'Docker', 'Postman', 'VS Code', 'Cisco Packet Tracer'],
     },
     {
       id: 'soft',
       labelKey: 'skillCategories.soft',
-      items: ['Communication', 'Teamwork', 'Problem Solving'],
+      items: ['Communication', 'Teamwork', 'Problem Solving', 'Fast Learner'],
     },
   ],
   languages: [

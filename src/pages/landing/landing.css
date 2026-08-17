@@ -327,45 +327,110 @@
   }
 }
 
-/* The one visually prominent block in the Contact section — everything
-   (contact pills, socials, the Download CV CTA) lives inside this card
-   instead of a loose row of equal-weight pills spanning the section. */
+/* The one visually prominent block in the Contact section — intro copy,
+   contact info, socials, and the two CTAs all live inside this card
+   instead of a loose row of equal-weight pills. Wider than a typical
+   `.landing-card` (this is the one section built around a single block)
+   but still well inside the shared `.landing-section__inner` container. */
 .landing-contact-card {
-  max-width: 480px;
+  max-width: 640px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: var(--space-4);
-  padding: var(--space-8) var(--space-6);
+  gap: var(--space-6);
+  padding: var(--space-8);
   border: 1px solid var(--color-accent-glow);
   border-radius: 18px;
   background: var(--color-surface);
 }
 
-.landing-contact-card__pills {
+.landing-contact-card__intro {
+  margin: 0;
+  font-size: var(--font-size-body);
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+/* Email/Phone side by side on desktop, Location spans both columns below —
+   collapses to one column on narrow screens (see the media query below). */
+.landing-contact-card__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6);
+}
+
+.landing-contact-card__item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.landing-contact-card__item--full {
+  grid-column: 1 / -1;
+}
+
+/* Small uppercase label above the value — the hierarchy fix: label reads
+   clearly as a label, not run together with the value next to it. */
+.landing-contact-card__item-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--font-size-caption);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+.landing-contact-card__item-value {
+  font-size: var(--font-size-body);
+  color: var(--color-text);
+  text-decoration: none;
+  word-break: break-word;
+}
+
+a.landing-contact-card__item-value:hover {
+  color: var(--color-accent);
+}
+
+.landing-contact-card__divider {
+  height: 1px;
+  background: var(--color-surface-border);
+}
+
+.landing-contact-card__socials {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: var(--space-3);
 }
 
-.landing-contact-card__location {
+/* Labeled (not icon-only) social buttons — this is now the only place
+   GitHub/LinkedIn appear on the page (removed from the footer to avoid
+   showing up twice), so they need to be easy to spot, not just an icon. */
+.landing-contact-card__social-link {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-1);
-  margin: 0;
+  gap: var(--space-2);
   font-size: var(--font-size-caption);
   color: var(--color-text-secondary);
+  border: 1px solid var(--color-surface-border);
+  border-radius: 999px;
+  padding: var(--space-2) var(--space-4);
+  text-decoration: none;
+  transition:
+    color var(--motion-duration) var(--motion-ease),
+    border-color var(--motion-duration) var(--motion-ease);
 }
 
-.landing-contact-card__socials {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-3);
+.landing-contact-card__social-link:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent-glow);
 }
 
 .landing-contact-card__cta {
+  align-self: center;
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
@@ -385,27 +450,42 @@
   transform: translateY(-2px) scale(1.02);
 }
 
+/* The subtle closing CTA ("Let's connect") — deliberately just a small
+   text link, not another button, so it doesn't compete with Download CV. */
+.landing-contact-card__connect {
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--font-size-caption);
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.landing-contact-card__connect:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  .landing-contact-card__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .landing-footer {
   background: var(--color-bg-bottom);
   border-top: 1px solid var(--color-surface-border);
   padding: var(--space-8) var(--space-6) var(--space-6);
 }
 
-/* Trimmed footer (Phase T): once Contact above carries the full contact
-   card, the footer below is just a closing bar — social icons + copyright,
-   centered. */
+/* Trimmed footer: GitHub/LinkedIn now live only in the Contact card above
+   (avoids showing the same links twice), so the footer is just a closing
+   copyright/tech-attribution line, centered. */
 .landing-footer__minimal {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-3);
   text-align: center;
-}
-
-.landing-footer__socials {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-3);
 }
 
 .landing-footer__copyright {

@@ -111,7 +111,7 @@ export const achievements: AchievementEntry[] = [
     category: 'certificate',
     title: 'SQL (Basic)',
     issuer: 'HackerRank',
-    date: '',
+    date: '2026.08',
     description: {
       en: 'Tests SQL fundamentals: SELECTs, filtering, sorting, and simple joins.',
       ja: 'SELECT、フィルタリング、ソート、単純な結合などSQLの基礎を評価。',
