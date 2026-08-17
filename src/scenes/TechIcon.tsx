@@ -6,6 +6,7 @@ import type { IconType } from 'react-icons'
 import type { OrbitParams } from '@/content/sections'
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion'
 import { ACCENT_GOLD } from '@/styles/colors'
+import { sunOcclusionRef } from './sunMeshRef'
 
 /**
  * A single orbiting tech-stack glyph — hover-only (no click/select), purely
@@ -33,7 +34,7 @@ export function TechIcon({ orbit, label, Icon }: TechIconProps) {
   return (
     <group ref={groupRef} rotation={[0, orbit.phaseOffset, orbit.inclination]}>
       <group position={[orbit.radius, 0, 0]}>
-        <Html center zIndexRange={[1, 0]}>
+        <Html center zIndexRange={[1, 0]} occlude={[sunOcclusionRef]}>
           <div
             aria-hidden="true"
             onMouseEnter={() => setHovered(true)}

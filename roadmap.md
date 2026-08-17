@@ -361,6 +361,24 @@ User shared their real resume PDF (`FullStackBe_NguyenVietMinhKhoa_intern.pdf`) 
 - [x] Manual QA: live via the scratch Playwright harness across **1920 / 1440 / 1024 / 768 / 375px** — confirmed no horizontal overflow at any width, the Email/Phone grid collapses to one column and the long email address wraps cleanly on narrow screens, GitHub/LinkedIn appear in the Contact card only (footer screenshot confirmed no icons there), and the card stays centered within the shared `.landing-section__inner` container at every width; no console errors
 - [x] Resume PDF wired up: the user pointed at `D:\CV\FullStackBe_NguyenVietMinhKhoa_intern.pdf` (verified via `pdftotext` that it byte-for-byte matches the resume content attached in this session, unlike the stale `Downloads/CV.pdf` found earlier); copied to `public/resume.pdf`, set `about.resumeUrl`/`contact.resumeUrl` to `/resume.pdf` — the Download CV button now renders on both the landing page (Hero + Contact) and the `/explore` 3D scene's About/Contact panels (all four already had the conditional-render logic in place from earlier phases, just needed a real URL). Confirmed live: `/resume.pdf` resolves (200, triggers a real PDF download) and `npm run build`'s `dist/resume.pdf` is present
 
+## Phase V — Explore scene: sun-occlusion for orbiting Html icons, explicit back-to-portfolio button, readable dashboard hover
+
+User (Vietnamese) reported three `/explore` issues after using the live scene:
+1. The orbiting tech-stack glyphs (Docker/Node/etc., `TechIconField`/`TechIcon.tsx`) never disappear behind the sun even when their orbit path takes them behind it — they render on top of the sun at all times.
+2. No obvious way to get back to the landing page (`/`) from the 3D scene — only a small unstyled "Orbit" wordmark link exists, not a clear button.
+3. The small glass "dashboard peek" cards embedded on the sun's surface (`PlanetDashboards.tsx`) are unreadable on hover — they keep sliding away since the sun keeps spinning underneath them, and hovering does nothing (no pointer events, no hover state), unlike `Asteroid.tsx` which already freezes in place on hover.
+
+Root cause for (1) and (3), same underlying issue: drei's `<Html>` renders as a plain DOM overlay with no awareness of the WebGL depth buffer, so it always paints on top of the canvas regardless of 3D position — `Asteroid.tsx` doesn't have this problem because it's a real mesh, not `Html`.
+
+- [x] `src/scenes/sunMeshRef.ts` (new) — tiny shared mutable ref module (same convention as `planetConstants.ts`) holding the sun's `Mesh` instance, set by `Planet.tsx`, read by any `Html`-based element that needs to occlude behind it
+- [x] `src/scenes/Planet.tsx` — attach `sunMeshRef` to the sun mesh
+- [x] `src/scenes/TechIcon.tsx` — `<Html occlude={[sunMeshRef]}>` so orbiting tech glyphs correctly hide once the sun's mesh is between them and the camera (targeted ref-array occlusion, not `occlude` against the whole scene, to avoid raycasting against the starfield/nebula/dust particle systems every frame)
+- [x] `src/scenes/PlanetDashboards.tsx` — same `occlude={[sunMeshRef]}` fix on the dashboard cards (identical bug, they're `Html` anchored to the sun's own surface so this was equally broken there)
+- [x] `src/components/ui/Navbar.tsx` — added an explicit, visibly-styled back button (pill button, `FiArrowLeft` + the existing `landing.backToHome` i18n label made visible instead of only an `aria-label`) next to the "Orbit" wordmark, linking to `/`
+- [x] `src/scenes/Planet.tsx` + `src/scenes/PlanetDashboards.tsx` — dashboard cards are now hoverable: pause the sun hull's `HULL_ROTATION_SPEED` rotation while any dashboard card is hovered (mirrors `Asteroid.tsx`'s existing hover-freeze pattern), enable `pointerEvents` on the cards (were `none`), and on hover remove the 2-line clamp/bottom fade mask and add an accent glow border so the full card text is actually readable once it stops moving
+- [x] `npm run build` / `npm run lint` clean
+- [x] Manual QA: live via the scratch Playwright harness — confirmed a tech icon disappears while its orbit phase is behind the sun and reappears on the near side; confirmed the new back button navigates `/explore` → `/`; confirmed hovering a dashboard card halts the sun's spin and un-clips its text within the same hover session
+
 ## Special-care reminders
 
 - Dual-accent tokens: `tokens.css` + root `CLAUDE.md` edited together (Phase A)

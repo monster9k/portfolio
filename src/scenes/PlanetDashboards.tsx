@@ -1,7 +1,8 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { Html } from '@react-three/drei'
 import { pointOnSphere } from './proceduralTextures'
 import { PLANET_RADIUS } from './planetConstants'
+import { sunOcclusionRef } from './sunMeshRef'
 import { useDashboardCardContent, type DashboardCardContent } from '@/hooks/useDashboardCardContent'
 
 /**
@@ -46,21 +47,42 @@ function usePositionedCards(): PositionedCard[] {
   )
 }
 
-function DashboardCardView({ card }: { card: PositionedCard }) {
+interface DashboardCardViewProps {
+  card: PositionedCard
+  hovered: boolean
+  onHoverStart: () => void
+  onHoverEnd: () => void
+}
+
+function DashboardCardView({ card, hovered, onHoverStart, onHoverEnd }: DashboardCardViewProps) {
   return (
-    <Html position={card.position} center zIndexRange={[1, 0]} distanceFactor={6}>
+    <Html
+      position={card.position}
+      center
+      zIndexRange={[1, 0]}
+      distanceFactor={6}
+      occlude={[sunOcclusionRef]}
+    >
       <div
         aria-hidden="true"
+        onMouseEnter={onHoverStart}
+        onMouseLeave={onHoverEnd}
         style={{
-          width: 150,
+          width: hovered ? 190 : 150,
           padding: 'var(--space-2) var(--space-3)',
           borderRadius: 10,
           background: 'var(--color-surface)',
-          border: '1px solid var(--color-surface-border)',
+          border: hovered
+            ? '1px solid var(--color-accent)'
+            : '1px solid var(--color-surface-border)',
+          boxShadow: hovered ? '0 0 18px var(--color-accent-glow)' : 'none',
           backdropFilter: 'blur(8px)',
-          pointerEvents: 'none',
-          maskImage: 'linear-gradient(to bottom, black 55%, transparent 100%)',
-          WebkitMaskImage: 'linear-gradient(to bottom, black 55%, transparent 100%)',
+          cursor: 'default',
+          transition: `width var(--motion-duration) var(--motion-ease), box-shadow var(--motion-duration) var(--motion-ease)`,
+          maskImage: hovered ? 'none' : 'linear-gradient(to bottom, black 55%, transparent 100%)',
+          WebkitMaskImage: hovered
+            ? 'none'
+            : 'linear-gradient(to bottom, black 55%, transparent 100%)',
         }}
       >
         <strong
@@ -75,10 +97,10 @@ function DashboardCardView({ card }: { card: PositionedCard }) {
         </strong>
         <span
           style={{
-            display: '-webkit-box',
-            WebkitLineClamp: 2,
+            display: hovered ? 'block' : '-webkit-box',
+            WebkitLineClamp: hovered ? 'unset' : 2,
             WebkitBoxOrient: 'vertical',
-            overflow: 'hidden',
+            overflow: hovered ? 'visible' : 'hidden',
             fontSize: 'var(--font-size-caption)',
             color: 'var(--color-text-secondary)',
             lineHeight: 1.4,
@@ -118,17 +140,32 @@ function DashboardCardView({ card }: { card: PositionedCard }) {
 
 interface PlanetDashboardsProps {
   isLowPower: boolean
+  /** Notified whenever any card is hovered, so Planet.tsx can pause the hull's spin. */
+  onHoverChange: (hovered: boolean) => void
 }
 
-export function PlanetDashboards({ isLowPower }: PlanetDashboardsProps) {
+export function PlanetDashboards({ isLowPower, onHoverChange }: PlanetDashboardsProps) {
   const cards = usePositionedCards()
   const visibleCount = isLowPower ? CARD_COUNT_LOW : CARD_COUNT_NORMAL
   const visibleCards = cards.slice(0, visibleCount)
+  const [hoveredKey, setHoveredKey] = useState<number | null>(null)
 
   return (
     <>
       {visibleCards.map((card) => (
-        <DashboardCardView key={card.key} card={card} />
+        <DashboardCardView
+          key={card.key}
+          card={card}
+          hovered={card.key === hoveredKey}
+          onHoverStart={() => {
+            setHoveredKey(card.key)
+            onHoverChange(true)
+          }}
+          onHoverEnd={() => {
+            setHoveredKey((current) => (current === card.key ? null : current))
+            onHoverChange(false)
+          }}
+        />
       ))}
     </>
   )

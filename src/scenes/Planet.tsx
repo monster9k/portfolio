@@ -1,9 +1,10 @@
-import { useEffect, useMemo, useRef } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useFrame } from '@react-three/fiber'
 import type { Group } from 'three'
 import { createSunMaterial } from './sunMaterial'
 import { PlanetDashboards } from './PlanetDashboards'
 import { PLANET_RADIUS } from './planetConstants'
+import { sunMeshRef } from './sunMeshRef'
 import { useResponsiveQuality } from '@/hooks/useResponsiveQuality'
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion'
 
@@ -21,13 +22,18 @@ export function Planet() {
   const { planetSegments, isLowPower } = useResponsiveQuality()
   const prefersReducedMotion = usePrefersReducedMotion()
   const elapsed = useRef(0)
+  // Paused while a dashboard peek card is hovered so its content stops
+  // sliding away mid-read (mirrors Asteroid.tsx's own hover-freeze).
+  const [dashboardHovered, setDashboardHovered] = useState(false)
 
   const sunMaterial = useMemo(() => createSunMaterial(), [])
   useEffect(() => () => sunMaterial.dispose(), [sunMaterial])
 
   useFrame((_, delta) => {
     if (prefersReducedMotion) return
-    if (surfaceRef.current) surfaceRef.current.rotation.y += delta * HULL_ROTATION_SPEED
+    if (surfaceRef.current && !dashboardHovered) {
+      surfaceRef.current.rotation.y += delta * HULL_ROTATION_SPEED
+    }
     elapsed.current += delta
     const wave = (Math.sin(elapsed.current * PULSE_SPEED) + 1) / 2
     sunMaterial.uniforms.uIntensity.value = PULSE_MIN + wave * (PULSE_MAX - PULSE_MIN)
@@ -35,11 +41,11 @@ export function Planet() {
 
   return (
     <group ref={surfaceRef} rotation={[AXIAL_TILT_X, 0, AXIAL_TILT_Z]}>
-      <mesh>
+      <mesh ref={(mesh) => (sunMeshRef.current = mesh)}>
         <sphereGeometry args={[PLANET_RADIUS, planetSegments, planetSegments]} />
         <primitive object={sunMaterial} attach="material" />
       </mesh>
-      <PlanetDashboards isLowPower={isLowPower} />
+      <PlanetDashboards isLowPower={isLowPower} onHoverChange={setDashboardHovered} />
     </group>
   )
 }
