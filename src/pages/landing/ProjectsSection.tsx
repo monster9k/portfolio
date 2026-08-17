@@ -83,13 +83,7 @@ export function ProjectsSection() {
 
               {project.highlights.length > 0 && (
                 <div style={{ marginBottom: 'var(--space-3)', flex: 1 }}>
-                  <h4
-                    style={{
-                      fontSize: 'var(--font-size-caption)',
-                      color: 'var(--color-text-secondary)',
-                      marginBottom: 'var(--space-1)',
-                    }}
-                  >
+                  <h4 className="landing-subheading" style={{ marginBottom: 'var(--space-1)' }}>
                     {t('landing.projects.featuresLabel')}
                   </h4>
                   <ul

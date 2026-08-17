@@ -23,37 +23,25 @@ export interface ExperienceEntry {
 
 // No formal work experience yet — user asked to drop the landing page's
 // Experience section entirely (ExperienceSection.tsx self-hides once there
-// are zero 'work' entries). Only education entries remain.
-//
-// TODO(user): confirm exact major/enrollment dates for Đại học Bách Khoa Đà
-// Nẵng — dates below are a placeholder estimate (student currently pursuing
-// the degree, no formal work experience yet), not yet confirmed by you.
+// are zero 'work' entries). Only education remains, and only the university
+// entry — the user asked to drop the High School line (not useful for a
+// university-student IT portfolio) and use that space for GPA instead.
 export const experience: ExperienceEntry[] = [
   {
     id: 'education-1',
     type: 'education',
     organization: 'Danang University of Science and Technology',
-    role: { en: 'B.S. in Computer Science', ja: '情報工学学士' },
-    period: '2022.09 - 2026.06 (expected)',
+    role: {
+      en: 'B.S. in Information Technology (Japan-Oriented Program)',
+      ja: '情報技術学士（日本語プログラム）',
+    },
+    period: '2022.09 - Early 2028 (expected)',
     location: 'Da Nang, Vietnam',
+    gpa: '3.3/4.0',
     description: [
       {
         en: 'Coursework: Data Structures, Algorithms, Web Development, Software Engineering',
         ja: '履修科目: データ構造、アルゴリズム、Web開発、ソフトウェア工学',
-      },
-    ],
-  },
-  {
-    id: 'education-2',
-    type: 'education',
-    organization: 'Phan Chau Trinh High School',
-    role: { en: 'High School Diploma', ja: '高等学校卒業' },
-    period: '2019.09 - 2022.06',
-    location: 'Da Nang, Vietnam',
-    description: [
-      {
-        en: 'General high school education in Da Nang.',
-        ja: 'ダナン市内の高等学校を卒業。',
       },
     ],
   },

@@ -8,15 +8,6 @@ import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion'
 
 const AVATAR_SIZE = 220
 
-const PILL_STYLE = {
-  display: 'inline-flex',
-  alignItems: 'center',
-  gap: 'var(--space-1)',
-  fontSize: 'var(--font-size-caption)',
-  borderRadius: 999,
-  padding: '4px 12px',
-} as const
-
 export function HeroSection() {
   const { t, language } = useTranslation()
   const navigate = useNavigate()
@@ -76,56 +67,61 @@ export function HeroSection() {
           </p>
         )}
 
-        {(about.location || about.availability[language]) && (
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-2)' }}>
-            {about.location && (
-              <span style={{ ...PILL_STYLE, color: 'var(--color-text-secondary)', border: '1px solid var(--color-surface-border)' }}>
-                <FiMapPin aria-hidden="true" size={13} />
-                {about.location}
-              </span>
+        {(about.location || about.availability[language] || contact.email || contact.phone || hasSocialLinks) && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
+            {(about.location || about.availability[language]) && (
+              <div className="landing-hero__meta">
+                {about.location && (
+                  <span className="landing-hero__meta-item">
+                    <FiMapPin aria-hidden="true" size={13} />
+                    {about.location}
+                  </span>
+                )}
+                {about.availability[language] && (
+                  <span className="landing-hero__meta-item">
+                    <FiCalendar aria-hidden="true" size={13} />
+                    {about.availability[language]}
+                  </span>
+                )}
+              </div>
             )}
-            {about.availability[language] && (
-              <span style={{ ...PILL_STYLE, color: 'var(--color-text-secondary)', border: '1px solid var(--color-surface-border)' }}>
-                <FiCalendar aria-hidden="true" size={13} />
-                {about.availability[language]}
-              </span>
-            )}
-          </div>
-        )}
 
-        {(contact.email || contact.phone || hasSocialLinks) && (
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-2)' }}>
-            {contact.email && (
-              <a href={`mailto:${contact.email}`} style={{ ...PILL_STYLE, color: 'var(--color-accent)', background: 'var(--color-accent-soft)' }}>
-                <FiMail aria-hidden="true" size={13} />
-                <span className="sr-only">{t('fields.email')}: </span>
-                {contact.email}
-              </a>
-            )}
-            {contact.phone && (
-              <a href={`tel:${contact.phone}`} style={{ ...PILL_STYLE, color: 'var(--color-accent)', background: 'var(--color-accent-soft)' }}>
-                <FiPhone aria-hidden="true" size={13} />
-                <span className="sr-only">{t('fields.phone')}: </span>
-                {contact.phone}
-              </a>
-            )}
-            {contact.links.github && (
-              <a href={contact.links.github} target="_blank" rel="noreferrer" style={{ ...PILL_STYLE, color: 'var(--color-text-secondary)', border: '1px solid var(--color-surface-border)' }}>
-                <FiGithub aria-hidden="true" size={13} />
-                {t('fields.github')}
-              </a>
-            )}
-            {contact.links.linkedin && (
-              <a href={contact.links.linkedin} target="_blank" rel="noreferrer" style={{ ...PILL_STYLE, color: 'var(--color-text-secondary)', border: '1px solid var(--color-surface-border)' }}>
-                <FiLinkedin aria-hidden="true" size={13} />
-                {t('fields.linkedin')}
-              </a>
-            )}
-            {contact.links.website && (
-              <a href={contact.links.website} target="_blank" rel="noreferrer" style={{ ...PILL_STYLE, color: 'var(--color-text-secondary)', border: '1px solid var(--color-surface-border)' }}>
-                <FiGlobe aria-hidden="true" size={13} />
-                {t('fields.website')}
-              </a>
+            {(contact.email || contact.phone || hasSocialLinks) && (
+              <div className="landing-hero__contact">
+                {contact.email && (
+                  <a href={`mailto:${contact.email}`} className="landing-hero__contact-pill landing-hero__contact-pill--accent">
+                    <FiMail aria-hidden="true" size={13} />
+                    <span className="sr-only">{t('fields.email')}: </span>
+                    {contact.email}
+                  </a>
+                )}
+                {contact.phone && (
+                  <a href={`tel:${contact.phone}`} className="landing-hero__contact-pill">
+                    <FiPhone aria-hidden="true" size={13} />
+                    <span className="sr-only">{t('fields.phone')}: </span>
+                    {contact.phone}
+                  </a>
+                )}
+                {hasSocialLinks && (
+                  <div className="landing-hero__social">
+                    {contact.links.github && (
+                      <a href={contact.links.github} target="_blank" rel="noreferrer" aria-label={t('fields.github')} className="landing-icon-btn">
+                        <FiGithub aria-hidden="true" />
+                      </a>
+                    )}
+                    {contact.links.linkedin && (
+                      <a href={contact.links.linkedin} target="_blank" rel="noreferrer" aria-label={t('fields.linkedin')} className="landing-icon-btn">
+                        <FiLinkedin aria-hidden="true" />
+                      </a>
+                    )}
+                    {contact.links.website && (
+                      <a href={contact.links.website} target="_blank" rel="noreferrer" aria-label={t('fields.website')} className="landing-icon-btn">
+                        <FiGlobe aria-hidden="true" />
+                      </a>
+                    )}
+                  </div>
+                )}
+              </div>
             )}
           </div>
         )}

@@ -96,14 +96,15 @@
     "gpa": "GPA",
     "keyAchievements": "主な成果",
     "keyResponsibilities": "主な職務内容",
+    "leadershipHighlights": "リーダーシップ実績",
     "comingSoon": "近日公開予定です。"
   },
   "sections": {
     "about": {
-      "body": "ダナン工科大学（Danang University of Science and Technology）情報工学専攻の学生です。React・TypeScript・Node.js/NestJS・C#を用いてフルスタックのWebアプリケーションを開発しています。2026年9月頃から始められるソフトウェアエンジニアのインターンシップを探しており、実際のプロダクト開発に貢献しながら学び続けたいと考えています。"
+      "body": "ダナン工科大学（Danang University of Science and Technology）情報技術専攻・日本語プログラムの学生です。React・TypeScript・Node.js/NestJS・C#を用いてフルスタックのWebアプリケーションを開発しています。IELTS 6.0、JLPT N4を取得しており、英語・日本語の両方でのコミュニケーション経験があります。2026年9月頃から始められるソフトウェアエンジニアのインターンシップを探しており、実際のプロダクト開発に貢献しながら学び続けたいと考えています。"
     },
     "skills": {
-      "body": "フロントエンド: React, TypeScript。バックエンド: Node.js, NestJS, C#, Java。Git, Docker, REST API設計にも対応可能です。"
+      "body": "フロントエンド: React, TypeScript。バックエンド: Node.js, NestJS, C#, Java。データベース: Prisma (ORM), MongoDB, SQL。AI連携: Google Gemini API。Git, Docker, REST API設計にも対応可能です。"
     },
     "projects": {
       "body": "最近作ったプロジェクトの一部です。詳細は以下をご覧ください。"

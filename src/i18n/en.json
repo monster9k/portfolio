@@ -96,14 +96,15 @@
     "gpa": "GPA",
     "keyAchievements": "Key Achievements",
     "keyResponsibilities": "Key Responsibilities",
+    "leadershipHighlights": "Leadership Highlights",
     "comingSoon": "Content coming soon."
   },
   "sections": {
     "about": {
-      "body": "Computer Science student at Danang University of Science and Technology, building full-stack web applications with React, TypeScript, Node.js/NestJS, and C#. Looking for a software engineering internship starting around September 2026 where I can contribute to real products and keep learning."
+      "body": "Computer Science student in the Japan-oriented Information Technology program at Danang University of Science and Technology, building full-stack web applications with React, TypeScript, Node.js/NestJS, and C#. IELTS 6.0 and JLPT N4 certified, with real experience collaborating in both English and Japanese. Looking for a software engineering internship starting around September 2026 where I can contribute to real products and keep learning."
     },
     "skills": {
-      "body": "Frontend: React, TypeScript. Backend: Node.js, NestJS, C#, Java. Also comfortable with Git, Docker, and REST API design."
+      "body": "Frontend: React, TypeScript. Backend: Node.js, NestJS, C#, Java. Databases: Prisma (ORM), MongoDB, SQL. AI integration: Google Gemini API. Also comfortable with Git, Docker, and REST API design."
     },
     "projects": {
       "body": "A few things I've built recently — see the highlights below."

@@ -12,6 +12,7 @@ import {
   SiFlutter,
   SiGit,
   SiGitlab,
+  SiGooglegemini,
   SiGraphql,
   SiHackerrank,
   SiHtml5,
@@ -27,6 +28,7 @@ import {
   SiNodedotjs,
   SiPhp,
   SiPostgresql,
+  SiPrisma,
   SiPython,
   SiReact,
   SiRedis,
@@ -91,6 +93,8 @@ const BRAND_ICON_MAP: Record<string, IconType> = {
   bootstrap: SiBootstrap,
   php: SiPhp,
   hackerrank: SiHackerrank,
+  prisma: SiPrisma,
+  'google gemini': SiGooglegemini,
 }
 
 /** Below this key length, only exact matches are considered — short keys (e.g. "git", "php") substring-matching inside unrelated words is how you get a Go logo on "Algorithms". */

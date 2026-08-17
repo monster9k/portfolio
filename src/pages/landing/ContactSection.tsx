@@ -51,23 +51,24 @@ export function ContactSection() {
               {contact.location}
             </span>
           )}
-          {contact.links.github && (
-            <a href={contact.links.github} target="_blank" rel="noreferrer" style={{ ...PILL_STYLE, color: 'var(--color-text-secondary)', border: '1px solid var(--color-surface-border)' }}>
-              <FiGithub aria-hidden="true" />
-              {t('fields.github')}
-            </a>
-          )}
-          {contact.links.linkedin && (
-            <a href={contact.links.linkedin} target="_blank" rel="noreferrer" style={{ ...PILL_STYLE, color: 'var(--color-text-secondary)', border: '1px solid var(--color-surface-border)' }}>
-              <FiLinkedin aria-hidden="true" />
-              {t('fields.linkedin')}
-            </a>
-          )}
-          {contact.links.website && (
-            <a href={contact.links.website} target="_blank" rel="noreferrer" style={{ ...PILL_STYLE, color: 'var(--color-text-secondary)', border: '1px solid var(--color-surface-border)' }}>
-              <FiGlobe aria-hidden="true" />
-              {t('fields.website')}
-            </a>
+          {hasLinks && (
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 'var(--space-2)' }}>
+              {contact.links.github && (
+                <a href={contact.links.github} target="_blank" rel="noreferrer" aria-label={t('fields.github')} className="landing-icon-btn">
+                  <FiGithub aria-hidden="true" />
+                </a>
+              )}
+              {contact.links.linkedin && (
+                <a href={contact.links.linkedin} target="_blank" rel="noreferrer" aria-label={t('fields.linkedin')} className="landing-icon-btn">
+                  <FiLinkedin aria-hidden="true" />
+                </a>
+              )}
+              {contact.links.website && (
+                <a href={contact.links.website} target="_blank" rel="noreferrer" aria-label={t('fields.website')} className="landing-icon-btn">
+                  <FiGlobe aria-hidden="true" />
+                </a>
+              )}
+            </div>
           )}
           {contact.resumeUrl && (
             <a href={contact.resumeUrl} target="_blank" rel="noreferrer" style={{ ...PILL_STYLE, color: 'var(--color-accent)', background: 'var(--color-accent-soft)' }}>

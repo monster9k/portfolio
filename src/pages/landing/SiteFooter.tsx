@@ -32,16 +32,7 @@ export function SiteFooter() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label={t('fields.github')}
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: 32,
-                  height: 32,
-                  borderRadius: '50%',
-                  border: '1px solid var(--color-surface-border)',
-                  color: 'var(--color-text-secondary)',
-                }}
+                className="landing-icon-btn"
               >
                 <FiGithub aria-hidden="true" />
               </a>
@@ -52,16 +43,7 @@ export function SiteFooter() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label={t('fields.linkedin')}
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: 32,
-                  height: 32,
-                  borderRadius: '50%',
-                  border: '1px solid var(--color-surface-border)',
-                  color: 'var(--color-text-secondary)',
-                }}
+                className="landing-icon-btn"
               >
                 <FiLinkedin aria-hidden="true" />
               </a>

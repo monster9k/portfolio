@@ -69,7 +69,7 @@ export function EducationSection() {
 
               {entry.achievements && entry.achievements.length > 0 && (
                 <div style={{ marginTop: 'var(--space-3)' }}>
-                  <h4 style={{ fontSize: 'var(--font-size-caption)', color: 'var(--color-text-secondary)', marginBottom: 'var(--space-1)' }}>
+                  <h4 className="landing-subheading" style={{ marginBottom: 'var(--space-1)' }}>
                     {t('fields.keyAchievements')}
                   </h4>
                   <ul style={{ margin: 0, paddingLeft: 'var(--space-4)' }}>
