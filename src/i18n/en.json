@@ -32,7 +32,8 @@
       "projects": "Projects",
       "projectsSubtitle": "A few things I've built recently",
       "contact": "Contact",
-      "contactSubtitle": "Let's talk about opportunities"
+      "contactSubtitle": "Let's talk about opportunities",
+      "contactConnectCta": "Let's connect"
     },
     "achievements": {
       "categories": {
@@ -41,6 +42,10 @@
         "certificate": "Certificates",
         "recognition": "Recognitions",
         "competition": "Competitions"
+      },
+      "groups": {
+        "language": "Language Certifications",
+        "tech": "Technical Certifications"
       },
       "viewCertificate": "View Certificate",
       "openExternal": "Open External"
@@ -52,9 +57,6 @@
       "stackLabel": "Tech Stack"
     },
     "footer": {
-      "aboutHeading": "About",
-      "quickLinks": "Quick Links",
-      "contactInfo": "Contact Info",
       "madeWith": "Made with",
       "rights": "All rights reserved."
     }
@@ -96,14 +98,16 @@
     "gpa": "GPA",
     "keyAchievements": "Key Achievements",
     "keyResponsibilities": "Key Responsibilities",
+    "leadershipHighlights": "Leadership Highlights",
+    "featured": "Highlighted",
     "comingSoon": "Content coming soon."
   },
   "sections": {
     "about": {
-      "body": "Computer Science student at Danang University of Science and Technology, building full-stack web applications with React, TypeScript, Node.js/NestJS, and C#. Looking for a software engineering internship starting around September 2026 where I can contribute to real products and keep learning."
+      "body": "3rd-year Information Technology student (Japan-Oriented Program) at Da Nang University of Technology (DUT), with hands-on experience leading a full-stack team project (TaskNexus) and building an AI-integrated application (Algominds) with NestJS, React, and the Gemini API. IELTS 6.0 and JLPT N4 certified. Looking for a Full-stack / Backend Developer internship starting around September 2026 where I can contribute to real products and keep growing in system design and AI-assisted development."
     },
     "skills": {
-      "body": "Frontend: React, TypeScript. Backend: Node.js, NestJS, C#, Java. Also comfortable with Git, Docker, and REST API design."
+      "body": "Frontend: React, TypeScript. Backend: Node.js, NestJS, Express, C#, Java. Databases: Prisma, PostgreSQL, Redis, MongoDB, SQL. Real-time & AI: Socket.io, Google Gemini API. Also comfortable with Git, Docker, Postman, and REST API design."
     },
     "projects": {
       "body": "A few things I've built recently — see the highlights below."
@@ -112,7 +116,7 @@
       "body": "No formal work experience yet — my hands-on experience comes from building and shipping personal full-stack projects, including Algominds, TaskNexus, and this portfolio, end to end from planning to deployment."
     },
     "contact": {
-      "body": "Reach me by email or check out my GitHub — happy to chat about opportunities."
+      "body": "I'm always open to discussing internship opportunities, projects, or software engineering roles."
     }
   }
 }

@@ -28,7 +28,10 @@ export interface AboutContent {
 
 export const about: AboutContent = {
   name: { en: 'Nguyen Viet Minh Khoa', ja: 'グエン・ビエット・ミン・コア' },
-  title: { en: 'Software Engineering Intern Candidate', ja: 'ソフトウェアエンジニアリング インターン候補' },
+  title: {
+    en: 'Full-stack / Backend Developer Intern Candidate',
+    ja: 'フルスタック／バックエンド開発 インターン候補',
+  },
   tagline: {
     en: 'Building playful, polished 3D web experiences.',
     ja: '遊び心があり洗練された3D Web体験を作っています。',
@@ -39,7 +42,7 @@ export const about: AboutContent = {
     ja: '2026年9月頃からのインターンシップに応募可能',
   },
   photoUrl: '/photo.jpg',
-  resumeUrl: '',
+  resumeUrl: '/resume.pdf',
   stats: [
     { value: '2+', labelKey: 'landing.stats.yearsCoding' },
     { value: '3+', labelKey: 'landing.stats.projectsBuilt' },

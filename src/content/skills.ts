@@ -1,3 +1,5 @@
+import type { LocalizedText } from './sections'
+
 export interface SkillCategory {
   id: string
   /** i18n key resolving to the category label (see en.json/ja.json "skillCategories"). */
@@ -13,10 +15,19 @@ export interface SpokenLanguage {
   level: string
 }
 
+export interface LeadershipHighlight {
+  /** e.g. "Project Leader". */
+  role: LocalizedText
+  /** e.g. "TaskNexus (PBL3 capstone project)". Proper noun, kept as-is across locales. */
+  org: string
+}
+
 export interface SkillsContent {
   categories: SkillCategory[]
   /** Human languages you speak — standard on a Japanese resume (履歴書) and worth surfacing for this audience. */
   languages: SpokenLanguage[]
+  /** Concrete evidence for soft skills (leadership roles held), shown alongside the plain "soft" category pills. */
+  leadership: LeadershipHighlight[]
 }
 
 // NOTE(user): categories mirror common resume conventions (programming
@@ -35,22 +46,44 @@ export const skills: SkillsContent = {
     {
       id: 'frameworks',
       labelKey: 'skillCategories.frameworks',
-      items: ['React', 'Node.js', 'NestJS'],
+      items: [
+        'React',
+        'Node.js',
+        'NestJS',
+        'Express',
+        'Socket.io',
+        'Prisma',
+        'PostgreSQL',
+        'Redis',
+        'MongoDB',
+        'SQL',
+        'Google Gemini API',
+      ],
     },
     {
       id: 'tools',
       labelKey: 'skillCategories.tools',
-      items: ['Git', 'Docker', 'VS Code'],
+      items: ['Git', 'GitHub', 'Docker', 'Postman', 'VS Code', 'Cisco Packet Tracer'],
     },
     {
       id: 'soft',
       labelKey: 'skillCategories.soft',
-      items: ['Communication', 'Teamwork', 'Problem Solving'],
+      items: ['Communication', 'Teamwork', 'Problem Solving', 'Fast Learner'],
     },
   ],
   languages: [
     { language: 'Vietnamese', level: 'Native' },
     { language: 'English', level: 'IELTS 6.0' },
     { language: 'Japanese', level: 'JLPT N4' },
+  ],
+  leadership: [
+    {
+      role: { en: 'Project Leader', ja: 'プロジェクトリーダー' },
+      org: 'TaskNexus (PBL3 capstone project)',
+    },
+    {
+      role: { en: 'Team Leader', ja: 'チームリーダー' },
+      org: 'Japanese Speech Contest',
+    },
   ],
 }

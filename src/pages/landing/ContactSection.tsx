@@ -1,21 +1,14 @@
-import { FiFileText, FiGithub, FiGlobe, FiLinkedin, FiMail, FiMapPin, FiPhone } from 'react-icons/fi'
+import { FiArrowRight, FiFileText, FiGithub, FiLinkedin, FiMail, FiMapPin, FiPhone } from 'react-icons/fi'
+import { about } from '@/content/about'
 import { contact } from '@/content/contact'
 import { useTranslation } from '@/i18n/useTranslation'
 import { RevealSection } from './RevealSection'
 
-const PILL_STYLE = {
-  display: 'inline-flex',
-  alignItems: 'center',
-  gap: 'var(--space-2)',
-  fontSize: 'var(--font-size-body)',
-  borderRadius: 999,
-  padding: 'var(--space-2) var(--space-5)',
-} as const
-
 export function ContactSection() {
   const { t } = useTranslation()
   const hasLinks = contact.links.github || contact.links.linkedin || contact.links.website
-  const hasAnyContent = contact.email || contact.phone || contact.location || hasLinks || contact.resumeUrl
+  const resumeUrl = contact.resumeUrl || about.resumeUrl
+  const hasAnyContent = contact.email || contact.phone || contact.location || hasLinks || resumeUrl
 
   if (!hasAnyContent) return null
 
@@ -29,50 +22,89 @@ export function ContactSection() {
           {t('landing.sectionTitles.contactSubtitle')}
         </p>
 
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 'var(--space-3)' }}>
-          {contact.email && (
-            <a href={`mailto:${contact.email}`} style={{ ...PILL_STYLE, color: 'var(--color-accent)', background: 'var(--color-accent-soft)' }}>
-              <FiMail aria-hidden="true" />
-              <span className="sr-only">{t('fields.email')}: </span>
-              {contact.email}
-            </a>
+        <div className="landing-contact-card">
+          <p className="landing-contact-card__intro">{t('sections.contact.body')}</p>
+
+          {(contact.email || contact.phone || contact.location) && (
+            <>
+              <div className="landing-contact-card__divider" />
+
+              <div className="landing-contact-card__grid">
+                {contact.email && (
+                  <div className="landing-contact-card__item">
+                    <span className="landing-contact-card__item-label">
+                      <FiMail aria-hidden="true" size={13} />
+                      {t('fields.email')}
+                    </span>
+                    <a href={`mailto:${contact.email}`} className="landing-contact-card__item-value">
+                      {contact.email}
+                    </a>
+                  </div>
+                )}
+                {contact.phone && (
+                  <div className="landing-contact-card__item">
+                    <span className="landing-contact-card__item-label">
+                      <FiPhone aria-hidden="true" size={13} />
+                      {t('fields.phone')}
+                    </span>
+                    <a href={`tel:${contact.phone}`} className="landing-contact-card__item-value">
+                      {contact.phone}
+                    </a>
+                  </div>
+                )}
+                {contact.location && (
+                  <div className="landing-contact-card__item landing-contact-card__item--full">
+                    <span className="landing-contact-card__item-label">
+                      <FiMapPin aria-hidden="true" size={13} />
+                      {t('fields.location')}
+                    </span>
+                    <span className="landing-contact-card__item-value">{contact.location}</span>
+                  </div>
+                )}
+              </div>
+            </>
           )}
-          {contact.phone && (
-            <a href={`tel:${contact.phone}`} style={{ ...PILL_STYLE, color: 'var(--color-text-secondary)', border: '1px solid var(--color-surface-border)' }}>
-              <FiPhone aria-hidden="true" />
-              <span className="sr-only">{t('fields.phone')}: </span>
-              {contact.phone}
-            </a>
+
+          {(hasLinks || resumeUrl) && <div className="landing-contact-card__divider" />}
+
+          {hasLinks && (
+            <div className="landing-contact-card__socials">
+              {contact.links.github && (
+                <a
+                  href={contact.links.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="landing-contact-card__social-link"
+                >
+                  <FiGithub aria-hidden="true" />
+                  {t('fields.github')}
+                </a>
+              )}
+              {contact.links.linkedin && (
+                <a
+                  href={contact.links.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="landing-contact-card__social-link"
+                >
+                  <FiLinkedin aria-hidden="true" />
+                  {t('fields.linkedin')}
+                </a>
+              )}
+            </div>
           )}
-          {contact.location && (
-            <span style={{ ...PILL_STYLE, color: 'var(--color-text-secondary)', border: '1px solid var(--color-surface-border)' }}>
-              <FiMapPin aria-hidden="true" />
-              <span className="sr-only">{t('fields.location')}: </span>
-              {contact.location}
-            </span>
-          )}
-          {contact.links.github && (
-            <a href={contact.links.github} target="_blank" rel="noreferrer" style={{ ...PILL_STYLE, color: 'var(--color-text-secondary)', border: '1px solid var(--color-surface-border)' }}>
-              <FiGithub aria-hidden="true" />
-              {t('fields.github')}
-            </a>
-          )}
-          {contact.links.linkedin && (
-            <a href={contact.links.linkedin} target="_blank" rel="noreferrer" style={{ ...PILL_STYLE, color: 'var(--color-text-secondary)', border: '1px solid var(--color-surface-border)' }}>
-              <FiLinkedin aria-hidden="true" />
-              {t('fields.linkedin')}
-            </a>
-          )}
-          {contact.links.website && (
-            <a href={contact.links.website} target="_blank" rel="noreferrer" style={{ ...PILL_STYLE, color: 'var(--color-text-secondary)', border: '1px solid var(--color-surface-border)' }}>
-              <FiGlobe aria-hidden="true" />
-              {t('fields.website')}
-            </a>
-          )}
-          {contact.resumeUrl && (
-            <a href={contact.resumeUrl} target="_blank" rel="noreferrer" style={{ ...PILL_STYLE, color: 'var(--color-accent)', background: 'var(--color-accent-soft)' }}>
+
+          {resumeUrl && (
+            <a href={resumeUrl} target="_blank" rel="noreferrer" className="landing-contact-card__cta">
               <FiFileText aria-hidden="true" />
-              {t('fields.resume')}
+              {t('landing.downloadCta')}
+            </a>
+          )}
+
+          {contact.email && (
+            <a href={`mailto:${contact.email}`} className="landing-contact-card__connect">
+              {t('landing.sectionTitles.contactConnectCta')}
+              <FiArrowRight aria-hidden="true" size={14} />
             </a>
           )}
         </div>

@@ -49,6 +49,12 @@ export function AccessibleContent({ className }: AccessibleContentProps) {
                   {skills.languages.map((entry) => `${entry.language} (${entry.level})`).join(', ')}
                 </li>
               )}
+              {skills.leadership.length > 0 && (
+                <li>
+                  <strong>{t('fields.leadershipHighlights')}:</strong>{' '}
+                  {skills.leadership.map((entry) => `${entry.role[language]} — ${entry.org}`).join(', ')}
+                </li>
+              )}
             </ul>
           )}
 
@@ -71,6 +77,7 @@ export function AccessibleContent({ className }: AccessibleContentProps) {
                   <li key={entry.id}>
                     <strong>{entry.organization}</strong> — {entry.role[language]}
                     {entry.period ? ` (${entry.period})` : ''}
+                    {entry.gpa ? ` — ${t('fields.gpa')}: ${entry.gpa}` : ''}
                   </li>
                 ))}
             </ul>

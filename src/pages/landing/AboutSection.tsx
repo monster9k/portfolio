@@ -1,3 +1,4 @@
+import { FiAward } from 'react-icons/fi'
 import { skills } from '@/content/skills'
 import { about } from '@/content/about'
 import { useTranslation } from '@/i18n/useTranslation'
@@ -5,7 +6,7 @@ import { TechPill } from '@/components/ui/TechPill'
 import { RevealSection } from './RevealSection'
 
 export function AboutSection() {
-  const { t } = useTranslation()
+  const { t, language } = useTranslation()
   const populatedCategories = skills.categories.filter((category) => category.items.length > 0)
 
   return (
@@ -40,18 +41,12 @@ export function AboutSection() {
               display: 'flex',
               flexDirection: 'column',
               gap: 'var(--space-4)',
-              marginBottom: 'var(--space-8)',
+              marginBottom: 'var(--space-6)',
             }}
           >
             {populatedCategories.map((category) => (
               <div key={category.id}>
-                <h3
-                  style={{
-                    fontSize: 'var(--font-size-caption)',
-                    color: 'var(--color-text-secondary)',
-                    marginBottom: 'var(--space-2)',
-                  }}
-                >
+                <h3 className="landing-subheading" style={{ marginBottom: 'var(--space-2)' }}>
                   {t(category.labelKey)}
                 </h3>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-2)' }}>
@@ -64,28 +59,64 @@ export function AboutSection() {
           </div>
         )}
 
-        {about.stats.length > 0 && (
-          <div className="landing-grid">
-            {about.stats.map((stat) => (
-              <div key={stat.labelKey} className="landing-card" style={{ textAlign: 'center' }}>
-                <div
-                  style={{
-                    fontSize: 'var(--font-size-section-title)',
-                    fontWeight: 700,
-                    color: 'var(--color-accent)',
-                  }}
-                >
-                  {stat.value}
-                </div>
-                <div
+        {skills.languages.length > 0 && (
+          <div style={{ marginBottom: 'var(--space-6)' }}>
+            <h3 className="landing-subheading" style={{ marginBottom: 'var(--space-2)' }}>
+              {t('fields.languagesSpoken')}
+            </h3>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-2)' }}>
+              {skills.languages.map((entry) => (
+                <span
+                  key={entry.language}
                   style={{
                     fontSize: 'var(--font-size-caption)',
-                    color: 'var(--color-text-secondary)',
-                    marginTop: 'var(--space-1)',
+                    color: 'var(--color-text)',
+                    border: '1px solid var(--color-accent-glow)',
+                    background: 'var(--color-accent-soft)',
+                    borderRadius: 999,
+                    padding: '4px 12px',
                   }}
                 >
-                  {t(stat.labelKey)}
+                  {entry.language} — <strong>{entry.level}</strong>
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {skills.leadership.length > 0 && (
+          <div style={{ marginBottom: 'var(--space-8)' }}>
+            <h3 className="landing-subheading" style={{ marginBottom: 'var(--space-2)' }}>
+              {t('fields.leadershipHighlights')}
+            </h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
+              {skills.leadership.map((entry) => (
+                <div
+                  key={entry.org}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 'var(--space-2)',
+                    fontSize: 'var(--font-size-caption)',
+                    color: 'var(--color-text-secondary)',
+                  }}
+                >
+                  <FiAward aria-hidden="true" size={14} style={{ color: 'var(--color-accent)', flexShrink: 0 }} />
+                  <span>
+                    <strong style={{ color: 'var(--color-text)' }}>{entry.role[language]}</strong> — {entry.org}
+                  </span>
                 </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {about.stats.length > 0 && (
+          <div className="landing-stats-strip">
+            {about.stats.map((stat) => (
+              <div key={stat.labelKey} className="landing-stats-strip__item">
+                <span className="landing-stats-strip__value">{stat.value}</span>
+                <span className="landing-stats-strip__label">{t(stat.labelKey)}</span>
               </div>
             ))}
           </div>

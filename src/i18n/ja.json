@@ -32,7 +32,8 @@
       "projects": "プロジェクト",
       "projectsSubtitle": "最近作ったプロジェクトの一部",
       "contact": "連絡先",
-      "contactSubtitle": "お仕事のご相談はこちらから"
+      "contactSubtitle": "お仕事のご相談はこちらから",
+      "contactConnectCta": "気軽にご連絡ください"
     },
     "achievements": {
       "categories": {
@@ -41,6 +42,10 @@
         "certificate": "資格",
         "recognition": "表彰",
         "competition": "競技大会"
+      },
+      "groups": {
+        "language": "語学認定",
+        "tech": "技術認定"
       },
       "viewCertificate": "証明書を見る",
       "openExternal": "外部リンクを開く"
@@ -52,9 +57,6 @@
       "stackLabel": "技術スタック"
     },
     "footer": {
-      "aboutHeading": "概要",
-      "quickLinks": "クイックリンク",
-      "contactInfo": "連絡先情報",
       "madeWith": "使用技術:",
       "rights": "All rights reserved."
     }
@@ -96,14 +98,16 @@
     "gpa": "GPA",
     "keyAchievements": "主な成果",
     "keyResponsibilities": "主な職務内容",
+    "leadershipHighlights": "リーダーシップ実績",
+    "featured": "注目",
     "comingSoon": "近日公開予定です。"
   },
   "sections": {
     "about": {
-      "body": "ダナン工科大学（Danang University of Science and Technology）情報工学専攻の学生です。React・TypeScript・Node.js/NestJS・C#を用いてフルスタックのWebアプリケーションを開発しています。2026年9月頃から始められるソフトウェアエンジニアのインターンシップを探しており、実際のプロダクト開発に貢献しながら学び続けたいと考えています。"
+      "body": "ダナン工科大学（Da Nang University of Technology, DUT）情報技術専攻・日本語プログラムの3年生です。チームのフルスタックプロジェクト（TaskNexus）でリーダーを務め、NestJS・React・Gemini APIを用いてAI統合アプリケーション（Algominds）を開発した実践経験があります。IELTS 6.0、JLPT N4を取得済みです。2026年9月頃から始められるフルスタック／バックエンド開発のインターンシップを探しており、実際のプロダクト開発に貢献しながらシステム設計とAI活用開発のスキルをさらに伸ばしたいと考えています。"
     },
     "skills": {
-      "body": "フロントエンド: React, TypeScript。バックエンド: Node.js, NestJS, C#, Java。Git, Docker, REST API設計にも対応可能です。"
+      "body": "フロントエンド: React, TypeScript。バックエンド: Node.js, NestJS, Express, C#, Java。データベース: Prisma, PostgreSQL, Redis, MongoDB, SQL。リアルタイム・AI: Socket.io, Google Gemini API。Git, Docker, Postman, REST API設計にも対応可能です。"
     },
     "projects": {
       "body": "最近作ったプロジェクトの一部です。詳細は以下をご覧ください。"
@@ -112,7 +116,7 @@
       "body": "正式な就業経験はまだありませんが、Algominds、TaskNexus、そしてこのポートフォリオなど、個人プロジェクトを企画から開発・公開まで一貫して手がけてきた実践的な経験があります。"
     },
     "contact": {
-      "body": "メールでご連絡いただくか、GitHubをご覧ください。お仕事のご相談、お気軽にどうぞ。"
+      "body": "インターンシップの機会、プロジェクト、ソフトウェアエンジニアリングの求人など、いつでもお気軽にご相談ください。"
     }
   }
 }

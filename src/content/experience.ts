@@ -23,37 +23,29 @@ export interface ExperienceEntry {
 
 // No formal work experience yet — user asked to drop the landing page's
 // Experience section entirely (ExperienceSection.tsx self-hides once there
-// are zero 'work' entries). Only education entries remain.
+// are zero 'work' entries). Only education remains, and only the university
+// entry — the user asked to drop the High School line (not useful for a
+// university-student IT portfolio) and use that space for GPA instead.
 //
-// TODO(user): confirm exact major/enrollment dates for Đại học Bách Khoa Đà
-// Nẵng — dates below are a placeholder estimate (student currently pursuing
-// the degree, no formal work experience yet), not yet confirmed by you.
+// Organization name/period/GPA sourced from the user's real resume PDF
+// (FullStackBe_NguyenVietMinhKhoa_intern.pdf) — corrects earlier
+// unconfirmed placeholder values.
 export const experience: ExperienceEntry[] = [
   {
     id: 'education-1',
     type: 'education',
-    organization: 'Danang University of Science and Technology',
-    role: { en: 'B.S. in Computer Science', ja: '情報工学学士' },
-    period: '2022.09 - 2026.06 (expected)',
+    organization: 'Da Nang University of Technology (DUT)',
+    role: {
+      en: 'Information Technology (Japan-Oriented Program)',
+      ja: '情報技術学（日本語プログラム）',
+    },
+    period: '2024 - Present',
     location: 'Da Nang, Vietnam',
+    gpa: '3.37/4.0',
     description: [
       {
-        en: 'Coursework: Data Structures, Algorithms, Web Development, Software Engineering',
-        ja: '履修科目: データ構造、アルゴリズム、Web開発、ソフトウェア工学',
-      },
-    ],
-  },
-  {
-    id: 'education-2',
-    type: 'education',
-    organization: 'Phan Chau Trinh High School',
-    role: { en: 'High School Diploma', ja: '高等学校卒業' },
-    period: '2019.09 - 2022.06',
-    location: 'Da Nang, Vietnam',
-    description: [
-      {
-        en: 'General high school education in Da Nang.',
-        ja: 'ダナン市内の高等学校を卒業。',
+        en: 'Developed strong foundations in software engineering principles, full-stack web development, and database management.',
+        ja: 'ソフトウェア工学の基礎、フルスタックWeb開発、データベース管理について確かな基盤を築いています。',
       },
     ],
   },

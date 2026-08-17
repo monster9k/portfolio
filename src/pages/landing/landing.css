@@ -13,15 +13,22 @@
   position: sticky;
   top: 0;
   z-index: 20;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-4);
+  width: 100%;
   padding: var(--space-3) var(--space-6);
   background: var(--color-surface);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--color-surface-border);
+}
+
+/* Shares `.landing-section__inner`'s max-width/centering so the nav's
+   content lines up with every section's content below it; this class only
+   adds the nav-specific flex layout on top. */
+.landing-nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
 }
 
 .landing-nav__links {
@@ -59,10 +66,34 @@
 }
 
 .landing-section {
+  width: 100%;
   padding: var(--space-12) var(--space-6);
 }
 
+/* Alternate a subtle surface tint + top/bottom border on About and
+   Achievements so the eye can tell one section has ended and the next
+   begun while scrolling — reuses the same translucent surface token as
+   cards/nav/modal rather than a one-off color. Hero isn't `.landing-section`
+   so it's already visually distinct from About; Education/Projects stay on
+   the plain page background in between. #contact is deliberately excluded
+   (it's technically "even" too) — its own `.landing-contact-card` carries
+   the visual weight instead, so tinting the whole section behind it would
+   just wash the card's contrast out. */
+#about,
+#achievements {
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-surface-border);
+  border-bottom: 1px solid var(--color-surface-border);
+}
+
+/* The one shared content container for the whole landing page — every
+   full-width wrapper (nav, hero, each `.landing-section`, footer) applies
+   the same `var(--space-6)` horizontal padding and then centers this
+   container inside it, so content lines up across the entire page instead
+   of each section picking its own width. Reuse this class rather than
+   introducing another max-width value. */
 .landing-section__inner {
+  width: 100%;
   max-width: 1080px;
   margin: 0 auto;
 }
@@ -93,6 +124,14 @@
   border-color: var(--color-accent-glow);
 }
 
+/* Marks the most important achievement cards (per-entry `featured: true`)
+   so they're the first thing the eye lands on — a glow border reusing the
+   existing accent-glow token, no new color introduced. */
+.landing-card--featured {
+  border-color: var(--color-accent-glow);
+  box-shadow: 0 0 0 1px var(--color-accent-glow), 0 0 24px -8px var(--color-accent-glow);
+}
+
 .landing-filter-tab {
   border: 1px solid var(--color-surface-border);
   background: transparent;
@@ -113,14 +152,161 @@
   color: var(--color-accent);
 }
 
+/* Small all-caps label used above a list/sub-list (e.g. "Key Achievements",
+   a skill category name) — bold + brighter than the secondary-gray body
+   text below it, so the two are unambiguous at a glance. */
+.landing-subheading {
+  display: block;
+  font-size: var(--font-size-caption);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text);
+}
+
+/* Icon-only circular action button — GitHub/LinkedIn/website links in the
+   hero, contact section, and footer all share this treatment instead of
+   full text pills, to cut down on visual clutter next to the primary
+   email/phone contact pills. */
+.landing-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--color-surface-border);
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition:
+    color var(--motion-duration) var(--motion-ease),
+    border-color var(--motion-duration) var(--motion-ease);
+}
+
+.landing-icon-btn:hover,
+.landing-icon-btn:focus-visible {
+  color: var(--color-accent);
+  border-color: var(--color-accent-glow);
+}
+
+/* Compact stat strip (About section) — 3 equal-width columns (not a flex
+   row sized to content, so "Certificates Earned" and "Years Coding" get the
+   same column width), each with the number stacked above its label so the
+   two never run into each other. Deliberately smaller/less dominant than a
+   `.landing-grid` of `.landing-card`s so a handful of early-career numbers
+   don't out-weigh the Projects section below. */
+.landing-stats-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--color-surface-border);
+  border-radius: 14px;
+  background: var(--color-surface);
+  padding: var(--space-4) var(--space-2);
+}
+
+.landing-stats-strip__item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  padding: var(--space-2) var(--space-3);
+  text-align: center;
+}
+
+/* A short, vertically-centered divider between columns instead of a
+   full-height border — reads as a subtle column separator, not a "|"
+   crammed against the text. */
+.landing-stats-strip__item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 1px;
+  height: 60%;
+  transform: translateY(-50%);
+  background: var(--color-surface-border);
+}
+
+.landing-stats-strip__value {
+  font-size: var(--font-size-section-title);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-accent);
+}
+
+.landing-stats-strip__label {
+  font-size: var(--font-size-caption);
+  color: var(--color-text-secondary);
+}
+
 .landing-hero {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  min-height: calc(100dvh - 60px);
+  padding: var(--space-8) var(--space-6);
+}
+
+/* Shares `.landing-section__inner`'s max-width/centering; the text-vs-avatar
+   row layout lives here instead of on `.landing-hero` so the hero's visible
+   content edges line up with every section below it. */
+.landing-hero__inner {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: var(--space-12);
   flex-wrap: wrap;
-  min-height: calc(100dvh - 60px);
-  padding: var(--space-8) var(--space-6);
+}
+
+.landing-hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1) var(--space-4);
+}
+
+.landing-hero__meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--font-size-caption);
+  color: var(--color-text-secondary);
+}
+
+.landing-hero__contact {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.landing-hero__contact-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--font-size-caption);
+  border-radius: 999px;
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--color-surface-border);
+  color: var(--color-text-secondary);
+  text-decoration: none;
+}
+
+.landing-hero__contact-pill--accent {
+  color: var(--color-accent);
+  background: var(--color-accent-soft);
+  border-color: transparent;
+}
+
+.landing-hero__social {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-left: var(--space-1);
+  padding-left: var(--space-3);
+  border-left: 1px solid var(--color-surface-border);
 }
 
 .landing-hero__cta {
@@ -141,24 +327,180 @@
   }
 }
 
+/* The one visually prominent block in the Contact section — intro copy,
+   contact info, socials, and the two CTAs all live inside this card
+   instead of a loose row of equal-weight pills. Wider than a typical
+   `.landing-card` (this is the one section built around a single block)
+   but still well inside the shared `.landing-section__inner` container. */
+.landing-contact-card {
+  max-width: 640px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding: var(--space-8);
+  border: 1px solid var(--color-accent-glow);
+  border-radius: 18px;
+  background: var(--color-surface);
+}
+
+.landing-contact-card__intro {
+  margin: 0;
+  font-size: var(--font-size-body);
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+/* Email/Phone side by side on desktop, Location spans both columns below —
+   collapses to one column on narrow screens (see the media query below). */
+.landing-contact-card__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6);
+}
+
+.landing-contact-card__item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.landing-contact-card__item--full {
+  grid-column: 1 / -1;
+}
+
+/* Small uppercase label above the value — the hierarchy fix: label reads
+   clearly as a label, not run together with the value next to it. */
+.landing-contact-card__item-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--font-size-caption);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+.landing-contact-card__item-value {
+  font-size: var(--font-size-body);
+  color: var(--color-text);
+  text-decoration: none;
+  word-break: break-word;
+}
+
+a.landing-contact-card__item-value:hover {
+  color: var(--color-accent);
+}
+
+.landing-contact-card__divider {
+  height: 1px;
+  background: var(--color-surface-border);
+}
+
+.landing-contact-card__socials {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+}
+
+/* Labeled (not icon-only) social buttons — this is now the only place
+   GitHub/LinkedIn appear on the page (removed from the footer to avoid
+   showing up twice), so they need to be easy to spot, not just an icon. */
+.landing-contact-card__social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-caption);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-surface-border);
+  border-radius: 999px;
+  padding: var(--space-2) var(--space-4);
+  text-decoration: none;
+  transition:
+    color var(--motion-duration) var(--motion-ease),
+    border-color var(--motion-duration) var(--motion-ease);
+}
+
+.landing-contact-card__social-link:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent-glow);
+}
+
+.landing-contact-card__cta {
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-body);
+  font-weight: 700;
+  color: var(--color-bg-bottom);
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-secondary) 100%);
+  border: none;
+  border-radius: 999px;
+  padding: var(--space-3) var(--space-6);
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform var(--motion-duration) var(--motion-ease);
+}
+
+.landing-contact-card__cta:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+/* The subtle closing CTA ("Let's connect") — deliberately just a small
+   text link, not another button, so it doesn't compete with Download CV. */
+.landing-contact-card__connect {
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--font-size-caption);
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.landing-contact-card__connect:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  .landing-contact-card__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .landing-footer {
   background: var(--color-bg-bottom);
   border-top: 1px solid var(--color-surface-border);
   padding: var(--space-8) var(--space-6) var(--space-6);
 }
 
-.landing-footer__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: var(--space-8);
-  max-width: 1080px;
-  margin: 0 auto;
+/* Trimmed footer: GitHub/LinkedIn now live only in the Contact card above
+   (avoids showing the same links twice), so the footer is just a closing
+   copyright/tech-attribution line, centered. */
+.landing-footer__minimal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.landing-footer__copyright {
+  margin: 0;
+  font-size: var(--font-size-caption);
+  color: var(--color-text-secondary);
 }
 
 @media (max-width: 720px) {
-  .landing-hero {
+  .landing-hero__inner {
     flex-direction: column-reverse;
     text-align: center;
+  }
+
+  .landing-hero {
     min-height: 0;
     padding-top: var(--space-12);
     padding-bottom: var(--space-12);
