@@ -13,15 +13,22 @@
   position: sticky;
   top: 0;
   z-index: 20;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-4);
+  width: 100%;
   padding: var(--space-3) var(--space-6);
   background: var(--color-surface);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--color-surface-border);
+}
+
+/* Shares `.landing-section__inner`'s max-width/centering so the nav's
+   content lines up with every section's content below it; this class only
+   adds the nav-specific flex layout on top. */
+.landing-nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
 }
 
 .landing-nav__links {
@@ -59,10 +66,18 @@
 }
 
 .landing-section {
+  width: 100%;
   padding: var(--space-12) var(--space-6);
 }
 
+/* The one shared content container for the whole landing page — every
+   full-width wrapper (nav, hero, each `.landing-section`, footer) applies
+   the same `var(--space-6)` horizontal padding and then centers this
+   container inside it, so content lines up across the entire page instead
+   of each section picking its own width. Reuse this class rather than
+   introducing another max-width value. */
 .landing-section__inner {
+  width: 100%;
   max-width: 1080px;
   margin: 0 auto;
 }
@@ -188,13 +203,22 @@
 }
 
 .landing-hero {
+  width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: var(--space-12);
-  flex-wrap: wrap;
   min-height: calc(100dvh - 60px);
   padding: var(--space-8) var(--space-6);
+}
+
+/* Shares `.landing-section__inner`'s max-width/centering; the text-vs-avatar
+   row layout lives here instead of on `.landing-hero` so the hero's visible
+   content edges line up with every section below it. */
+.landing-hero__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-12);
+  flex-wrap: wrap;
 }
 
 .landing-hero__meta {
@@ -274,14 +298,15 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: var(--space-8);
-  max-width: 1080px;
-  margin: 0 auto;
 }
 
 @media (max-width: 720px) {
-  .landing-hero {
+  .landing-hero__inner {
     flex-direction: column-reverse;
     text-align: center;
+  }
+
+  .landing-hero {
     min-height: 0;
     padding-top: var(--space-12);
     padding-bottom: var(--space-12);
